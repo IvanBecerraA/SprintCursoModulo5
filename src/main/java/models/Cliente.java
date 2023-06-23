@@ -1,0 +1,18 @@
+package models;
+
+import lombok.*;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+public class Cliente extends Usuario{
+    private int id;
+    private String nombreEmpresa;
+    private String giroEmpresa;
+    private String rut;
+    private String telefonoRepresentante;
+    private String direccionEmpresa;
+    private String comunaEmpresa;
+}
