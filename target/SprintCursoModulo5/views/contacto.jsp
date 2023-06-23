@@ -2,97 +2,71 @@
   Created by IntelliJ IDEA.
   User: oscar
   Date: 23-06-23
-  Time: 13:03
+  Time: 14:07
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <script>
+        // Función para validar el formulario y mostrar el cuerpo del mensaje en una alerta
+        function validarFormulario() {
+            var nombre = document.getElementById('nombre').value;
+            var apellidos = document.getElementById('apellidos').value;
+            var correo = document.getElementById('correo').value;
+            var email = document.getElementById('email').value;
+            var mensaje = document.getElementById('mensaje').value;
+
+            // Expresión regular para validar el formato del correo
+            var correoRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+            // Validar todos los campos (no deben estar vacíos)
+            if (nombre.trim() === '' || apellidos.trim() === '' || correo.trim() === '' || email.trim() === '' || mensaje.trim() === '') {
+                alert('Por favor, complete todos los campos.');
+                return false;
+            }
+
+            // Validar el correo
+            if (!correo.match(correoRegex)) {
+                alert('Por favor, ingrese un correo válido.');
+                return false;
+            }
+
+            // Mostrar el cuerpo del mensaje en una alerta
+            alert('Cuerpo del mensaje:\n\n' + mensaje);
+
+            // Si todos los campos son válidos, enviar el formulario
+            return true;
+        }
+
+        // Asignar la función de validación al evento "submit" del formulario
+        document.getElementById('contactForm').addEventListener('submit', validarFormulario);
+    </script>
+
+
     <title>Title</title>
+
+
 </head>
-
-
-
 <body>
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-        <a class="navbar-brand me-5 ms-5" href="#">Asesorías PR</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse me-5" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link active" href="${pageContext.request.contextPath}/crearcapacitacion">Crear capacitación</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="${pageContext.request.contextPath}/listarcapacitaciones">Listar capacitación</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="${pageContext.request.contextPath}/inicio">Cerrar Sesión</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-<header>
+        <form id="contactForm" action="procesar_formulario.jsp" method="post">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
 
+            <label for="apellidos">Apellidos:</label>
+            <input type="text" id="apellidos" name="apellidos" required>
 
-    <img src="./images/contacto2.jpeg" alt="oficina">
-    <section class="container">
-        <h1 class="text-center mt-5">FORMULARIO <br> DE CONTACTO</h1>
-    </section>
-</header>
-<main class="container formulario">
-    <form action="">
-        <div class="row">
-            <div class="form-floating col-6 mt-5 ">
-                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                <label for="floatingInput">Nombre</label>
-            </div>
-            <div class="form-floating col-6 mt-5">
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                <label for="floatingPassword">Apellido</label>
-            </div>
-            <div class="form-floating col-6 mt-3">
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                <label for="floatingPassword">Correo electrónico</label>
-            </div>
-            <div class="form-floating col-6 mt-3">
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                <label for="floatingPassword">Teléfono</label>
-            </div>
-            <div class="form-floating mt-3">
-                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
-                              style="height: 100px"></textarea>
-                <label for="floatingTextarea2">Mensaje</label>
-            </div>
-            <div class="text-center mt-5 mb-3">
-                <button type="submit" class="btn btn-primary btn-lg">Enviar</button>
-            </div>
-        </div>
-    </form>
-</main>
-<footer>
-    <h3 class="mt-3">Búscanos en redes sociales</h3>
-    <a href="http://www.facebook.com" target="_blank" class="rrss me-3"><i class="fa-brands fa-facebook fa-3x"
-                                                                           style="color: rgb(159, 201, 237)"></i></a>
-    <a href="http://www.instagram.com" target="_blank" class="rrss me-3"><i class="fa-brands fa-instagram fa-3x"
-                                                                            style="color: rgb(159, 201, 237)"></i></a>
-    <a href="http://www.twitter.com" target="_blank" class="rrss"><i class="fa-brands fa-twitter fa-3x"
-                                                                     style="color: rgb(159, 201, 237)"></i></a>
-    <p class="mt-1">©Copyright Tech Titans 2023</p>
-</footer>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-        crossorigin="anonymous"></script>
-</header>
-</body>
+            <label for="correo">Correo:</label>
+            <input type="text" id="correo" name="correo" required>
 
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
 
+            <label for="mensaje">Mensaje:</label>
+            <textarea id="mensaje" name="mensaje" required></textarea>
 
-
+            <input type="submit" value="Enviar">
+        </form>
 
 </body>
 </html>
