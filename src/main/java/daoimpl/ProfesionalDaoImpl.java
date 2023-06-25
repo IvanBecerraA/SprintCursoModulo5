@@ -1,7 +1,6 @@
 package daoimpl;
 
 import dao.IProfesional;
-import models.Profesional;
 
 import java.util.List;
 

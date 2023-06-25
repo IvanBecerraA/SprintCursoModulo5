@@ -1,7 +1,5 @@
 package dao;
 
-import models.Profesional;
-
 import java.util.List;
 
 public interface IProfesional {
