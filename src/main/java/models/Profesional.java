@@ -1,10 +1,14 @@
 package models;
-import java.util.Date;
 
-public class Profesional extends Usuario{
-    private int id_profesional;
-    private int id_usuario;
+import lombok.*;
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+public class Profesional extends Usuario {
+    private int id_professional;
+    private int id_user;
     private String titulo;
-    private Date fecha_ingreso;
-
+    private String fecha_ingreso;
 }
