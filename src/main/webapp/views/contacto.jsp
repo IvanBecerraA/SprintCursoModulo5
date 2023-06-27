@@ -8,78 +8,94 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <%@ include file="head.jsp" %>
+
 </head>
 
 <body>
+<%@ include file="header.jsp" %>
+
+
 <form id="contactForm" method="post">
-    <label for="nombre">Nombre:</label>
-    <input type="text" id="nombre" name="nombre" required>
+    <div class="form-group">
+        <label for="nombre">Nombre:</label>
+        <input type="text" class="form-control" id="nombre" name="nombre" required>
+    </div>
 
-    <label for="apellidos">Apellidos:</label>
-    <input type="text" id="apellidos" name="apellidos" required>
+    <div class="form-group">
+        <label for="apellidos">Apellidos:</label>
+        <input type="text" class="form-control" id="apellidos" name="apellidos" required>
+    </div>
 
-    <label for="telefono">Teléfono:</label>
-    <input type="text" id="telefono" name="telefono" required>
+    <div class="form-group">
+        <label for="telefono">Teléfono:</label>
+        <input type="text" class="form-control" id="telefono" name="telefono" required>
+    </div>
 
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="email" name="email" required>
+        <small id="emailHelp" class="form-text text-muted">Nunca compartiremos tu correo electrónico con nadie más.</small>
+    </div>
 
-    <label for="mensaje">Mensaje:</label>
-    <textarea id="mensaje" name="mensaje" required></textarea>
+    <div class="form-group">
+        <label for="mensaje">Mensaje:</label>
+        <textarea class="form-control" id="mensaje" name="mensaje" required></textarea>
+    </div>
 
-    <input type="submit" value="Enviar">
+    <button type="submit" class="btn btn-primary">Enviar</button>
 </form>
+        <script>
+            // Función para validar el formulario y mostrar el cuerpo del mensaje en una alerta
+            function validarFormulario(event) {
+                event.preventDefault();
 
-<script>
-    // Función para validar el formulario y mostrar el cuerpo del mensaje en una alerta
-    function validarFormulario(event) {
-        event.preventDefault();
+                var nombre = document.getElementById('nombre').value;
+                var apellidos = document.getElementById('apellidos').value;
+                var telefono = document.getElementById('telefono').value;
+                var email = document.getElementById('email').value;
+                var mensaje = document.getElementById('mensaje').value;
 
-        var nombre = document.getElementById('nombre').value;
-        var apellidos = document.getElementById('apellidos').value;
-        var telefono = document.getElementById('telefono').value;
-        var email = document.getElementById('email').value;
-        var mensaje = document.getElementById('mensaje').value;
+                // Expresión regular para validar el formato del correo
+                var correoRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                var nombreRegex = /^[A-Za-z]+$/;
+                var telefonoRegex = /^\+\d{6,9}$/;
+                var apellidoRegex = /^[A-Za-z]+$/;
 
-        // Expresión regular para validar el formato del correo
-        var correoRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        var nombreRegex = /^[A-Za-z]+$/;
-        var telefonoRegex = /^\+\d{6,9}$/;
-        var apellidoRegex = /^[A-Za-z]+$/;
+                // Validar todos los campos (no deben estar vacíos)
+                if (nombre.trim() === '' || apellidos.trim() === '' || telefono.trim() === '' || email.trim() === '' || mensaje.trim() === '') {
+                    alert('Por favor, complete todos los campos.');
+                    return false;
+                }
 
-        // Validar todos los campos (no deben estar vacíos)
-        if (nombre.trim() === '' || apellidos.trim() === '' || telefono.trim() === '' || email.trim() === '' || mensaje.trim() === '') {
-            alert('Por favor, complete todos los campos.');
-            return false;
-        }
+                // Validar el correo
+                if (!email.match(correoRegex)) {
+                    alert('Por favor, ingrese un correo válido.');
+                    return false;
+                }
+                if (!nombre.match(nombreRegex)) {
+                    alert('Por favor, ingrese solo letras en nombre');
+                    return false;
+                }
+                if (!apellidos.match(apellidoRegex)) {
+                    alert('Por favor, ingrese solo letras en apellido');
+                    return false;
+                }
+                if (!telefono.match(telefonoRegex)) {
+                    alert('Teléfono ingresado no es válido');
+                    return false;
+                }
 
-        // Validar el correo
-        if (!email.match(correoRegex)) {
-            alert('Por favor, ingrese un correo válido.');
-            return false;
-        }
-        if (!nombre.match(nombreRegex)) {
-            alert('Por favor, ingrese solo letras en nombre');
-            return false;
-        }
-        if (!apellidos.match(apellidoRegex)) {
-            alert('Por favor, ingrese solo letras en apellido');
-            return false;
-        }
-        if (!telefono.match(telefonoRegex)) {
-            alert('Teléfono ingresado no es válido');
-            return false;
-        }
+                // Mostrar el cuerpo del mensaje en una alerta
+                alert('Nombre: ' + nombre + '\nCuerpo del mensaje:\n\n' + mensaje + '\nMensaje Enviado');
 
-        // Mostrar el cuerpo del mensaje en una alerta
-        alert('Nombre: ' + nombre + '\nCuerpo del mensaje:\n\n' + mensaje + '\nMensaje Enviado');
+                // Si todos los campos son válidos, enviar el formulario
+                return true;
+            }
 
-        // Si todos los campos son válidos, enviar el formulario
-        return true;
-    }
-
-    // Asignar la función de validación al evento "submit" del formulario
-    document.getElementById('contactForm').addEventListener('submit', validarFormulario);
-</script>
+            // Asignar la función de validación al evento "submit" del formulario
+            document.getElementById('contactForm').addEventListener('submit', validarFormulario);
+        </script>
+<%@ include file="footer.jsp" %>
 </body>
 </html>
