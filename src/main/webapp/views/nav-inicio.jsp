@@ -11,7 +11,7 @@
                  <div class="collapse navbar-collapse  pe-5" id="navbarNav">
                      <ul class="navbar-nav ms-md-auto">
                          <li class="nav-item">
-                             <a class="nav-link active" aria-current="page" href="../index.jsp">Inicio</a>
+                             <a class="nav-link active" aria-current="page" href="#">Inicio</a>
                          </li>
                          <li class="nav-item">
                              <a class="nav-link active" href="views/login.jsp">Login</a>
