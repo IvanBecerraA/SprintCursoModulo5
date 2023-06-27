@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Crear Administrativo</title>
+    <title>Crear Usuario</title>
     <%@ include file='head.jsp'  %>
 </head>
 <body>
@@ -12,6 +12,17 @@
 
     <form action="ServletCreaUsuario" method="post" class="container p-3" style="width: 50%; text-align: center;">
         <h2 class="pb-4">Formulario Crear Usuario Administrativo</h2>
+
+        <!-- Select para perfil de usuario, podría ser un recurso a incluir -->
+        <div class="form-floating pb-3">
+          <select class="form-select" id="floatingSelect" onchange="camposAdicionales()" required>
+            <option value="">Selecciona un perfil</option>
+            <option value="1">Cliente</option>
+            <option value="2">Profesional</option>
+            <option value="3">Administrativo</option>
+          </select>
+          <label for="floatingSelect">Usuario</label>
+        </div>
 
         <!-- Datos basicos de usuario -->
         <div class="form-floating mb-3">
@@ -39,28 +50,7 @@
             <label for="contrasena">Contraseña</label>
         </div>
 
-        <!-- Select para perfil de usuario, podría ser un recurso a incluir -->
-        <div class="form-floating pb-3">
-          <select class="form-select" id="floatingSelect" onchange="camposAdicionales()" required>
-            <option value="">Selecciona un perfil</option>
-            <option value="1">Cliente</option>
-            <option value="2">Profesional</option>
-            <option value="3">Administrativo</option>
-          </select>
-          <label for="floatingSelect">Usuario</label>
-        </div>
-
-        <!-- Campos adicionales para Administrativo -->
-        <div id="additionalFields" class="cantainer" style="display: none;">
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="area" placeholder="RRHH" required>
-                <label for="area">Área</label>
-            </div>
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="experienciaPrevia" placeholder="4 años" required>
-                <label for="experienciaPrevia">Experiencia Previa</label>
-            </div>
-        </div>
+        <%@ include file='camposAdministrativo.jsp' %>
 
         <!-- botones, cancelar debe redirijir a inicio cuando exista la view -->
         <button type="submit" class="btn btn-success btn-lg">Crear</button>
