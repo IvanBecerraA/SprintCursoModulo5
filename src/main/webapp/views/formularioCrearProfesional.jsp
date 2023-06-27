@@ -65,29 +65,12 @@
     <div class="container ">
       <div class="row grid gap-6 w-50 m-auto mt-5 ">
         <form action="">
-          <div class="p-2 g-col-6 col-sm-12" >
-            <input type="text" class="form-control" placeholder="Nombre" aria-label="First name" />
-          </div>
-          <div class="p-2 g-col-6 col-sm-12">
-            <input type="text" class="form-control" placeholder="Primer Apellido" aria-label="First name"/>
-          </div>
-          <div class="p-2 g-col-6 col-sm-12">
-            <input type="text" class="form-control" placeholder="Segundo Apellido" aria-label="First name"/>
-          </div>
-          <div class="p-2 g-col-6 col-sm-12">
-            <input type="text" class="form-control" placeholder="Fecha de Nacimiento" aria-label="First name"/>
-          </div>
-          <div class="p-2 g-col-6 col-sm-12">
-            <input type="text" class="form-control" placeholder="Run" aria-label="First name" />
-          </div>
           <div class="p-2 g-col-6 col-sm-12">
             <input type="text" class="form-control" placeholder="Titulo" aria-label="First name"/>
           </div>
           <div class="p-2 g-col-6 col-sm-12">
             <input type="text" class="form-control" placeholder="Fecha de Ingreso" aria-label="First name"/>
           </div>
-          <button type="button" class="btn btn-secondary mt-5">Cancelar</button>
-          <button type="button" class="btn btn-primary mt-5">Crear</button>
         </form>
       </div>
     </div>
