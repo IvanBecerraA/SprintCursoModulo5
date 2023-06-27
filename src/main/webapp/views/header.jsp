@@ -12,10 +12,10 @@
                              <a class="nav-link active" aria-current="page" href="#">Inicio</a>
                          </li>
                          <li class="nav-item">
-                             <a class="nav-link active" href="#">Login</a>
+                             <a class="nav-link active" href="login.jsp">Login</a>
                          </li>
                          <li class="nav-item">
-                             <a class="nav-link active" href="#">Contacto</a>
+                             <a class="nav-link active" href="contacto.jsp">Contacto</a>
                          </li>
                          <li class="nav-item">
                              <a class="nav-link active" href="#">Crear capacitación</a>

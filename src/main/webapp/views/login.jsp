@@ -21,7 +21,7 @@
                 method="POST"
                 class="bg-white p-5 rounded-5 text-secondary shadow"
                 style="width: 25rem"
-                action="login"
+                action="/login"
             >
                 <div class="d-flex justify-content-center">
                     <img

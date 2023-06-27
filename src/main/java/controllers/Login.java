@@ -14,7 +14,7 @@ import java.io.PrintWriter;
 /**
  * Servlet implementation class Login
  */
-@WebServlet("/login")
+@WebServlet("/login.jsp")
 public class Login extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -47,8 +47,8 @@ public class Login extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String requestUsuario = "";
-        String requestPassword = "";
+        String requestUsuario = "1234";
+        String requestPassword = "1234";
 
         PrintWriter out = response.getWriter();
 
