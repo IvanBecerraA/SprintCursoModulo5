@@ -22,7 +22,11 @@
   <div class="row d-flex justify-content-center my-5 justify-content-center">
     <div class="col-lg-6 col-sm-12 rounded shadow p-3">
       <h1 class="text-center mb-3">Crear capacitación</h1>
-      <form method="post" action="SvCrearCapacitacion" id="formCrearCapacitacion">
+      <form method="post" action="SvCapacitacion" id="formCrearCapacitacion">
+        <div class="mb-3">
+                  <label for="inputRutCliente" class="form-label">RUT cliente</label>
+                  <input type="text" class="form-control" id="inputRutCliente" name="rutCliente">
+                </div>
         <div class="mb-3">
           <label for="inputDia" class="form-label">Día de la capacitación</label>
           <select class="form-select" aria-label="Default select example" id="inputDia" name="dia">
@@ -41,8 +45,8 @@
           <input type="time" class="form-control" id="inputHora" name="hora">
         </div>
         <div class="mb-3">
-          <label for="inputDireccion" class="form-label">Dirección de la capacitación</label>
-          <input type="text" class="form-control" id="inputDireccion" name="direccion">
+          <label for="inputLugar" class="form-label">Dirección de la capacitación</label>
+          <input type="text" class="form-control" id="inputLugar" name="lugar">
         </div>
         <div class="mb-3">
           <label for="inputDuracion" class="form-label">Duración (En minutos)</label>
