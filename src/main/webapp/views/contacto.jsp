@@ -15,36 +15,43 @@
 <body>
 <%@ include file="header.jsp" %>
 
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
 
-<form id="contactForm" method="post">
+<form id="contactForm" method="post" class="mx-auto">
     <div class="form-group">
         <label for="nombre">Nombre:</label>
-        <input type="text" class="form-control" id="nombre" name="nombre" required>
+        <input type="text" class="form-control" id="nombre" name="nombre" required style="width: 400px">
     </div>
 
     <div class="form-group">
         <label for="apellidos">Apellidos:</label>
-        <input type="text" class="form-control" id="apellidos" name="apellidos" required>
+        <input type="text" class="form-control" id="apellidos" name="apellidos" required style="width: 400px">
     </div>
 
     <div class="form-group">
         <label for="telefono">Teléfono:</label>
-        <input type="text" class="form-control" id="telefono" name="telefono" required>
+        <input type="text" class="form-control" id="telefono" name="telefono" required style="width: 400px">
     </div>
 
     <div class="form-group">
         <label for="email">Email:</label>
-        <input type="email" class="form-control" id="email" name="email" required>
+        <input type="email" class="form-control" id="email" name="email" required maxlength="100" style="width: 400px;">
         <small id="emailHelp" class="form-text text-muted">Nunca compartiremos tu correo electrónico con nadie más.</small>
     </div>
 
     <div class="form-group">
         <label for="mensaje">Mensaje:</label>
-        <textarea class="form-control" id="mensaje" name="mensaje" required></textarea>
+        <textarea class="form-control" id="mensaje" name="mensaje" required style="width: 400px;"></textarea>
     </div>
 
     <button type="submit" class="btn btn-primary">Enviar</button>
 </form>
+
+        </div>
+    </div>
+</div>
         <script>
             // Función para validar el formulario y mostrar el cuerpo del mensaje en una alerta
             function validarFormulario(event) {
