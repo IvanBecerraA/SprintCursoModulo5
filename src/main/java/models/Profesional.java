@@ -14,4 +14,5 @@ public class Profesional extends Usuario {
     private int id_user;
     private String titulo;
     private Date fecha_ingreso;
+
 }
