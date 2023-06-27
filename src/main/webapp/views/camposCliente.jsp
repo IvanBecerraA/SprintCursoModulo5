@@ -1,20 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
       pageEncoding="UTF-8"%>
 
-<!DOCTYPE html>
-<html>
-	<head>
-	    <%@ include file='head.jsp'  %>
-		<title>Cliente</title>
-	</head>
-	<body>
-	    <%@ include file='header.jsp' %>
-		<form action="SvCliente" method="post">
 		    <h2 class="pb-4">Crear Cliente</h2>
 
 			<!-- Razón Social -->
+			<label for="razonSocial">Nombre Empresa o Razón Social:</label>
 			<div class="form-floating mb-3">
-			    <label for="razonSocial">Nombre Empresa o Razón Social:</label>
 				<input
 					type="text"
 					id="razonSocial"
@@ -88,14 +79,3 @@
 					placeholder="Por algún lugar"
 				/>
 			</div>
-
-			<!-- Botón Registrar -->
-			<div>
-				<button type="submit" class="btn btn-primary">Registrar</button>
-			</div>
-		</form>
-
-    <%@ include file='footer.jsp' %>
-
-	</body>
-</html>
