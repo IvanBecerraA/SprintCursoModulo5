@@ -11,6 +11,7 @@ import java.util.PrimitiveIterator;
 @NoArgsConstructor
 @ToString
 public class Usuario {
+    private int idUsuario;
     private String nombre;
     private String apellido1;
     private String apellido2;
