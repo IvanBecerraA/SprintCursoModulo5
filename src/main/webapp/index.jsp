@@ -1,5 +1,8 @@
 <html>
+<%@include file="views/head.jsp"%>
 <body>
-<h2>Hello World!</h2>
+
+<%@include file="views/header.jsp"%>
+<%@ include file='views/footer.jsp' %>
 </body>
 </html>

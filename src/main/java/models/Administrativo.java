@@ -8,8 +8,10 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 public class Administrativo extends Usuario{
+    private int idAdministrativo;
     private String area;
     private String experienciaPrevia;
+
 
 
 }
