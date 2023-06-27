@@ -11,7 +11,7 @@
     <%@ include file='header.jsp' %>
 
     <form action="ServletCreaUsuario" method="post" class="container p-3" style="width: 50%; text-align: center;">
-        <h2 class="pb-4">Formulario Crear Usuario Administrativo</h2>
+        <h2 class="pb-4">Formulario Crear Usuario</h2>
 
         <!-- Select para perfil de usuario, podría ser un recurso a incluir -->
         <div class="form-floating pb-3">
@@ -50,10 +50,13 @@
             <label for="contrasena">Contraseña</label>
         </div>
 
+        <%@ include file='camposCliente.jsp' %>
+        <%@ include file='camposProfesional.jsp' %>
         <%@ include file='camposAdministrativo.jsp' %>
 
-        <!-- botones, cancelar debe redirijir a inicio cuando exista la view -->
-        <button type="submit" class="btn btn-success btn-lg">Crear</button>
+
+        <!-- botones, cancelar debe redirigir a inicio cuando exista la view -->
+        <button type="submit" class="btn btn-primary btn-lg">Crear</button>
         <button type="submit" formaction="inicio.jsp" class="btn btn-outline-danger" formnovalidate>Cancelar</button>
 
     </form>
@@ -64,11 +67,26 @@
     <script>
         function camposAdicionales() {
             var select = document.getElementById("floatingSelect");
-            var additionalFields = document.getElementById("additionalFields");
-            if (select.value === "3") {
-                additionalFields.style.display = "block";
+            var cliente = document.getElementById("cliente");
+            var profesional = document.getElementById("profesional");
+            var administrativo = document.getElementById("administrativo");
+
+            if (select.value === "1") {
+                cliente.style.display = "block";
             } else {
-                additionalFields.style.display = "none";
+                cliente.style.display = "none";
+            }
+
+            if (select.value === "2") {
+                profesional.style.display = "block";
+            } else {
+                profesional.style.display = "none";
+            }
+
+            if (select.value === "3") {
+                administrativo.style.display = "block";
+            } else {
+                administrativo.style.display = "none";
             }
         }
     </script>

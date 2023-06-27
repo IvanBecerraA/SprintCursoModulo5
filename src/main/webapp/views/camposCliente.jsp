@@ -1,19 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
       pageEncoding="UTF-8"%>
 
-		    <h2 class="pb-4">Crear Cliente</h2>
+<!-- Campos adicionales para Cliente -->
+<div id="cliente" class="cantainer" style="display: none;">
+
+		    <h2 class="pb-4">Datos del usuario Cliente</h2>
 
 			<!-- Razón Social -->
-			<label for="razonSocial">Nombre Empresa o Razón Social:</label>
 			<div class="form-floating mb-3">
+                <label for="razonSocial">Nombre Empresa o Razón Social:</label>
 				<input
 					type="text"
-					id="razonSocial"
+		            id="razonSocial"
 					class="form-control"
 					name="razonSocial"
-					required
 					placeholder="Los Marines"
-				/>
+					required
+				>
 			</div>
 
 			<!-- Giro Empresa -->
@@ -79,3 +82,4 @@
 					placeholder="Por algún lugar"
 				/>
 			</div>
+</div>
