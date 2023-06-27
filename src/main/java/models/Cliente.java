@@ -8,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 public class Cliente extends Usuario{
-    private int id;
+    private int idCliente;
     private String razonSocial;
     private String giroEmpresa;
     private String rut;
