@@ -9,7 +9,7 @@ import lombok.*;
 @ToString
 public class Cliente extends Usuario{
     private int id;
-    private String nombreEmpresa;
+    private String razonSocial;
     private String giroEmpresa;
     private String rut;
     private String telefonoRepresentante;
