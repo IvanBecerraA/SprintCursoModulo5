@@ -1,11 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Joaquin
-  Date: 23-06-23
-  Time: 16:07
-  To change this template use File | Settings | File Templates.
---%>
-
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -15,18 +7,12 @@
      <%@ include file="nav-inicio.jsp" %>
 
         <div class="d-flex justify-content-center align-content-center">
-            <form
-                method="POST"
-                class="bg-white p-5 rounded-5 text-secondary shadow"
-                style="width: 25rem"
-                action="/login"
-            >
+            <form method="POST" class="bg-white p-5 rounded-5 text-secondary shadow" style="width: 25rem" action="/login">
                 <div class="d-flex justify-content-center">
                     <img
                         src="../images/login-icon.svg"
                         alt="login-icon"
-                        style="height: 7rem"
-                    />
+                        style="height: 7rem"/>
                 </div>
                 <div class="text-center fs-1 fw-bold">Login</div>
                 <div class="input-group mt-4">
@@ -34,8 +20,7 @@
                         <img
                             src="../images/username-icon.svg"
                             alt="username-icon"
-                            style="height: 1rem"
-                        />
+                            style="height: 1rem"/>
                     </div>
                     <input
                         class="form-control bg-light"
@@ -43,16 +28,14 @@
                         placeholder="Run"
                         name="run"
                         id="run"
-                        required
-                    />
+                        required/>
                 </div>
                 <div class="input-group mt-1">
                     <div class="input-group-text bg-primary">
                         <img
                             src="../images/password-icon.svg"
                             alt="password-icon"
-                            style="height: 1rem"
-                        />
+                            style="height: 1rem"/>
                     </div>
                     <input
                         class="form-control bg-light"
@@ -60,15 +43,9 @@
                         placeholder="Password"
                         name="password"
                         id="password"
-                        required
-                    />
+                        required/>
                 </div>
-                <button
-                    class="btn btn-primary text-white w-100 mt-4 fw-semibold shadow-sm"
-                    type="submit"
-                >
-                    Login
-                </button>
+                <button class="btn btn-primary text-white w-100 mt-4 fw-semibold shadow-sm" type="submit">Login</button>
             </form>
         </div>
         <%@ include file="footer.jsp" %>
