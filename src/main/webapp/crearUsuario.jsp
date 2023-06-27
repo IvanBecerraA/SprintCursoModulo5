@@ -8,7 +8,7 @@ pageEncoding="UFT-8"%>
 	</head>
 	<body>
 		<header>
-			<form action="#" method="post">
+			<form action="SvCliente" method="post">
 				<!-- Razón Social -->
 				<div>
 					<input
@@ -83,7 +83,7 @@ pageEncoding="UFT-8"%>
 
 				<!-- Botón Registrar -->
 				<div>
-					<button type="submit" class="">Registrar</button>
+					<button type="submit" class="btn btn-primary">Registrar</button>
 				</div>
 			</form>
 		</header>
