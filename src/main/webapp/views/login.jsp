@@ -15,15 +15,16 @@
     <body
         class="bg-primary d-flex justify-content-center align-items-center vh-100"
     >
-        <%@ include file="nav.jsp" %>
+        <%--<%@ include file="nav.jsp" %>--%>
         <form
             method="POST"
             class="bg-white p-5 rounded-5 text-secondary shadow"
             style="width: 25rem"
+            action="login"
         >
             <div class="d-flex justify-content-center">
                 <img
-                    src="/assets/icons/login-icon.svg"
+                    src="../icons/login-icon.svg"
                     alt="login-icon"
                     style="height: 7rem"
                 />
@@ -32,7 +33,7 @@
             <div class="input-group mt-4">
                 <div class="input-group-text bg-primary">
                     <img
-                        src="/assets/icons/username-icon.svg"
+                        src="../icons/username-icon.svg"
                         alt="username-icon"
                         style="height: 1rem"
                     />
@@ -49,7 +50,7 @@
             <div class="input-group mt-1">
                 <div class="input-group-text bg-primary">
                     <img
-                        src="/assets/icons/password-icon.svg"
+                        src="../icons/password-icon.svg"
                         alt="password-icon"
                         style="height: 1rem"
                     />
@@ -70,5 +71,6 @@
                 Login
             </button>
         </form>
+        <%--<%@ include file="footer.jsp" %>--%>
     </body>
 </html>
