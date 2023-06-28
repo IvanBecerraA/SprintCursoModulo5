@@ -7,7 +7,8 @@ import java.sql.Connection;
 import java.sql.Statement;
 import java.util.List;
 
-public class AdministrativoDaoImpl implements IAdministrativo {
+public class AdministrativoDaoImpl
+        implements IAdministrativo {
 
     @Override
     public boolean create(Administrativo administrativo) {
