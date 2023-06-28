@@ -1,5 +1,6 @@
 package controllers;
 
+import daoimpl.AdministrativoDaoImpl;
 import daoimpl.ClienteDaoImpl;
 import daoimpl.ProfesionalDaoImpl;
 import jakarta.servlet.RequestDispatcher;
@@ -8,6 +9,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import models.Administrativo;
 import models.Cliente;
 import models.Profesional;
 
@@ -25,6 +27,7 @@ public class SvUsuario extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private ClienteDaoImpl clienteDao;
     private ProfesionalDaoImpl profesionalDao;
+    private AdministrativoDaoImpl administrativoDao;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -146,36 +149,49 @@ public class SvUsuario extends HttpServlet {
 
 
     private void create(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+        // Datos básicos del Usuario, transversal a todas las clases
         String  tipoDeUsuario = request.getParameter("floatingSelect");// ID del Select
-        PrintWriter out = response.getWriter();
-        switch (tipoDeUsuario){
-            case "1":
-                out.println("<script type=\"text/javascript\">");
-                out.println("consol.log('funciona cliente')");
-                out.println("location='index.jsp';");
-                out.println("</script>");
-                break;
-            case "2":
-                String nombre = request.getParameter("nombre");
-                String apellido1 = request.getParameter("apellido1");
-                String apellido2 = request.getParameter("apellido2");
-                String fechaNacimiento = request.getParameter("fechaNacimiento");
-                String run = request.getParameter("run");
-                String cotrasena = request.getParameter("contrasena");
+        String nombre = request.getParameter("nombre");
+        String apellido1 = request.getParameter("apellido1");
+        String apellido2 = request.getParameter("apellido2");
+        String fechaNacimiento = request.getParameter("fechaNacimiento"); // TODO Debe ser de tipo DATE o LOCALDATE
+        String run = request.getParameter("run"); //TODO DEBE SER INT
+        String cotrasena = request.getParameter("contrasena");
 
+        switch (tipoDeUsuario){
+
+            case "1":
+                //TODO CLIENTE
+                String razonSocial = request.getParameter("razonSocial");
+                String giroEmpresa = request.getParameter("giroEmpresa");
+                int rut = Integer.parseInt(request.getParameter("rut")); // TODO DEBE SER INT?
+                String telefonoRepresentante = request.getParameter("telefonoRepresentante");
+                String direccionEmpresa = request.getParameter("direccionEmpresa");
+                String comunaEmpresa = request.getParameter("comunaEmpresa");
+                Cliente cliente = new Cliente();
+                clienteDao.create(cliente);
+                break;
+
+            case "2":
                 String titulo = request.getParameter("titulo");
                 String fecha_ingreso = request.getParameter("fechaIngreso");
                 Profesional profesional = new Profesional(nombre, apellido1,apellido2,fechaNacimiento,run,cotrasena,titulo,fecha_ingreso);
                 profesionalDao.create(profesional);
                 break;
-            case "3":
 
-                out.println("<script type=\"text/javascript\">");
-                out.println("consol.log('funciona administrador')");
-                out.println("location='index.jsp';");
-                out.println("</script>");
+            case "3":
+                // TODO ADMINISTRATIVO
+                String area = request.getParameter("area");
+                String expPrevia = request.getParameter("experienciaPrevia");
+                //Administrativo administrativo = new Administrativo(nombre, apellido1, apellido2,
+                //                                fechaNacimiento, run, cotrasena, tipoDeUsuario,
+                //                                area, expPrevia);
+                //administrativoDao.create(administrativo); TODO DESCOMENTAR CUANDO TIPOS DE DATOS HAYAN SIDO ARREGLADOS
                 break;
         }
+
+        response.sendRedirect("list"); // Redije a lista de usuarios
+
 
 
     }
