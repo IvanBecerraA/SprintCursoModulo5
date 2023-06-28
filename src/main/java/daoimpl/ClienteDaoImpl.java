@@ -13,7 +13,29 @@ public class ClienteDaoImpl implements ICliente{
 
     @Override
     public boolean create(Cliente cliente) {
-        return false;
+        boolean create = false;
+        Connection con = null;
+        Statement stmt = null;
+
+        String sqlUseSchema = "USE nombre_esquema"; //TODO realizar ajustes cuando base de datos esté funcionando
+
+        String sqlInsertUsuario = "INSERT INTO Usuario VALUES(null,\"" + cliente.getNombre() + "\"," +
+                "\"" + cliente.getApellido1() + "\"," +
+                "\"" + cliente.getApellido2() + "\"," +
+                "\"" + cliente.getFechaNacimiento() + "\"," +
+                "\"" + cliente.getRun() + "\"," +
+                "\"" + cliente.getPassword() + "\"," +
+                "\"" + cliente.getTipo_usuario() + "\");";
+
+        String sqlInsertAdministrativo = "INSERT INTO Profesional (titulo, fecha_ingreso) VALUES" +
+                "(null,\"" + cliente.getRazonSocial() + "\"," +
+                "\"" + cliente.getGiroEmpresa() + "\"," +
+                "\"" + cliente.getRut() + "\"," +
+                "\"" + cliente.getTelefonoRepresentante() + "\"," +
+                "\"" + cliente.getDireccionEmpresa() + "\"," +
+                "\"" + cliente.getComunaEmpresa() + "\"," +
+                "(SELECT id_usuario FROM Usuario WHERE run = '" + cliente.getRun() + "'));";
+        return create;
     }
 
     @Override

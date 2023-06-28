@@ -28,7 +28,7 @@ public class ProfesionalDaoImpl implements IProfesional {
                 "(null,\"" + profesional.getTitulo() + "\"," +
                 "\"" + profesional.getFecha_ingreso() + "\"," +
                 "(SELECT id_usuario FROM Usuario WHERE run = '" + profesional.getRun() + "'));";
-        return false;
+        return create;
     }
 
     @Override

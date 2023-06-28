@@ -138,6 +138,7 @@ public class SvUsuario extends HttpServlet {
 
                 String titulo = request.getParameter("titulo");
                 String fecha_ingreso = request.getParameter("fechaIngreso");
+
                 Profesional profesional = new Profesional(nombre, apellido1,apellido2,fechaNacimiento,run,cotrasena,titulo,fecha_ingreso);
                 profesionalDao.create(profesional);
                 break;
@@ -159,7 +160,7 @@ public class SvUsuario extends HttpServlet {
         String direccionEmpresa = request.getParameter("direccionEmpresa");
         String comunaEmpresa = request.getParameter("comunaEmpresa");
 
-        Cliente cliente = new Cliente(idCliente,razonSocial, giroEmpresa, rut, telefonoRepresentante, direccionEmpresa, comunaEmpresa);
+        Cliente cliente = new Cliente(razonSocial, giroEmpresa, rut, telefonoRepresentante, direccionEmpresa, comunaEmpresa);
         clienteDao.create(cliente);
         response.sendRedirect("list");
     }
