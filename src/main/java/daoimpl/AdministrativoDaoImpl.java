@@ -24,7 +24,7 @@ public class AdministrativoDaoImpl implements IAdministrativo {
                 "\"" + administrativo.getApellido2() + "\"," +
                 "\"" + administrativo.getFechaNacimiento() + "\"," +
                 "\"" + administrativo.getRun() + "\"," +
-                "\"" + administrativo.getPassword() + "\"," +
+                "\"" + administrativo.getContrasenia() + "\"," +
                 "\"" + administrativo.getTipo_usuario() + "\");";
 
         String sqlInsertAdministrativo = "INSERT INTO Administrativo (id_administrativo, area, c_anios_experiencia, id_usuario) VALUES" +
