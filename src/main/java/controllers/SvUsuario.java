@@ -117,7 +117,7 @@ public class SvUsuario extends HttpServlet {
         int idCliente = Integer.parseInt(request.getParameter("252"));
         String razonSocial = request.getParameter("razonSocial");
         String giroEmpresa = request.getParameter("giroEmpresa");
-        String rut = request.getParameter("rut");
+        int rut = Integer.parseInt(request.getParameter("rut"));
         String telefonoRepresentante = request.getParameter("telefonoRepresentante");
         String direccionEmpresa = request.getParameter("direccionEmpresa");
         String comunaEmpresa = request.getParameter("comunaEmpresa");
