@@ -25,7 +25,7 @@ public class ClienteDaoImpl implements ICliente{
                 "\"" + cliente.getContrasenia() + "\"," +
                 "\"" + cliente.getTipo_usuario() + "\");";
 
-        String sqlInsertAdministrativo = "INSERT INTO Profesional (titulo, fecha_ingreso) VALUES" + // TODO hola, checkear los atributos de la tabla
+        String sqlInsertAdministrativo = "INSERT INTO Cliente (titulo, fecha_ingreso) VALUES" + // TODO hola, checkear los atributos de la tabla
                 "(null,\"" + cliente.getRazonSocial() + "\"," +
                 "\"" + cliente.getGiroEmpresa() + "\"," +
                 "\"" + cliente.getRut() + "\"," +
