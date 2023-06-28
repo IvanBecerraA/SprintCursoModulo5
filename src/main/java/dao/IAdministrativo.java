@@ -9,7 +9,8 @@ import java.util.List;
 
 public interface IAdministrativo {
     public boolean create(int id_usuario, Administrativo administrativo);
-    public boolean update(int id_administrativo, Administrativo administrativo);
-    public boolean delete(int id_administrativo);
-    public List<Usuario> list() throws SQLException;
+    public boolean update(Administrativo administrativo);
+    public boolean delete(int id_usuario);
+    public List<Administrativo> listOne(int id_usuario);
+
 }

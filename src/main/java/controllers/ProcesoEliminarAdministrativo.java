@@ -17,6 +17,7 @@ public class ProcesoEliminarAdministrativo extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int IdUsuario = Integer.parseInt(req.getParameter("idUsuarioE"));
+        adm.delete(IdUsuario);
         PrintWriter out = resp.getWriter();
         resp.setContentType("text/html");
         out.println("<!DOCTYPE html>");
@@ -29,5 +30,6 @@ public class ProcesoEliminarAdministrativo extends HttpServlet {
         out.println("</body>");
         out.println("</html>");
         out.close();
+        getServletContext().getRequestDispatcher("/listarUsuario.jsp").forward(req,resp);
     }
 }

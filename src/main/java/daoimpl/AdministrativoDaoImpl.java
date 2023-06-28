@@ -45,39 +45,52 @@ public class AdministrativoDaoImpl implements IAdministrativo {
     }
 
     @Override
-    public boolean update(int id_administrativo, Administrativo administrativo) {
+    public boolean update(Administrativo administrativo) {
         boolean update = false;
         Statement stmt=null;
         Connection con=null;
-        String sql= "UPDATE administrativo SET area = '"
-                +administrativo.getArea()
+        String sqlUsu = "update usuario\n" +
+                "set nombre= '"+administrativo.getNombre()+"',\n" +
+                "apellido1 = '"+administrativo.getApellido1()+"',\n" +
+                "apellido2 = '"+administrativo.getApellido2()+"',\n" +
+                "fecha_nacimiento = '"+administrativo.getFechaNacimiento()+"',\n" +
+                "contrasenia='"+administrativo.getPassword()+"'\n" +
+                "where id_usuario = "+administrativo.getIdUsuario()+";";
+        String sqlAdm= "UPDATE administrativo " +
+                "SET area = '" +administrativo.getArea()
                 +"', c_anios_experiencia = '" +administrativo.getExperienciaPrevia()
-                + "' WHERE id_administrativo = "+id_administrativo;
+                + "' WHERE id_administrativo = "+administrativo.getIdAdministrativo();
         try {
             con= conexion.conectar();
             stmt= con.createStatement();
-            stmt.execute(sql);
+            stmt.executeUpdate(sqlUsu);
+            stmt.executeUpdate(sqlAdm);
             update=true;
             stmt.close();
             con.close();
+            System.out.println("Se actualizo correctamente");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        System.out.println("No se pudo actualizar");
         return update;
+
     }
 
     @Override
-    public boolean delete(int id_administrativo) {
+    public boolean delete(int id_usuario) {
         boolean delete = false;
         Connection con= null;
         Statement stmt= null;
 
-        String sql = "DELETE from administrativo where id_administrativo = "
-                +id_administrativo;
+        String sqlAdm = "DELETE from administrativo where id_usuario = "
+                +id_usuario+"; ";
+        String sqlUsu = " Delete from Usuario where id_usuario = "+id_usuario;
         try {
             con= conexion.conectar();
             stmt= con.createStatement();
-            stmt.execute(sql);
+            stmt.execute(sqlAdm);
+            stmt.execute(sqlUsu);
             delete=true;
             stmt.close();
             con.close();
@@ -86,29 +99,37 @@ public class AdministrativoDaoImpl implements IAdministrativo {
         }
         return delete;
     }
+
     @Override
-    public List<Usuario> list() throws SQLException {
-        List<Usuario> usuarios =  new ArrayList<>();
-        Statement stmt=null;
-        Connection con=null;
-        ResultSet rs= null;
-        Usuario usu;
+    public List<Administrativo> listOne(int id_usuario) {
+        List<Administrativo> administrativos =  new ArrayList<>();//creamos una lista tipo Administrativo
+        Administrativo adm; //instanciamos una clase Administrativo
+        Statement stmt=null; //instanciamos el statement
+        Connection con=null;//instanciamos el con
+        ResultSet rs= null;//instanciamos el ResulSet que nos sirve para ejecutar comandos sql
+
         try {
-            con= conexion.conectar();
-            stmt= con.createStatement();
-            rs = stmt.executeQuery("select id_usuario, nombre, apellido1, apellido2, " +
-                    "fecha_nacimiento, run, tipo_usuario from usuario;");
+            con= conexion.conectar();//llamamos a nuestra conexion de la bd
+            stmt= con.createStatement();//llamamos a nuestros metodos executeQuery(), executeUpdate(),execute()
+            rs = stmt.executeQuery("select * " +
+                    "from usuario u " +
+                    "inner join administrativo a " +
+                    "on u.id_usuario = a.id_usuario " +
+                    "where a.id_usuario = "+ id_usuario+
+                    " Limit 1;");
             while (rs.next()){
-                usu = new Usuario(rs.getInt(1),rs.getString(2),
+                adm = new Administrativo(rs.getInt(1),rs.getString(2),
                         rs.getString(3),rs.getString(4),rs.getDate(5),
-                        rs.getInt(6),rs.getInt(7));
-                   usuarios.add(usu);
+                        rs.getInt(6),rs.getString(7),rs.getInt(8),
+                        rs.getInt(9),rs.getString(10),rs.getString(11));
+                administrativos.add(adm);
             }
             stmt.close();
             con.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return usuarios;
+        return administrativos;
     }
+
 }

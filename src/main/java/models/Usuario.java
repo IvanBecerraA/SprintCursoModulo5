@@ -29,4 +29,6 @@ public class Usuario {
         this.run = run;
         this.tipo_usuario = tipo_usuario;
     }
+
+
 }
