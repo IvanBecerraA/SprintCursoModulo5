@@ -25,7 +25,7 @@ public class ClienteDaoImpl implements ICliente{
                 "\"" + cliente.getPassword() + "\"," +
                 "\"" + cliente.getTipo_usuario() + "\");";
 
-        String sqlInsertAdministrativo = "INSERT INTO Profesional (titulo, fecha_ingreso) VALUES" +
+        String sqlInsertAdministrativo = "INSERT INTO Profesional (titulo, fecha_ingreso) VALUES" + // TODO hola, checkear los atributos de la tabla
                 "(null,\"" + cliente.getRazonSocial() + "\"," +
                 "\"" + cliente.getGiroEmpresa() + "\"," +
                 "\"" + cliente.getRut() + "\"," +
@@ -79,7 +79,7 @@ public class ClienteDaoImpl implements ICliente{
             pstmU.setDate(4, (Date) cliente.getFechaNacimiento());
             pstmU.setInt(5, cliente.getRun());
             pstmU.setString(6, cliente.getPassword());
-            pstmU.setInt(7, cliente.getIdUsuario());
+            pstmU.setInt(7, cliente.getIdUsuario()); // TODO USUARIO YA NO TIENE ID?
 
             PreparedStatement pstmC = con.prepareStatement(updateCliente);
             pstmC.executeQuery();
@@ -89,7 +89,7 @@ public class ClienteDaoImpl implements ICliente{
             pstmC.setString(4, cliente.getTelefonoRepresentante());
             pstmC.setString(5, cliente.getDireccionEmpresa());
             pstmC.setString(6, cliente.getComunaEmpresa());
-            pstmU.setInt(7, cliente.getIdUsuario());
+            pstmU.setInt(7, cliente.getIdUsuario()); // TODO USUARIO YA NO TIENE ID?
             actualizar = pstmC.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -107,10 +107,10 @@ public class ClienteDaoImpl implements ICliente{
         String deleteUsuario = "DELETE FROM usuario WHERE id_usuario =?";
         String deleteCliente = "DELETE FROM cliente WHERE id_usuario =?";
 
-        try{
+  /*      try{
             con = Conexion.getConexion();
             PreparedStatement pstmU = con.prepareStatement(deleteUsuario);
-            pstmU.setInt(1, cliente.getRun());
+            pstmU.setInt(1, cliente.getRun()); // TODO EN VEZ DE USAR EL ID USÉ EL RUN
 
             PreparedStatement pstmC = con.prepareStatement(deleteCliente);
             pstmC.setInt(1, cliente.getRut()); // VER QUÉ SE TOMA POR PARÁMETRO PARA ELIMINAR
@@ -123,6 +123,8 @@ public class ClienteDaoImpl implements ICliente{
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+   */
 
         return delete;
         }
