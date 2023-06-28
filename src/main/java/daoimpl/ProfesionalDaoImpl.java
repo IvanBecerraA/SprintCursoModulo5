@@ -16,7 +16,7 @@ public class ProfesionalDaoImpl implements IProfesional {
         Connection con = null;
         Statement stmt = null;
 
-        String sqlUseSchema = "USE nombre_esquema"; //TODO realizar ajustes cuando base de datos esté funcionando
+        String sqlUseSchema = "USE sql9628208"; //TODO realizar ajustes cuando base de datos esté funcionando
 
         String sqlInsertUsuario = "INSERT INTO Usuario VALUES(null,\"" + profesional.getNombre() + "\"," +
                 "\"" + profesional.getApellido1() + "\"," +
@@ -26,7 +26,7 @@ public class ProfesionalDaoImpl implements IProfesional {
                 "\"" + profesional.getContrasenia() + "\"," +
                 "\"" + profesional.getTipo_usuario() + "\");";
 
-        String sqlInsertAdministrativo = "INSERT INTO Profesional (titulo, fecha_ingreso) VALUES" +
+        String sqlInsertProfesional = "INSERT INTO Profesional (titulo, fecha_ingreso) VALUES" +
                 "(null,\"" + profesional.getTitulo() + "\"," +
                 "\"" + profesional.getFecha_ingreso() + "\"," +
                 "(SELECT id_usuario FROM Usuario WHERE run = '" + profesional.getRun() + "'));";
@@ -35,7 +35,7 @@ public class ProfesionalDaoImpl implements IProfesional {
             stmt = con.createStatement();
             stmt.execute(sqlUseSchema);
             stmt.executeUpdate(sqlInsertUsuario);
-            stmt.executeUpdate(sqlInsertAdministrativo);
+            stmt.executeUpdate(sqlInsertProfesional);
             create = true;
             stmt.close();
             con.close();

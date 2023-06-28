@@ -15,7 +15,7 @@ public class ClienteDaoImpl implements ICliente{
         Connection con = null;
         Statement stmt = null;
 
-        String sqlUseSchema = "USE nombre_esquema"; //TODO realizar ajustes cuando base de datos esté funcionando
+        String sqlUseSchema = "USE sql9628208"; //TODO realizar ajustes cuando base de datos esté funcionando
 
         String sqlInsertUsuario = "INSERT INTO Usuario VALUES(null,\"" + cliente.getNombre() + "\"," +
                 "\"" + cliente.getApellido1() + "\"," +
@@ -25,7 +25,7 @@ public class ClienteDaoImpl implements ICliente{
                 "\"" + cliente.getContrasenia() + "\"," +
                 "\"" + cliente.getTipo_usuario() + "\");";
 
-        String sqlInsertAdministrativo = "INSERT INTO Cliente (titulo, fecha_ingreso) VALUES" + // TODO hola, checkear los atributos de la tabla
+        String sqlInsertCliente = "INSERT INTO Cliente (titulo, fecha_ingreso) VALUES" + // TODO hola, checkear los atributos de la tabla
                 "(null,\"" + cliente.getRazonSocial() + "\"," +
                 "\"" + cliente.getGiroEmpresa() + "\"," +
                 "\"" + cliente.getRut() + "\"," +
@@ -38,7 +38,7 @@ public class ClienteDaoImpl implements ICliente{
             stmt = con.createStatement();
             stmt.execute(sqlUseSchema);
             stmt.executeUpdate(sqlInsertUsuario);
-            stmt.executeUpdate(sqlInsertAdministrativo);
+            stmt.executeUpdate(sqlInsertCliente);
             create = true;
             stmt.close();
             con.close();

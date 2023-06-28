@@ -17,7 +17,7 @@ public class AdministrativoDaoImpl implements IAdministrativo {
         Connection con = null;
         Statement stmt = null;
 
-        String sqlUseSchema = "USE nombre_esquema"; //TODO realizar ajustes cuando base de datos esté funcionando
+        String sqlUseSchema = "USE sql9628208"; //TODO realizar ajustes cuando base de datos esté funcionando
 
         String sqlInsertUsuario = "INSERT INTO Usuario VALUES(null,\"" + administrativo.getNombre() + "\"," +
                 "\"" + administrativo.getApellido1() + "\"," +
