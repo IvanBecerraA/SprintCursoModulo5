@@ -4,8 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Crear Usuario</title>
+    <title>Listado de Usuarios</title>
     <%@ include file='head.jsp'  %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 <body>
     <%@ include file='header.jsp' %>
@@ -14,7 +15,7 @@
         <button type="button" style="width: 150px;" class="btn btn-primary m-auto">Crear Usuario</button>
 
       </div>
-      <div class="container ">
+      <div class="container"style="min-height: calc(65vh - 50px); overflow-y: auto;">
         <div class="row grid gap-6 w-70 m-auto mt-5 ">
           <table class="table">
             <thead>
@@ -48,8 +49,8 @@
                 <td>Otto</td>
                 <!-- <td>juan</td> -->
                 <td>Mark</td>
-                <td><button type="button" class="btn btn-success">Editar</button></td>
-                <td><button type="button" class="btn btn-danger">Eliminar</button></td>
+                <td><button type="button" class="btn btn-success"><i class="bi bi-pencil-square"></i></button></td>
+                <td><button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button></td>
 
               </tr>
               <tr class="text-center">
@@ -61,8 +62,8 @@
                 <td>Thornton</td>
                 <td>@fat</td>
                 <td>Thornton</td>
-                <td><button type="button" class="btn btn-success">Editar</button></td>
-                <td><button type="button" class="btn btn-danger">Eliminar</button></td>
+                <td><button type="button" class="btn btn-success"><i class="bi bi-pencil-square"></i></button></td>
+                <td><button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button></td>
               </tr>
               <tr class="text-center">
                 <th scope="row">3</th>
@@ -73,8 +74,8 @@
                 <!-- <td>Jacob</td> -->
                 <td>Thornton</td>
                 <td>@fat</td>
-                <td><button type="button" class="btn btn-success">Editar</button></td>
-                <td><button type="button" class="btn btn-danger">Eliminar</button></td>
+                <td><button type="button" class="btn btn-success"><i class="bi bi-pencil-square"></i></button></td>
+                <td><button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button></td>
               </tr>
             </tbody>
           </table>
