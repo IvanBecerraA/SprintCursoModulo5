@@ -1,5 +1,6 @@
 package controllers;
 
+import daoimpl.ClienteDaoImpl;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -113,6 +114,7 @@ public class SvUsuario extends HttpServlet {
 
 
     private void create(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+        int idCliente = Integer.parseInt(request.getParameter("252"));
         String razonSocial = request.getParameter("razonSocial");
         String giroEmpresa = request.getParameter("giroEmpresa");
         int rut = Integer.parseInt(request.getParameter("rut"));
@@ -120,7 +122,7 @@ public class SvUsuario extends HttpServlet {
         String direccionEmpresa = request.getParameter("direccionEmpresa");
         String comunaEmpresa = request.getParameter("comunaEmpresa");
 
-        Cliente cliente = new Cliente(razonSocial, giroEmpresa, rut, telefonoRepresentante, direccionEmpresa, comunaEmpresa);
+        Cliente cliente = new Cliente(idCliente,razonSocial, giroEmpresa, rut, telefonoRepresentante, direccionEmpresa, comunaEmpresa);
         clienteDao.create(cliente);
         response.sendRedirect("list");
     }
@@ -156,9 +158,11 @@ public class SvUsuario extends HttpServlet {
 
         // Método que se puede eliminar
     private void get(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
+       /* int id = Integer.parseInt(request.getParameter("id"));
         Cliente clienteExistente;
-        try {
+
+       try {
+
             clienteExistente = clienteDao.seleccionarId(id);
             RequestDispatcher dispatcher = request.getRequestDispatcher("user-form.jsp");
             request.setAttribute("user", clienteExistente);
@@ -167,6 +171,8 @@ public class SvUsuario extends HttpServlet {
         }catch (Exception e) {
             e.printStackTrace();
         }
+
+        */
 
     }
 
@@ -190,12 +196,13 @@ public class SvUsuario extends HttpServlet {
         String direccionEmpresa = request.getParameter("direccionEmpresa");
         String comunaEmpresa = request.getParameter("comunaEmpresa");
 
-        Cliente cliente = new Cliente(razonSocial, giroEmpresa, rut, telefonoRepresentante, direccionEmpresa, comunaEmpresa);
+        //Cliente cliente = new Cliente(razonSocial, giroEmpresa, rut, telefonoRepresentante, direccionEmpresa, comunaEmpresa);
 
         //El parámetro para modificar tiene que ser un id int
+        /*
         clienteDao.update(cliente);
         response.sendRedirect("list");
-
+        */
 
 
     }
@@ -215,6 +222,7 @@ public class SvUsuario extends HttpServlet {
 
 
     private void listUsers(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException{
+        /*
         try{
             List<Cliente> listaClientes = clienteDao.list();
             request.setAttribute("listaClientes", listaClientes);
@@ -223,6 +231,8 @@ public class SvUsuario extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+         */
 
     }
 
