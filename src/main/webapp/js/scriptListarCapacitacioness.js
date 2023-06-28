@@ -17,4 +17,22 @@ $(document).ready(function () {
         }
         table.row('.selected').remove().draw(false)
     })
+
+    $('#btnEditar').click(function () {
+        var data = table.row('.selected').data()
+        if (data) {
+            $('#idEliminacion').val(data[0])
+        }
+
+    })
+
+    $('#btnModalBorrar').click(function () {
+        var data = table.row('.selected').data()
+        var seleccionadas = table.rows('.selected').data().length
+        if (seleccionadas) {
+            $('#idEliminacion').val(data[0])
+            console.log(seleccionadas)
+        }
+
+    })
 })
