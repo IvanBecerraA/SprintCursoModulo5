@@ -10,23 +10,11 @@
                  </button>
                  <div class="collapse navbar-collapse  pe-5" id="navbarNav">
                      <ul class="navbar-nav ms-md-auto">
-                        <li class="nav-item">
-                             <a class="nav-link active" href="">Listar usuarios</a>
+                         <li class="nav-item">
+                             <a class="nav-link active" aria-current="page" href="../index.jsp">Inicio</a>
                          </li>
                          <li class="nav-item">
-                             <a class="nav-link active" href="crearUsuario.jsp">Crear usuarios</a>
-                         </li>
-                          <li class="nav-item">
-                             <a class="nav-link active" href="listarCapacitaciones.jsp">Listar capacitación</a>
-                          </li>
-                          <li class="nav-item">
-                             <a class="nav-link active" href="crearCapacitacion.jsp">Crear capacitación</a>
-                          </li>
-                         <li class="nav-item">
-                             <a class="nav-link active" href="#">Contacto</a>
-                         </li>
-                         <li class="nav-item">
-                             <a class="nav-link active" href="../index.jsp">Cerrar sesión</a>
+                             <a class="nav-link active" href="views/login.jsp">Login</a>
                          </li>
                      </ul>
                  </div>
