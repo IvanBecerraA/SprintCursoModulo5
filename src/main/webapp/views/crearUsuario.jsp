@@ -10,7 +10,7 @@
 		<%@ include file='header.jsp' %>
 
 		<div class="container mx-auto" style="width: 80vw">
-			<form action="SvUsuario" method="post">
+			<form action="/../SprintCursoModulo5/create" method="post">
 				<div class="row d-flex justify-content-between mt-4">
 					<h2 class="p-10">Formulario Crear Usuario</h2>
 					<div class="text-center">
@@ -18,6 +18,7 @@
 						<select
 							class="form-select mx-auto"
 							id="floatingSelect"
+							name="floatingSelect"
 							onchange="camposAdicionales()"
 							required
 							style="width: 200px"
@@ -39,6 +40,7 @@
 								type="text"
 								class="form-control form-control-sm"
 								id="nombre"
+								name="nombre"
 								placeholder="Juan"
 								required
 							/>
@@ -53,6 +55,7 @@
 								type="text"
 								class="form-control form-control-sm bb"
 								id="apellido1"
+								name="apellido1"
 								placeholder="Perez"
 								required
 							/>
@@ -67,6 +70,7 @@
 								type="text"
 								class="form-control form-control-sm"
 								id="apellido2"
+								name="apellido2"
 								placeholder="Pereira"
 								required
 							/>
@@ -82,6 +86,7 @@
 								type="date"
 								class="form-control form-control-sm"
 								id="fechaNacimiento"
+								name="fechaNacimiento"
 								required
 							/>
 						</div>
@@ -95,13 +100,14 @@
 								type="text"
 								class="form-control form-control-sm"
 								id="run"
+								name="run"
 								placeholder="11222333-3"
 								required
 							/>
 						</div>
 					</div>
 
-					<!-- Password -->
+					<!-- Contraseña -->
 					<div class="col-md-4 mb-3">
 						<div class="form-group">
 							<label for="contrasena" class="form-label">Contraseña</label>
@@ -109,57 +115,85 @@
 								type="password"
 								class="form-control form-control-sm"
 								id="contrasena"
+								name="contrasena"
 								placeholder="1234"
 								required
 							/>
 						</div>
 					</div>
 				</div>
-				<%@ include file='camposCliente.jsp' %> <%@ include file='camposProfesional.jsp' %>
+				<%@ include file='camposCliente.jsp' %>
+				<%@ include file='camposProfesional.jsp' %>
 				<%@ include file='camposAdministrativo.jsp' %>
 
-				<!-- botones, cancelar debe redirigir a inicio cuando exista la view -->
+				<!-- botones, cancelar resetea form -->
 				<div class="text-center">
-					<button type="submit" class="btn btn-primary btn-lg">Crear</button>
-					<button
-						type="submit"
-						formaction="inicio.jsp"
-						class="btn btn-outline-danger"
-						formnovalidate
-					>
-						Cancelar
-					</button>
+					<button type="submit" class="btn btn-primary btn-lg">Crear Usuario</button>
+					<button type="reset" class="btn btn-outline-danger">Limpiar Formulario</button>
 				</div>
 			</form>
 		</div>
 		<%@ include file='footer.jsp' %>
-
-		<!-- SCRIPT PARA MOSTRAR CAMPOS ADICIONALES, trasladar a js file -->
 		<script>
-			function camposAdicionales() {
-				var select = document.getElementById('floatingSelect');
-				var cliente = document.getElementById('cliente');
-				var profesional = document.getElementById('profesional');
-				var administrativo = document.getElementById('administrativo');
+            <!-- SCRIPT PARA MOSTRAR CAMPOS ADICIONALES -->
+            function camposAdicionales() {
+                var select = document.getElementById('floatingSelect');
+                var cliente = document.getElementById('cliente');
+                var profesional = document.getElementById('profesional');
+                var administrativo = document.getElementById('administrativo');
 
-				if (select.value === '1') {
-					cliente.style.display = 'block';
-				} else {
-					cliente.style.display = 'none';
-				}
 
-				if (select.value === '2') {
-					profesional.style.display = 'block';
-				} else {
-					profesional.style.display = 'none';
-				}
+                if (select.value === '1') {
+                    cliente.style.display = 'block';
+                    // Activa required en caso que hayan sido desactivadas
+                    cliente.querySelectorAll('input').forEach(function(input) {
+                        input.setAttribute('required', 'required');
+                    });
+                    // Desactiva los required de los perfiles no seleccionados
+                    profesional.querySelectorAll('input[required]').forEach(function(input) {
+                        input.removeAttribute('required');
+                    });
+                    administrativo.querySelectorAll('input[required]').forEach(function(input) {
+                        input.removeAttribute('required');
+                    });
+                } else {
+                    cliente.style.display = 'none';
+                }
 
-				if (select.value === '3') {
-					administrativo.style.display = 'block';
-				} else {
-					administrativo.style.display = 'none';
-				}
-			}
+                if (select.value === '2') {
+                    profesional.style.display = 'block';
+                    // Activa required en caso que hayan sido desactivadas
+                    profesional.querySelectorAll('input').forEach(function(input) {
+                        input.setAttribute('required', 'required');
+                    });
+                    // Desactiva los required de los perfiles no seleccionados
+                    cliente.querySelectorAll('input[required]').forEach(function(input) {
+                        input.removeAttribute('required');
+                    });
+                    administrativo.querySelectorAll('input[required]').forEach(function(input) {
+                        input.removeAttribute('required');
+                    });
+                } else {
+                    profesional.style.display = 'none';
+                }
+
+                if (select.value === '3') {
+                    administrativo.style.display = 'block';
+                    // Activa required en caso que hayan sido desactivadas
+                    administrativo.querySelectorAll('input').forEach(function(input) {
+                        input.setAttribute('required', 'required');
+                    });
+                    // Desactiva los required de los perfiles no seleccionados
+                    cliente.querySelectorAll('input[required]').forEach(function(input) {
+                        input.removeAttribute('required');
+                    });
+                    profesional.querySelectorAll('input[required]').forEach(function(input) {
+                        input.removeAttribute('required');
+                    });
+                } else {
+                    administrativo.style.display = 'none';
+                }
+            }
 		</script>
 	</body>
 </html>

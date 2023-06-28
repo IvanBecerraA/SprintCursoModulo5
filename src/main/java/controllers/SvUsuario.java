@@ -17,7 +17,6 @@ import java.util.List;
  * Servlet implementation class SvUsuarios
  */
 @WebServlet("/")
-
 public class SvUsuario extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private ClienteDaoImpl clienteDao;
@@ -33,7 +32,49 @@ public class SvUsuario extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
+        String action = request.getServletPath(); // Devuelve un string con el nombre o ruta del request (nombre del action del form)"
+        switch (action) {
+            case "/new":
+                showNewForm(request, response);
+                break;
+            case "/create":
+                System.out.println("Hello from POST!");
+                // implementacion
+                try {
+                    create(request, response);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+            case "/update":
+                try {
+                    update(request, response);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+            case "/get":
+                try {
+                    get(request, response);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+            case "/delete":
+                try {
+                    delete(request, response);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+            default:
+                try {
+                    listUsers(request,response);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+        }
     }
 
     @Override
@@ -45,11 +86,9 @@ public class SvUsuario extends HttpServlet {
                 showNewForm(request, response);
                 break;
             case "/create":
-                try {
-                    create(request, response);
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
+                System.out.println("Hello from GET!");
+                // Redirecciona a crearUsuario
+                getServletContext().getRequestDispatcher("/views/crearUsuario.jsp").forward(request, response);
                 break;
             case "/update":
                 try {
