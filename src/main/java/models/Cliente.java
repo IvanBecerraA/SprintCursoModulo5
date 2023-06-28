@@ -8,10 +8,10 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 public class Cliente extends Usuario{
-    private int id;
-    private String nombreEmpresa;
+    private int idCliente;
+    private String razonSocial;
     private String giroEmpresa;
-    private String rut;
+    private int rut;
     private String telefonoRepresentante;
     private String direccionEmpresa;
     private String comunaEmpresa;

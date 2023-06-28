@@ -10,29 +10,23 @@
                  </button>
                  <div class="collapse navbar-collapse  pe-5" id="navbarNav">
                      <ul class="navbar-nav ms-md-auto">
-                         <li class="nav-item">
-                             <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                        <li class="nav-item">
+                             <a class="nav-link active" href="">Listar usuarios</a>
                          </li>
                          <li class="nav-item">
-                             <a class="nav-link active" href="#">Login</a>
+                             <a class="nav-link active" href="crearUsuario.jsp">Crear usuarios</a>
                          </li>
+                          <li class="nav-item">
+                             <a class="nav-link active" href="listarCapacitaciones.jsp">Listar capacitación</a>
+                          </li>
+                          <li class="nav-item">
+                             <a class="nav-link active" href="crearCapacitacion.jsp">Crear capacitación</a>
+                          </li>
                          <li class="nav-item">
                              <a class="nav-link active" href="#">Contacto</a>
                          </li>
                          <li class="nav-item">
-                             <a class="nav-link active" href="#">Crear capacitación</a>
-                         </li>
-                         <li class="nav-item">
-                             <a class="nav-link active" href="#">Listar capacitación</a>
-                         </li>
-                         <li class="nav-item">
-                             <a class="nav-link active" href="#">Crear usuario</a>
-                         </li>
-                         <li class="nav-item">
-                             <a class="nav-link active" href="#">Listar usuario</a>
-                         </li>
-                         <li class="nav-item">
-                             <a class="nav-link active" href="#">Cerrar sesión</a>
+                             <a class="nav-link active" href="../index.jsp">Cerrar sesión</a>
                          </li>
                      </ul>
                  </div>
