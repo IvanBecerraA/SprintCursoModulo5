@@ -2,7 +2,6 @@ package daoimpl;
 
 import dao.ICliente;
 import models.Cliente;
-import conexion.conexion;
 
 import java.sql.*;
 import java.util.List;
