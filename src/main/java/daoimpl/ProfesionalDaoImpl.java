@@ -1,9 +1,11 @@
 package daoimpl;
 
+import conexion.Conexion;
 import dao.IProfesional;
 import models.Profesional;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
@@ -28,7 +30,19 @@ public class ProfesionalDaoImpl implements IProfesional {
                 "(null,\"" + profesional.getTitulo() + "\"," +
                 "\"" + profesional.getFecha_ingreso() + "\"," +
                 "(SELECT id_usuario FROM Usuario WHERE run = '" + profesional.getRun() + "'));";
-        return false;
+        try {
+            con = Conexion.getConexion(); //TODO cambiar nombre de clase que maneja singleton cuando haya sido crada
+            stmt = con.createStatement();
+            stmt.execute(sqlUseSchema);
+            stmt.executeUpdate(sqlInsertUsuario);
+            stmt.executeUpdate(sqlInsertAdministrativo);
+            create = true;
+            stmt.close();
+            con.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return create;
     }
 
     @Override

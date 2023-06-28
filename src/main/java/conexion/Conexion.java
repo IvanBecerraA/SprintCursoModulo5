@@ -18,7 +18,7 @@ public class Conexion {
         }catch (ClassNotFoundException e){
             e.printStackTrace();
         }catch (SQLException e){
-            e.printStackTrace();
+            e.printStackTrace(); // hola
         }
     }
 

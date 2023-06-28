@@ -7,7 +7,7 @@
      <%@ include file="nav-inicio.jsp" %>
 
         <div class="d-flex justify-content-center align-content-center">
-            <form method="POST" class="bg-white p-5 rounded-5 text-secondary shadow" style="width: 25rem" action="/login">
+            <form method="POST" class="bg-white p-5 rounded-5 text-secondary shadow" style="width: 25rem" action="<%= request.getContextPath() %>/loginServlet">
                 <div class="d-flex justify-content-center">
                     <img
                         src="../images/login-icon.svg"
