@@ -56,7 +56,7 @@ public class ClienteDaoImpl implements ICliente{
     @Override
     public boolean update(Cliente cliente) {
         Connection con;
-        boolean actualizar = false;
+        boolean update = false;
 
         /* Consultas preparadas:
         -Permiten pasar parámetros a las sentencas sql
@@ -81,8 +81,6 @@ public class ClienteDaoImpl implements ICliente{
             pstmU.setString(6, cliente.getPassword());
             pstmU.setInt(7, cliente.getIdUsuario());
 
-
-
             PreparedStatement pstmC = con.prepareStatement(updateCliente);
             pstmC.executeQuery();
             pstmC.setString(1, cliente.getRazonSocial());
@@ -98,12 +96,34 @@ public class ClienteDaoImpl implements ICliente{
         }
 */
 
-        return actualizar;
+        return update;
     }
 
     @Override
-    public boolean delete(int id) {
+    public boolean delete(Cliente cliente) {
 
-            return false;
+        Connection con;
+        boolean delete = false;
+        String deleteUsuario = "DELETE FROM usuario WHERE id_usuario =?";
+        String deleteCliente = "DELETE FROM cliente WHERE id_usuario =?";
+
+        try{
+            con = Conexion.getConexion();
+            PreparedStatement pstmU = con.prepareStatement(deleteUsuario);
+            pstmU.setInt(1, cliente.getRun());
+
+            PreparedStatement pstmC = con.prepareStatement(deleteCliente);
+            pstmC.setInt(1, cliente.getRut()); // VER QUÉ SE TOMA POR PARÁMETRO PARA ELIMINAR
+                                                            // CLIENTE DE LA TABLA CLIENTE ...
+
+            delete = pstmU.executeUpdate() > 0 && pstmC.executeUpdate() > 0;
+            // Si se realizó la consulta el método executeUpdate
+            // retorna 1, si 1 > 0 = true => delete() retorna true
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return delete;
         }
     }

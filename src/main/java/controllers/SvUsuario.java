@@ -211,7 +211,7 @@ public class SvUsuario extends HttpServlet {
     private void delete(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         try {
-            clienteDao.delete(id);
+           // clienteDao.delete(Cliente cliente); REVISAR
         } catch (Exception e) {
             e.printStackTrace();
         }
