@@ -7,7 +7,6 @@ import java.util.Date;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @ToString
 public class Cliente extends Usuario{
@@ -20,6 +19,7 @@ public class Cliente extends Usuario{
     private String comunaEmpresa;
     private int id_usuario;
 
+
     public Cliente(String nombre, String apellido1, String apellido2, LocalDate fechaNacimiento, int run, String contrasenia,
                    int tipo_usuario, String razonSocial, String giroEmpresa, int rut, String telefonoRepresentante,
                    String direccionEmpresa, String comunaEmpresa) {
@@ -31,5 +31,6 @@ public class Cliente extends Usuario{
         this.direccionEmpresa = direccionEmpresa;
         this.comunaEmpresa = comunaEmpresa;
     }
+
 
 }
