@@ -58,11 +58,11 @@ public class ClienteDaoImpl implements ICliente{
             pstmC.setString(5, cliente.getDireccionEmpresa());
             pstmC.setString(6, cliente.getComunaEmpresa());
             pstmU.setInt(7, cliente.getIdUsuario());
-*/
             actualizar = pstmC.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+*/
 
         return actualizar;
     }
