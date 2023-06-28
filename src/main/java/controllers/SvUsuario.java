@@ -16,6 +16,8 @@ import models.Profesional;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -157,6 +159,9 @@ public class SvUsuario extends HttpServlet {
         String fechaNacimiento = request.getParameter("fechaNacimiento"); // TODO Debe ser de tipo DATE o LOCALDATE
         int run = Integer.parseInt(request.getParameter("run")); //TODO DEBE SER INT
         String contrasena = request.getParameter("contrasena");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        LocalDate fecha_Nacimiento = LocalDate.parse(fechaNacimiento, formatter);
 
         switch (tipoDeUsuario){
 
@@ -169,15 +174,17 @@ public class SvUsuario extends HttpServlet {
                 String direccionEmpresa = request.getParameter("direccionEmpresa");
                 String comunaEmpresa = request.getParameter("comunaEmpresa");
 
-                //Cliente cliente = new Cliente(nombre, apellido1,apellido2,fechaNacimiento,run,contrasena,tipoDeUsuario,razonSocial,giroEmpresa,rut,telefonoRepresentante,direccionEmpresa,comunaEmpresa);
-                //clienteDao.create(cliente);
+                Cliente cliente = new Cliente(nombre, apellido1,apellido2,fecha_Nacimiento,run,contrasena,tipoDeUsuario,razonSocial,giroEmpresa,rut,telefonoRepresentante,direccionEmpresa,comunaEmpresa);
+                clienteDao.create(cliente);
                 break;
 
             case 2:
                 String titulo = request.getParameter("titulo");
                 String fecha_ingreso = request.getParameter("fechaIngreso");
 
-                Profesional profesional = new Profesional(nombre, apellido1,apellido2,fechaNacimiento,run,contrasena,tipoDeUsuario,titulo,fecha_ingreso);
+                LocalDate fechaIngreso = LocalDate.parse(fecha_ingreso, formatter);
+
+                Profesional profesional = new Profesional(nombre, apellido1,apellido2,fecha_Nacimiento,run,contrasena,tipoDeUsuario,titulo,fechaIngreso);
                 profesionalDao.create(profesional);
                 break;
 
@@ -186,10 +193,10 @@ public class SvUsuario extends HttpServlet {
                 String area = request.getParameter("area");
                 String expPrevia = request.getParameter("experienciaPrevia");
 
-//                Administrativo administrativo = new Administrativo(nombre, apellido1, apellido2,
-//                                                fechaNacimiento, run, contrasena, tipoDeUsuario,
-//                                                area, expPrevia);
-//                administrativoDao.create(administrativo); //TODO DESCOMENTAR CUANDO TIPOS DE DATOS HAYAN SIDO ARREGLADOS
+                Administrativo administrativo = new Administrativo(nombre, apellido1, apellido2,
+                        fecha_Nacimiento, run, contrasena, tipoDeUsuario,
+                                                area, expPrevia);
+                administrativoDao.create(administrativo); //TODO DESCOMENTAR CUANDO TIPOS DE DATOS HAYAN SIDO ARREGLADOS
                 break;
         }
 

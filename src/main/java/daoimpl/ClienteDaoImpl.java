@@ -22,7 +22,7 @@ public class ClienteDaoImpl implements ICliente{
                 "\"" + cliente.getApellido2() + "\"," +
                 "\"" + cliente.getFechaNacimiento() + "\"," +
                 "\"" + cliente.getRun() + "\"," +
-                "\"" + cliente.getPassword() + "\"," +
+                "\"" + cliente.getContrasenia() + "\"," +
                 "\"" + cliente.getTipo_usuario() + "\");";
 
         String sqlInsertAdministrativo = "INSERT INTO Profesional (titulo, fecha_ingreso) VALUES" + // TODO hola, checkear los atributos de la tabla

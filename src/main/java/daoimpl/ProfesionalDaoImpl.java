@@ -23,7 +23,7 @@ public class ProfesionalDaoImpl implements IProfesional {
                 "\"" + profesional.getApellido2() + "\"," +
                 "\"" + profesional.getFechaNacimiento() + "\"," +
                 "\"" + profesional.getRun() + "\"," +
-                "\"" + profesional.getPassword() + "\"," +
+                "\"" + profesional.getContrasenia() + "\"," +
                 "\"" + profesional.getTipo_usuario() + "\");";
 
         String sqlInsertAdministrativo = "INSERT INTO Profesional (titulo, fecha_ingreso) VALUES" +
