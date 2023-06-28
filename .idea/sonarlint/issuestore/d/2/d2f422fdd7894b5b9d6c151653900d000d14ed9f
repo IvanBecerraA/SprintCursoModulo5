@@ -1,0 +1,16 @@
+
+q	java:S116"WRename this field "tipo_usuario" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(µ¹´âÿÿÿÿÿ
+L
+java:S1068"*Remove this unused "nombre" private field.(µÿï„ùÿÿÿÿ8Îì¶é1
+O
+java:S1068"-Remove this unused "apellido1" private field.(úì”ñûÿÿÿÿ8Îì¶é1
+O
+java:S1068"-Remove this unused "apellido2" private field.(°éŒ—şÿÿÿÿ8Îì¶é1
+U
+java:S1068"3Remove this unused "fechaNacimiento" private field.(¦ë¨ ÿÿÿÿÿ8Ïì¶é1
+I
+java:S1068"'Remove this unused "run" private field.(òî°ûÿÿÿÿ8Ïì¶é1
+N
+java:S1068",Remove this unused "password" private field.(œãë­úÿÿÿÿ8Ïì¶é1
+R
+java:S1068"0Remove this unused "tipo_usuario" private field.(µ¹´âÿÿÿÿÿ8Ğì¶é1
