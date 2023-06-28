@@ -10,12 +10,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import models.Administrativo;
 import models.Cliente;
 import models.Profesional;
+import models.Usuario;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -109,7 +112,7 @@ public class SvUsuario extends HttpServlet {
 
 
     private void showNewForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("listarUsuario.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("listarUsuarios.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -179,13 +182,11 @@ public class SvUsuario extends HttpServlet {
 
 
     private void delete(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
-        int id = Integer.parseInt(request.getParameter("idUsuario"));
-        String TipoUsuario = request.getParameter("tipoUsuario");
-        System.out.println(id);
-        System.out.println(TipoUsuario);
-        switch (TipoUsuario){
+        int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));//Recuperamos el id del Usuario
+        String TipoUsuario = request.getParameter("tipoUsuario");//recuperamos tipo de usuario en texto
+        switch (TipoUsuario){ //evaluamos que tipo de usuario es
             case "Administrativo":
-                adm.delete(id);
+                adm.delete(idUsuario); //llamamos al metodo que eliminará en nuestro el registro en SQL
                 break;
             case "Cliente":
                 //cli.delete(id); El implemento de CLiente delete
@@ -194,7 +195,8 @@ public class SvUsuario extends HttpServlet {
                 //pro.delete(id); El implemento de Profesional delete
                 break;
         }
-        response.sendRedirect("list");
+        response.sendRedirect("listUsers"); //Le damos un nombre que no existe para que nos
+                                                // lleve a la función ListUser
     }
 
 
@@ -237,28 +239,81 @@ public class SvUsuario extends HttpServlet {
 
 
     // Editar para modificar los 3 tipos de usarios
-    private void update(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+    private void update(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
+        //Instanciamos las clases
+        Administrativo adm = new Administrativo(); //Administrativo
+        Cliente cli = new Cliente(); //CLiente
+        Profesional pro = new Profesional(); //Profesional
+        /* La variable botonFormulario es para saber si la accion de entrar al update es a través
+        de la listarUsuarios
+        */
+        String botonFormulario = request.getParameter("actualizarFormulario");
 
-        String razonSocial = request.getParameter("razonSocial");
-        String giroEmpresa = request.getParameter("giroEmpresa");
-        int rut = Integer.parseInt(request.getParameter("rut"));
-        String telefonoRepresentante = request.getParameter("telefonoRepresentante");
-        String direccionEmpresa = request.getParameter("direccionEmpresa");
-        String comunaEmpresa = request.getParameter("comunaEmpresa");
+        //preguntamos si entramos desde la lista
+        if (botonFormulario != "" && botonFormulario != null) {
+            //rescatamos el IdUsuario y tipo usuario
+            int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
+            String tipoUsuario = request.getParameter("tipoUsuario");
+            //enviamos a sus respectivos formularios segun su tipousuario
+            switch (tipoUsuario) {
+                case "Cliente":
+                    break;
+                case "Profesional":
+                    break;
+                case "Administrativo":
+                    //llamamos los campos de nuestra tabla Administrativo + Usuario filatrado por el idUsuario y lo enviamos al HTML
+                    request.setAttribute("administrativosHtml", this.adm.listOne(idUsuario));
+                    //Nos dirigimos a nuestro formulario para modificar
+                    getServletContext().getRequestDispatcher("/views/actualizarAdministrativo.jsp").forward(request, response);
+                    break;
+            }
 
+        } else {
+            //Cargamos todos los campos de Usuario que se tendra por defecto en cada update
+            int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));//recuperando id
+            int idTipo = Integer.parseInt(request.getParameter("idtipo"));//recuperando id tipo usuario
+            String nombre = (request.getParameter("nombre"));
+            String apellido1 = (request.getParameter("apellido1"));
+            String apellido2 = (request.getParameter("apellido2"));
+            String password = (request.getParameter("contrasenia"));
+            LocalDate FechaNacimiento = (LocalDate.parse(request.getParameter("fechaNac")));
+            String tipoUsuario = idTipo==1?(idTipo==2?"Profesional":"Cliente"):"Administrativo";
+            switch (tipoUsuario) {
+                case "Cliente":
+                    /* Codigo si es CLiente*/
+                    break;
+                case "Profesional":
+                    /* Codigo si es Profesional*/
+                    break;
+                case "Administrativo":
+                    //hacemos un Set para nuestra clase Administrador
+                    adm.setIdUsuario(idUsuario); adm.setNombre(nombre); adm.setApellido1(apellido1);
+                    adm.setApellido2(apellido2);adm.setPassword(password);adm.setFechaNacimiento(FechaNacimiento);
+                    //recuperamos los datos que pertenecen a nuestra propia clase desde el formulario
+                    adm.setIdAdministrativo(Integer.parseInt(request.getParameter("idAdministrativo")));
+                    adm.setArea(request.getParameter("area"));
+                    adm.setExperienciaPrevia(request.getParameter("experiencia"));
+                    //lo enviamos a nuestro metodo udpate
+                    this.adm.update(adm);
+                    break;
 
-        //Cliente cliente = new Cliente(razonSocial, giroEmpresa, rut, telefonoRepresentante, direccionEmpresa, comunaEmpresa);
+            }
+        }
+        //Nos envia a Listar usuario solo si no entra al if
+        response.sendRedirect("listUsers");
 
-        //El parámetro para modificar tiene que ser un id int
+            //Cliente cliente = new Cliente(razonSocial, giroEmpresa, rut, telefonoRepresentante, direccionEmpresa, comunaEmpresa);
+
+            //El parámetro para modificar tiene que ser un id int
         /*
         clienteDao.update(cliente);
         response.sendRedirect("list");
         */
 
 
+
+
     }
-
-
 
 
 
@@ -280,8 +335,8 @@ public class SvUsuario extends HttpServlet {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        // redirigir a página "/listarUsuario.jsp" con la lista de usuariosHtml
-        getServletContext().getRequestDispatcher("/listarUsuario.jsp").forward(request,response);
+        // redirigir a página "/listarUsuarios.jsp" con la lista de usuariosHtml
+        getServletContext().getRequestDispatcher("/views/listarUsuarios.jsp").forward(request,response);
 
 
 

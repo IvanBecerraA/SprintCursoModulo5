@@ -27,7 +27,7 @@ public class ProcesoListarUsuario extends HttpServlet{
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        // redirigir a página "/listarUsuario.jsp" con la lista de usuariosHtml
-        getServletContext().getRequestDispatcher("/listarUsuario.jsp").forward(request,response);
+        // redirigir a página "/listarUsuarios.jsp" con la lista de usuariosHtml
+        getServletContext().getRequestDispatcher("/listarUsuarios.jsp").forward(request,response);
     }
 }

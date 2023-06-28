@@ -23,6 +23,6 @@ public class ProcesoEliminarAdministrativo extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int IdUsuario = Integer.parseInt(req.getParameter("idUsuarioE"));
         adm.delete(IdUsuario);
-        resp.sendRedirect(req.getContextPath() + "/ListarUsuario");
+        resp.sendRedirect(req.getContextPath() + "ListarUsuario");
     }
 }

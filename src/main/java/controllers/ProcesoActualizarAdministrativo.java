@@ -34,13 +34,7 @@ public class ProcesoActualizarAdministrativo extends HttpServlet {
         adm.setExperienciaPrevia(req.getParameter("experiencia"));
         adm.setPassword(req.getParameter("contrasenia"));
         String fechaNacimientoStr = req.getParameter("fechaNac");
-        if (fechaNacimientoStr != null) {
-            LocalDate fechaNacimiento = LocalDate.parse(fechaNacimientoStr);
-            java.sql.Date fechaNacimientoSql = java.sql.Date.valueOf(fechaNacimiento);
-            adm.setFechaNacimiento(fechaNacimientoSql);
-            // Guardar fechaNacimientoSql en tu objeto Administrativo o en tu consulta SQL
-        }
-
+        adm.setFechaNacimiento(LocalDate.parse(fechaNacimientoStr));
         this.adm.update(adm);
         getServletContext().getRequestDispatcher("/ListarUsuario").forward(req,resp);
     }

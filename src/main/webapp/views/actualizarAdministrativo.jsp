@@ -20,7 +20,7 @@
 
 
     %>
-    <form action="ActualizarAdministrativo" method="GET" >
+    <form action="/../SprintCursoModulo5/update" method="GET" >
         <!--Datos ocultos-->
         <input type="hidden" name="idUsuario" value="<%=adm.getIdUsuario()%>">
         <input type="hidden" name="idtipo" value="<%=adm.getTipo_usuario()%>">
@@ -43,7 +43,7 @@
         <label >Años de Experiencia </label>
         <input type="number" name="experiencia" placeholder="Ingrese Años de Experiencia" value="<%= adm.getExperienciaPrevia()%>" required>
 
-        <button type="submit">Editar</button>
+        <input type="submit" name="actualizarCargar" value="Editar">
     </form>
 
 </body>

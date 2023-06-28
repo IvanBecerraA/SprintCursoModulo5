@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +52,7 @@ public class UsuarioDaoImpl implements IUsuario {
             rs = stmt.executeQuery("select * from usuario;");
             while (rs.next()){
                 usu = new Usuario(rs.getInt(1),rs.getString(2),
-                        rs.getString(3),rs.getString(4),rs.getDate(5),
+                        rs.getString(3),rs.getString(4), LocalDate.parse(rs.getString(5)),
                         rs.getInt(6),rs.getString(7),rs.getInt(8));
                 usuarios.add(usu);
             }
