@@ -10,7 +10,7 @@ import lombok.*;
 public class Cliente extends Usuario{
     private String razonSocial;
     private String giroEmpresa;
-    private String rut;
+    private int rut;
     private String telefonoRepresentante;
     private String direccionEmpresa;
     private String comunaEmpresa;
