@@ -6,7 +6,7 @@
 	<div class="row gutter-2 mt-4">
 		<div class="col-md-4 mb-3">
 			<div class="form-group">
-				<label for="titulo">Nombre Empresa o Raz�n Social:</label>
+				<label for="titulo">Título</label>
 				<input
 					type="text"
 					id="titulo"
@@ -19,7 +19,7 @@
 		</div>
 		<div class="col-md-4 mb-3">
 			<div class="form-group">
-				<label for="fechaIngreso">Nombre Empresa o Raz�n Social:</label>
+				<label for="fechaIngreso">Fecha de Ingreso</label>
 				<input
 					type="date"
 					class="form-control form-control-sm"

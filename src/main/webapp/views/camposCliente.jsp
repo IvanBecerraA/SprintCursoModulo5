@@ -8,7 +8,7 @@
 	<div class="row gutter-2 mt-4">
 		<div class="col-md-4 mb-3">
 			<div class="form-group">
-				<label for="razonSocial">Nombre Empresa o Razón Social:</label>
+				<label for="razonSocial">Nombre Empresa o Razón Social</label>
 				<input
 					type="text"
 					id="razonSocial"
@@ -23,7 +23,7 @@
 		<!-- Giro Empresa -->
 		<div class="col-md-4 mb-3">
 			<div class="form-group">
-				<label for="giroEmpresa">Giro de la Empresa:</label>
+				<label for="giroEmpresa">Giro de la Empresa</label>
 				<input
 					type="text"
 					id="giroEmpresa"
@@ -38,7 +38,7 @@
 		<!-- Rut Empresa -->
 		<div class="col-md-4 mb-3">
 			<div class="form-group">
-				<label for="rut">Rut de la Empresa:</label>
+				<label for="rut">Rut de la Empresa</label>
 				<input
 					type="text"
 					id="rut"
@@ -53,7 +53,7 @@
 		<!-- Teléfono del Representante -->
 		<div class="col-md-4 mb-3">
 			<div class="form-group">
-				<label for="telefonoRepresentante">Teléfono del Representante:</label>
+				<label for="telefonoRepresentante">Teléfono del Representante</label>
 				<input
 					type="text"
 					id="telefonoRepresentante"
@@ -68,7 +68,7 @@
 		<!-- Dirección de la Empresa -->
 		<div class="col-md-4 mb-3">
 			<div class="form-group">
-				<label for="direccionEmpresa">Dirección de la Empresa:</label>
+				<label for="direccionEmpresa">Dirección de la Empresa</label>
 				<input
 					type="text"
 					id="direccionEmpresa"
@@ -83,7 +83,7 @@
 		<!-- Comuna de la Empresa -->
 		<div class="col-md-4 mb-3">
 			<div class="form-group">
-				<label for="comunaEmpresa">Comuna de la Empresa:</label>
+				<label for="comunaEmpresa">Comuna de la Empresa</label>
 				<input
 					type="text"
 					id="comunaEmpresa"

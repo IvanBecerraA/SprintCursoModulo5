@@ -24,7 +24,7 @@
 					type="text"
 					id="experienciaPrevia"
 					class="form-control form-control-sm"
-					name="area"
+					name="experienciaPrevia"
 					placeholder="4 años"
 					required
 				/>

@@ -10,9 +10,9 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 public class Profesional extends Usuario {
-    private int id_professional;
-    private int id_user;
     private String titulo;
     private Date fecha_ingreso;
 
+    public Profesional(String nombre, String apellido1, String apellido2, String fechaNacimiento, String run, String cotrasena, String titulo, String fechaIngreso) {
+    }
 }
