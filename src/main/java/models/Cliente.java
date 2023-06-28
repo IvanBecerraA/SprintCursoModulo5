@@ -15,4 +15,7 @@ public class Cliente extends Usuario{
     private String telefonoRepresentante;
     private String direccionEmpresa;
     private String comunaEmpresa;
+
+    public Cliente(String razonSocial, String giroEmpresa, int rut, String telefonoRepresentante, String direccionEmpresa, String comunaEmpresa) {
+    }
 }

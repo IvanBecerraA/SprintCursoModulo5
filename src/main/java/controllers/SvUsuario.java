@@ -220,13 +220,24 @@ public class SvUsuario extends HttpServlet {
 
 
         // Editar para modificar los 3 tipos de usarios
-    private void update(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+        private void update(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+            String razonSocial = request.getParameter("razonSocial");
+            String giroEmpresa = request.getParameter("giroEmpresa");
+            int rut = Integer.parseInt(request.getParameter("rut"));
+            String telefonoRepresentante = request.getParameter("telefonoRepresentante");
+            String direccionEmpresa = request.getParameter("direccionEmpresa");
+            String comunaEmpresa = request.getParameter("comunaEmpresa");
+
+            Cliente cliente = new Cliente(razonSocial, giroEmpresa,rut,telefonoRepresentante,direccionEmpresa,comunaEmpresa);
+
+            clienteDao.update(cliente);
+            response.sendRedirect("list");
+
+
+        }
 
 
 
-
-
-    }
 
 
 
