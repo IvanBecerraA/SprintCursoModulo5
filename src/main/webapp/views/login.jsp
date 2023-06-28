@@ -10,7 +10,7 @@
             <form method="POST" class="bg-white p-5 rounded-5 text-secondary shadow" style="width: 25rem" action="<%= request.getContextPath() %>/loginServlet">
                 <div class="d-flex justify-content-center">
                     <img
-                        src="../images/login-icon.svg"
+                        src="https://raw.githubusercontent.com/IvanBecerraA/SprintCursoModulo5/b6e4e3f531bdcca0bb1128cb4b0ba15bba8567b0/src/main/webapp/images/login-icon.svg"
                         alt="login-icon"
                         style="height: 7rem"/>
                 </div>
@@ -18,7 +18,7 @@
                 <div class="input-group mt-4">
                     <div class="input-group-text bg-primary">
                         <img
-                            src="../images/username-icon.svg"
+                            src="https://raw.githubusercontent.com/IvanBecerraA/SprintCursoModulo5/b6e4e3f531bdcca0bb1128cb4b0ba15bba8567b0/src/main/webapp/images/username-icon.svg"
                             alt="username-icon"
                             style="height: 1rem"/>
                     </div>
@@ -33,7 +33,7 @@
                 <div class="input-group mt-1">
                     <div class="input-group-text bg-primary">
                         <img
-                            src="../images/password-icon.svg"
+                            src="https://raw.githubusercontent.com/IvanBecerraA/SprintCursoModulo5/b6e4e3f531bdcca0bb1128cb4b0ba15bba8567b0/src/main/webapp/images/password-icon.svg"
                             alt="password-icon"
                             style="height: 1rem"/>
                     </div>
