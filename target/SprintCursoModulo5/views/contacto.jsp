@@ -66,7 +66,7 @@
                 // Expresión regular para validar el formato del correo
                 var correoRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
                 var nombreRegex = /^[A-Za-z]+$/;
-                var telefonoRegex = /^\+\d{6,9}$/;
+                var telefonoRegex = /^\+\d{6,11}$/;
                 var apellidoRegex = /^[A-Za-z]+$/;
 
                 // Validar todos los campos (no deben estar vacíos)
@@ -81,20 +81,20 @@
                     return false;
                 }
                 if (!nombre.match(nombreRegex)) {
-                    alert('Por favor, ingrese solo letras en nombre');
+                    alert('Por favor, ingrese un nombre valido');
                     return false;
                 }
                 if (!apellidos.match(apellidoRegex)) {
-                    alert('Por favor, ingrese solo letras en apellido');
+                    alert('Por favor, ingrese un apellido valido');
                     return false;
                 }
                 if (!telefono.match(telefonoRegex)) {
-                    alert('Teléfono ingresado no es válido');
+                    alert('ingrese un telefono valido');
                     return false;
                 }
 
                 // Mostrar el cuerpo del mensaje en una alerta
-                alert('Nombre: ' + nombre + '\nCuerpo del mensaje:\n\n' + mensaje + '\nMensaje Enviado');
+                alert(`Sr/a: ${nombre}\n\nSu mensaje:\n\n${mensaje}\n\n¡Se ha enviado con éxito!`);
 
                 // Si todos los campos son válidos, enviar el formulario
                 return true;
