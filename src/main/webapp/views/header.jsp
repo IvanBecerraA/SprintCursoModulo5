@@ -29,7 +29,7 @@
                              <a class="nav-link active" href="#">Crear usuario</a>
                          </li>
                          <li class="nav-item">
-                             <a class="nav-link active" href="ListarUsuario">Listar usuario</a>
+                             <a class="nav-link active" href="/../SprintCursoModulo5/listar">Listar usuario</a>
                          </li>
                          <li class="nav-item">
                              <a class="nav-link active" href="#">Cerrar sesión</a>
