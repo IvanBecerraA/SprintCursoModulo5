@@ -1,6 +1,7 @@
 package controllers;
 
 import daoimpl.ClienteDaoImpl;
+import daoimpl.ProfesionalDaoImpl;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -8,9 +9,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import models.Cliente;
+import models.Profesional;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,6 +25,7 @@ import java.util.List;
 public class SvUsuario extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private ClienteDaoImpl clienteDao;
+    private ProfesionalDaoImpl profesionalDao;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -114,10 +119,42 @@ public class SvUsuario extends HttpServlet {
 
 
     private void create(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+        String  tipoDeUsuario = request.getParameter("floatingSelect");// ID del Select
+        PrintWriter out = response.getWriter();
+        switch (tipoDeUsuario){
+            case "1":
+                out.println("<script type=\"text/javascript\">");
+                out.println("consol.log('funciona cliente')");
+                out.println("location='index.jsp';");
+                out.println("</script>");
+                break;
+            case "2":
+                String nombre = request.getParameter("nombre");
+                String apellido1 = request.getParameter("apellido1");
+                String apellido2 = request.getParameter("apellido2");
+                String fechaNacimiento = request.getParameter("fechaNacimiento");
+                String run = request.getParameter("run");
+                String cotrasena = request.getParameter("contrasena");
+
+                String titulo = request.getParameter("titulo");
+                String fecha_ingreso = request.getParameter("fechaIngreso");
+                Profesional profesional = new Profesional(nombre, apellido1,apellido2,fechaNacimiento,run,cotrasena,titulo,fecha_ingreso);
+                profesionalDao.create(profesional);
+                break;
+            case "3":
+
+                out.println("<script type=\"text/javascript\">");
+                out.println("consol.log('funciona administrador')");
+                out.println("location='index.jsp';");
+                out.println("</script>");
+                break;
+        }
+
+
         int idCliente = Integer.parseInt(request.getParameter("252"));
         String razonSocial = request.getParameter("razonSocial");
         String giroEmpresa = request.getParameter("giroEmpresa");
-        String rut = request.getParameter("rut");
+        int rut = Integer.parseInt(request.getParameter("rut"));
         String telefonoRepresentante = request.getParameter("telefonoRepresentante");
         String direccionEmpresa = request.getParameter("direccionEmpresa");
         String comunaEmpresa = request.getParameter("comunaEmpresa");
