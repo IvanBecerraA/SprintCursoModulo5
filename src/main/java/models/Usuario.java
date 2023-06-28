@@ -20,15 +20,7 @@ public class Usuario {
     private String password;
     private int tipo_usuario;
 
-    public Usuario(int idUsuario, String nombre, String apellido1, String apellido2, Date fechaNacimiento, int run, int tipo_usuario) {
-        this.idUsuario = idUsuario;
-        this.nombre = nombre;
-        this.apellido1 = apellido1;
-        this.apellido2 = apellido2;
-        this.fechaNacimiento = fechaNacimiento;
-        this.run = run;
-        this.tipo_usuario = tipo_usuario;
-    }
+
 
 
 }

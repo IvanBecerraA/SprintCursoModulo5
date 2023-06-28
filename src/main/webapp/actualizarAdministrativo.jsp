@@ -37,7 +37,7 @@
         <% System.out.println(x.getFechaNacimiento()); %>
         <input type="date" name="fechaNac"  value="<%= x.getFechaNacimiento()%>" required>
         <label >Contraseña </label>
-        <input type="password" name="contrasenia" placeholder="Ingrese Contraseña"  required>
+        <input type="password" name="contrasenia" placeholder="Ingrese Contraseña" value="<%=x.getPassword()%>" required>
         <label >Area</label>
         <input type="text" name="area" placeholder="Area" value="<%= x.getArea()%>" required>
         <label >Años de Experiencia </label>
