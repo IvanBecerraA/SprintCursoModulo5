@@ -150,17 +150,17 @@ public class SvUsuario extends HttpServlet {
 
     private void create(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
         // Datos básicos del Usuario, transversal a todas las clases
-        String  tipoDeUsuario = request.getParameter("floatingSelect");// ID del Select
+        int  tipoDeUsuario = Integer.parseInt(request.getParameter("floatingSelect"));// ID del Select
         String nombre = request.getParameter("nombre");
         String apellido1 = request.getParameter("apellido1");
         String apellido2 = request.getParameter("apellido2");
         String fechaNacimiento = request.getParameter("fechaNacimiento"); // TODO Debe ser de tipo DATE o LOCALDATE
-        String run = request.getParameter("run"); //TODO DEBE SER INT
-        String cotrasena = request.getParameter("contrasena");
+        int run = Integer.parseInt(request.getParameter("run")); //TODO DEBE SER INT
+        String contrasena = request.getParameter("contrasena");
 
         switch (tipoDeUsuario){
 
-            case "1":
+            case 1:
                 //TODO CLIENTE
                 String razonSocial = request.getParameter("razonSocial");
                 String giroEmpresa = request.getParameter("giroEmpresa");
@@ -168,26 +168,28 @@ public class SvUsuario extends HttpServlet {
                 String telefonoRepresentante = request.getParameter("telefonoRepresentante");
                 String direccionEmpresa = request.getParameter("direccionEmpresa");
                 String comunaEmpresa = request.getParameter("comunaEmpresa");
-                Cliente cliente = new Cliente();
-                clienteDao.create(cliente);
+
+                //Cliente cliente = new Cliente(nombre, apellido1,apellido2,fechaNacimiento,run,contrasena,tipoDeUsuario,razonSocial,giroEmpresa,rut,telefonoRepresentante,direccionEmpresa,comunaEmpresa);
+                //clienteDao.create(cliente);
                 break;
 
-            case "2":
+            case 2:
                 String titulo = request.getParameter("titulo");
                 String fecha_ingreso = request.getParameter("fechaIngreso");
 
-                Profesional profesional = new Profesional(nombre, apellido1,apellido2,fechaNacimiento,run,cotrasena,titulo,fecha_ingreso);
+                Profesional profesional = new Profesional(nombre, apellido1,apellido2,fechaNacimiento,run,contrasena,tipoDeUsuario,titulo,fecha_ingreso);
                 profesionalDao.create(profesional);
                 break;
 
-            case "3":
+            case 3:
                 // TODO ADMINISTRATIVO
                 String area = request.getParameter("area");
                 String expPrevia = request.getParameter("experienciaPrevia");
-                //Administrativo administrativo = new Administrativo(nombre, apellido1, apellido2,
-                //                                fechaNacimiento, run, cotrasena, tipoDeUsuario,
-                //                                area, expPrevia);
-                //administrativoDao.create(administrativo); TODO DESCOMENTAR CUANDO TIPOS DE DATOS HAYAN SIDO ARREGLADOS
+
+//                Administrativo administrativo = new Administrativo(nombre, apellido1, apellido2,
+//                                                fechaNacimiento, run, contrasena, tipoDeUsuario,
+//                                                area, expPrevia);
+//                administrativoDao.create(administrativo); //TODO DESCOMENTAR CUANDO TIPOS DE DATOS HAYAN SIDO ARREGLADOS
                 break;
         }
 

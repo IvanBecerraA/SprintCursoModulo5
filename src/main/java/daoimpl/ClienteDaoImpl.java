@@ -1,5 +1,6 @@
 package daoimpl;
 
+import conexion.Conexion;
 import dao.ICliente;
 import models.Cliente;
 
@@ -32,6 +33,18 @@ public class ClienteDaoImpl implements ICliente{
                 "\"" + cliente.getDireccionEmpresa() + "\"," +
                 "\"" + cliente.getComunaEmpresa() + "\"," +
                 "(SELECT id_usuario FROM Usuario WHERE run = '" + cliente.getRun() + "'));";
+        try {
+            con = Conexion.getConexion(); //TODO cambiar nombre de clase que maneja singleton cuando haya sido crada
+            stmt = con.createStatement();
+            stmt.execute(sqlUseSchema);
+            stmt.executeUpdate(sqlInsertUsuario);
+            stmt.executeUpdate(sqlInsertAdministrativo);
+            create = true;
+            stmt.close();
+            con.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return create;
     }
 

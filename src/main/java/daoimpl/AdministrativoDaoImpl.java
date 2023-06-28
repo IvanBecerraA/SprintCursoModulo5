@@ -1,9 +1,11 @@
 package daoimpl;
 
+import conexion.Conexion;
 import dao.IAdministrativo;
 import models.Administrativo;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
@@ -30,8 +32,8 @@ public class AdministrativoDaoImpl implements IAdministrativo {
                 "\"" + administrativo.getExperienciaPrevia() + "\"," +
                 "(SELECT id_usuario FROM Usuario WHERE run = '" + administrativo.getRun() + "'));";
 
-        /*try {
-            con = conexion.conectar(); //TODO cambiar nombre de clase que maneja singleton cuando haya sido crada
+        try {
+            con = Conexion.getConexion(); //TODO cambiar nombre de clase que maneja singleton cuando haya sido crada
             stmt = con.createStatement();
             stmt.execute(sqlUseSchema);
             stmt.executeUpdate(sqlInsertUsuario);
@@ -39,9 +41,9 @@ public class AdministrativoDaoImpl implements IAdministrativo {
             create = true;
             stmt.close();
             con.close();
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
-        }*/
+        }
 
         return create;
     }
