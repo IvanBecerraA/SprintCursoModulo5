@@ -11,6 +11,6 @@ public interface IAdministrativo {
     public boolean create(int id_usuario, Administrativo administrativo);
     public boolean update(Administrativo administrativo);
     public boolean delete(int id_usuario);
-    public List<Administrativo> listOne(int id_usuario);
+    public Administrativo listOne(int id_usuario);
 
 }

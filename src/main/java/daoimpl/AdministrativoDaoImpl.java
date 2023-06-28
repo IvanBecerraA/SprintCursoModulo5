@@ -101,9 +101,8 @@ public class AdministrativoDaoImpl implements IAdministrativo {
     }
 
     @Override
-    public List<Administrativo> listOne(int id_usuario) {
-        List<Administrativo> administrativos =  new ArrayList<>();//creamos una lista tipo Administrativo
-        Administrativo adm; //instanciamos una clase Administrativo
+    public Administrativo listOne(int id_usuario) {
+        Administrativo adm = null;//instanciamos una clase Administrativo
         Statement stmt=null; //instanciamos el statement
         Connection con=null;//instanciamos el con
         ResultSet rs= null;//instanciamos el ResulSet que nos sirve para ejecutar comandos sql
@@ -122,14 +121,14 @@ public class AdministrativoDaoImpl implements IAdministrativo {
                         rs.getString(3),rs.getString(4),rs.getDate(5),
                         rs.getInt(6),rs.getString(7),rs.getInt(8),
                         rs.getInt(9),rs.getString(10),rs.getString(11));
-                administrativos.add(adm);
+                
             }
             stmt.close();
             con.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return administrativos;
+        return adm;
     }
 
 }
