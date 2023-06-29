@@ -1,6 +1,4 @@
-  <%@ page language="java" contentType="text/html; charset=UTF-8"
-      pageEncoding="UTF-8"%>
-  <header>
+<header>
          <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #7952b3;">
              <div class="container-fluid">
                  <a class="navbar-brand" href="#">Asesorías 0007</a>
@@ -20,7 +18,7 @@
                              <a class="nav-link active" href="<%= request.getContextPath() %>/views/listarCapacitaciones.jsp">Listar capacitación</a>
                           </li>
                           <li class="nav-item">
-                             <a class="nav-link active" href="<%= request.getContextPath() %>/views/crearCapacitacion.jsp">Crear capacitación</a>
+                             <a class="nav-link active" href="/SprintCursoModulo5/SvCapacitacionCreate">Crear capacitación</a>
                           </li>
                          <li class="nav-item">
                              <a class="nav-link active" href="<%= request.getContextPath() %>/views/contacto.jsp">Contacto</a>
