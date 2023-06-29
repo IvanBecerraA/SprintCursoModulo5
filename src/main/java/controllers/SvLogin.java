@@ -62,7 +62,7 @@ public class SvLogin extends HttpServlet {
         } else {
             HttpSession sesionUsuario= request.getSession(true);
             sesionUsuario.setAttribute("Nombre", requestUsuario);
-            RequestDispatcher rd = request.getRequestDispatcher("views/crearCapacitacion.jsp"); //el profe lo tenía cómo .jsp
+            RequestDispatcher rd = request.getRequestDispatcher("views/listarCapacitaciones.jsp"); //el profe lo tenía cómo .jsp
             rd.forward(request, response);
         }
     }
