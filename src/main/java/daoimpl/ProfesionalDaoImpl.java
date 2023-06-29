@@ -30,10 +30,10 @@ public class ProfesionalDaoImpl implements IProfesional {
                 "\"" + profesional.getContrasenia() + "\"," +
                 "\"" + profesional.getTipo_usuario() + "\");";
 
-        String sqlInsertProfesional = "INSERT INTO Profesional (titulo, fecha_ingreso, id_usuario) VALUES" +
-                "(\"" + profesional.getTitulo() + "\"," +
-                "\"" + profesional.getFecha_ingreso() + "\"," +
-                "(SELECT id_usuario FROM Usuario WHERE run = '" + profesional.getRun() + "'));";
+        String sqlInsertProfesional = "INSERT INTO Profesional (id_usuario, titulo,fecha_ingreso) VALUES" +
+                "((SELECT id_usuario FROM Usuario WHERE run = '\" + profesional.getRun() + \"'),"+
+                "\"" + profesional.getTitulo() + "\"," +
+                "\"" + profesional.getFecha_ingreso() + "\");";
         try {
             con = Conexion.getConexion();
             stmt = con.createStatement();
