@@ -208,11 +208,11 @@ public class SvUsuario extends HttpServlet {
 
         out = response.getWriter();
         out.println("<script type=\"text/javascript\">");
-        out.println("alert('Usuario creado con éxito');");
-        out.println("location='/create'");
+        out.println("alert('Usuario creado con exito');");
+        out.println("location='/list'");
         out.println("</script>");
 
-        response.sendRedirect("list"); // Redije a lista de usuarios
+        //response.sendRedirect("list"); // Redije a lista de usuarios
 
 
     }
@@ -242,20 +242,62 @@ public class SvUsuario extends HttpServlet {
 
         // Editar para modificar los 3 tipos de usarios
         private void update(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
-            String razonSocial = request.getParameter("razonSocial");
-            String giroEmpresa = request.getParameter("giroEmpresa");
-            int rut = Integer.parseInt(request.getParameter("rut"));
-            String telefonoRepresentante = request.getParameter("telefonoRepresentante");
-            String direccionEmpresa = request.getParameter("direccionEmpresa");
-            String comunaEmpresa = request.getParameter("comunaEmpresa");
+            // Datos básicos del Usuario, transversal a todas las clases
+            int  tipoDeUsuario = Integer.parseInt(request.getParameter("floatingSelect"));// ID del Select
+            String nombre = request.getParameter("nombre");
+            String apellido1 = request.getParameter("apellido1");
+            String apellido2 = request.getParameter("apellido2");
+            String fechaNacimiento = request.getParameter("fechaNacimiento");
+            int run = Integer.parseInt(request.getParameter("run"));
+            String contrasena = request.getParameter("contrasena");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate fecha_Nacimiento = LocalDate.parse(fechaNacimiento, formatter);
 
-            //Cliente cliente = new Cliente(razonSocial, giroEmpresa,rut,telefonoRepresentante,direccionEmpresa,comunaEmpresa);
+            switch (tipoDeUsuario){
 
-            //clienteDao.update(cliente);
-            response.sendRedirect("list");
+                case 1:
+
+                    String razonSocial = request.getParameter("razonSocial");
+                    String giroEmpresa = request.getParameter("giroEmpresa");
+                    int rut = Integer.parseInt(request.getParameter("rut"));
+                    String telefonoRepresentante = request.getParameter("telefonoRepresentante");
+                    String direccionEmpresa = request.getParameter("direccionEmpresa");
+                    String comunaEmpresa = request.getParameter("comunaEmpresa");
+
+                    Cliente cliente = new Cliente(nombre, apellido1,apellido2,fecha_Nacimiento,run,contrasena,tipoDeUsuario,razonSocial,giroEmpresa,rut,telefonoRepresentante,direccionEmpresa,comunaEmpresa);
+                    clienteDao.update(cliente);
+                    break;
+
+                case 2:
+
+                    String titulo = request.getParameter("titulo");
+                    String fecha_ingreso = request.getParameter("fechaIngreso");
+
+                    LocalDate fechaIngreso = LocalDate.parse(fecha_ingreso, formatter);
+
+                    Profesional profesional = new Profesional(nombre, apellido1,apellido2,fecha_Nacimiento,run,contrasena,tipoDeUsuario,titulo,fechaIngreso);
+                    profesionalDao.update(profesional.getId_usuario());
+                    break;
+
+                case 3:
+
+                    String area = request.getParameter("area");
+                    int expPrevia = Integer.parseInt(request.getParameter("experienciaPrevia"));
+
+                    Administrativo administrativo = new Administrativo(
+                            nombre, apellido1, apellido2, fecha_Nacimiento, run,
+                            contrasena, tipoDeUsuario, area, expPrevia);
+                    System.out.println(administrativo);
+                    System.out.println(administrativo.getFechaNacimiento());
+                    administrativoDao.update(administrativo.getId_usuario());
+                    break;
+            }
+
+            response.sendRedirect("list"); // Redije a lista de usuarios
 
 
         }
+
 
 
 
