@@ -5,6 +5,7 @@ import dao.ICliente;
 import models.Cliente;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.List;
 
 public class ClienteDaoImpl implements ICliente{
@@ -76,7 +77,7 @@ public class ClienteDaoImpl implements ICliente{
             pstmU.setString(1, cliente.getNombre());
             pstmU.setString(2, cliente.getApellido1());
             pstmU.setString(3, cliente.getApellido2());
-            //pstmU.setDate(4, cliente.getFechaNacimiento()); TODO CASTEAR A LOCALDATE
+            pstmU.setObject(4, cliente.getFechaNacimiento());
             pstmU.setInt(5, cliente.getRun());
             pstmU.setString(6, cliente.getContrasenia());
             pstmU.setInt(7, cliente.getTipo_usuario()); //
@@ -115,8 +116,8 @@ public class ClienteDaoImpl implements ICliente{
             pstmU.setInt(1, cliente.getId_usuario());
 
             PreparedStatement pstmC = con.prepareStatement(deleteCliente);
-            pstmC.setInt(1, cliente.getId_usuario()); // VER QUÉ SE TOMA POR PARÁMETRO PARA ELIMINAR
-                                                            // CLIENTE DE LA TABLA CLIENTE ...
+            pstmC.setInt(1, cliente.getId_usuario());
+
 
             delete = pstmU.executeUpdate() > 0 && pstmC.executeUpdate() > 0;
             // Si se realizó la consulta el método executeUpdate

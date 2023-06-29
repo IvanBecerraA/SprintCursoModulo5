@@ -2,11 +2,15 @@ package daoimpl;
 
 import conexion.Conexion;
 import dao.IProfesional;
+import models.Administrativo;
+import models.Capacitacion;
 import models.Profesional;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ProfesionalDaoImpl implements IProfesional {
@@ -26,10 +30,10 @@ public class ProfesionalDaoImpl implements IProfesional {
                 "\"" + profesional.getContrasenia() + "\"," +
                 "\"" + profesional.getTipo_usuario() + "\");";
 
-        String sqlInsertProfesional = "INSERT INTO Profesional (titulo, fecha_ingreso, id_usuario) VALUES" +
-                "(\"" + profesional.getTitulo() + "\"," +
-                "\"" + profesional.getFecha_ingreso() + "\"," +
-                "(SELECT id_usuario FROM Usuario WHERE run = '" + profesional.getRun() + "'));";
+        String sqlInsertProfesional = "INSERT INTO Profesional (id_usuario, titulo,fecha_ingreso) VALUES" +
+                "((SELECT id_usuario FROM Usuario WHERE run = '\" + profesional.getRun() + \"'),"+
+                "\"" + profesional.getTitulo() + "\"," +
+                "\"" + profesional.getFecha_ingreso() + "\");";
         try {
             con = Conexion.getConexion();
             stmt = con.createStatement();
@@ -46,9 +50,37 @@ public class ProfesionalDaoImpl implements IProfesional {
     }
 
     @Override
+    public List<Profesional> read() {
+        String sql = "SELECT id_profesional, id_user, titulo, fecha_ingreso from profesional" ;
+        List<Profesional> profesional = new ArrayList<>();
+
+/*
+        try {
+            connection = ConexionDB.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+
+                profesional.add(new Profesional(resultSet.getInt("id_professional"),
+                        resultSet.getString("id_user"),
+                        resultSet.getString("titulo"),
+                        resultSet.getString("fecha_ingreso"),));
+            }
+
+            statement.close();
+            resultSet.close();
+            //connection.close();
+        } catch (SQLException e) {
+            System.out.println("Error: Clase ProfesionalDaoImpl, método readAll");
+            e.printStackTrace();
+        }*/
+
+        return profesional;
+
+    }
+
+    @Override
     public boolean update(int id) {
-
-
         return false;
     }
 
@@ -57,8 +89,9 @@ public class ProfesionalDaoImpl implements IProfesional {
         return false;
     }
 
-    @Override
-    public List<Profesional> list() {
-        return null;
-    }
+
 }
+
+
+
+

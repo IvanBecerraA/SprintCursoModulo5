@@ -13,7 +13,7 @@ import java.time.LocalDate;
 public class Administrativo extends Usuario{
     private int id_administrativo;
     private String area;
-    private String experienciaPrevia;
+    private int experienciaPrevia;
     private int id_usuario;
 
     public Administrativo(String nombre,
@@ -24,7 +24,7 @@ public class Administrativo extends Usuario{
                           String contrasenia,
                           int tipo_usuario,
                           String area,
-                          String experienciaPrevia) {
+                          int experienciaPrevia) {
         super(nombre, apellido1, apellido2, fechaNacimiento, run, contrasenia, tipo_usuario);
         this.area = area;
         this.experienciaPrevia = experienciaPrevia;
