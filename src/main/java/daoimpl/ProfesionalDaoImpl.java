@@ -50,7 +50,7 @@ public class ProfesionalDaoImpl implements IProfesional {
     }
     @Override
     public List<Profesional> read() {
-        String sql = "SELECT id_profesional, id_user, titulo, fecha_ingreso";
+        String sql = "SELECT id_profesional, id_user, titulo, fecha_ingreso from profesional" ;
         List<Profesional> profesional = new ArrayList<>();
 
 /*
