@@ -45,7 +45,7 @@
 					class="form-control form-control-sm"
 					name="rut"
 					required
-					placeholder="77.123.XXX-X"
+					placeholder="77123456"
 				/>
 			</div>
 		</div>

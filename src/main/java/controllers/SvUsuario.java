@@ -150,7 +150,7 @@ public class SvUsuario extends HttpServlet {
 
 
 
-    private void create(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+    private void create(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
         // Datos básicos del Usuario, transversal a todas las clases
         int  tipoDeUsuario = Integer.parseInt(request.getParameter("floatingSelect"));// ID del Select
         String nombre = request.getParameter("nombre");
@@ -175,8 +175,22 @@ public class SvUsuario extends HttpServlet {
                 String comunaEmpresa = request.getParameter("comunaEmpresa");
 
                 Cliente cliente = new Cliente(nombre, apellido1,apellido2,fecha_Nacimiento,run,contrasena,tipoDeUsuario,razonSocial,giroEmpresa,rut,telefonoRepresentante,direccionEmpresa,comunaEmpresa);
-                clienteDao.create(cliente);
-                break;
+                boolean create = clienteDao.create(cliente);
+
+                if (create) {
+                    // Si el cliente se creó correctamente, mostrar una alerta de éxito
+                    String message = "El cliente se ha creado correctamente.";
+                    request.setAttribute("message", message);
+                    request.setAttribute("alertClass", "alert-success");
+                    request.getRequestDispatcher("/views/crearUsuario.jsp").forward(request, response);
+                } else {
+                    // Si ocurrió un error al crear el cliente, mostrar una alerta de error
+                    String message = "No se pudo crear el cliente.";
+                    request.setAttribute("message", message);
+                    request.setAttribute("alertClass", "alert-danger");
+                    request.getRequestDispatcher("/views/crearUsuario.jsp").forward(request, response);
+                }
+                //break;
 
             case 2:
 
