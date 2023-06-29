@@ -1,4 +1,6 @@
-<header>
+  <%@ page language="java" contentType="text/html; charset=UTF-8"
+      pageEncoding="UTF-8"%>
+  <header>
          <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #7952b3;">
              <div class="container-fluid">
                  <a class="navbar-brand" href="#">Asesorías 0007</a>
@@ -9,7 +11,7 @@
                  <div class="collapse navbar-collapse  pe-5" id="navbarNav">
                      <ul class="navbar-nav ms-md-auto">
                         <li class="nav-item">
-                             <a class="nav-link active" href="<%= request.getContextPath() %>/views/listarUsuarios.jsp">Listar usuarios</a>
+                             <a class="nav-link active" href="/../SprintCursoModulo5/listar">Listar usuarios</a>
                          </li>
                          <li class="nav-item">
                              <a class="nav-link active" href="<%= request.getContextPath() %>/views/crearUsuario.jsp">Crear usuarios</a>
