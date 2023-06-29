@@ -64,22 +64,23 @@ public class ClienteDaoImpl implements ICliente{
         -Tienen mejor rendimiento, son dinámicas (Al ser precompiladas y reutilizables)
          Probaré usar este tipo de consulta*/
 
-        String updateUsuario = "UPDATE usuario SET apellido1 =?, apellido2 =?, fecha_nacimiento =?," +
-                "run =?, contrasenia =?, tipo_usuario =? WHERE id =?";
+        String updateUsuario = "UPDATE usuario SET nombre =?, apellido1 =?, apellido2 =?," +
+                "fecha_nacimiento =?, run =?, contrasenia =?, tipo_usuario =? WHERE id_usuario =?";
         String updateCliente = "UPDATE cliente SET razon_social =?, giro =?, rut=?," +
-                "telefono =?, direccion =?, comuna =? WHERE id =?";
-/*
+                "telefono =?, direccion =?, comuna =? WHERE id_usuario =?";
+
         try {
-            con = conexion.conectar(); //Esperando clase Conexion
+            con = Conexion.getConexion();
             PreparedStatement pstmU = con.prepareStatement(updateUsuario);
             pstmU.executeQuery();
             pstmU.setString(1, cliente.getNombre());
             pstmU.setString(2, cliente.getApellido1());
             pstmU.setString(3, cliente.getApellido2());
-            pstmU.setDate(4, (Date) cliente.getFechaNacimiento());
+            //pstmU.setDate(4, cliente.getFechaNacimiento()); TODO CASTEAR A LOCALDATE
             pstmU.setInt(5, cliente.getRun());
-            pstmU.setString(6, cliente.getPassword());
-            pstmU.setInt(7, cliente.getIdUsuario()); // TODO USUARIO YA NO TIENE ID?
+            pstmU.setString(6, cliente.getContrasenia());
+            pstmU.setInt(7, cliente.getTipo_usuario()); //
+            pstmU.setInt(8, cliente.getId_usuario()); //
 
             PreparedStatement pstmC = con.prepareStatement(updateCliente);
             pstmC.executeQuery();
@@ -89,12 +90,13 @@ public class ClienteDaoImpl implements ICliente{
             pstmC.setString(4, cliente.getTelefonoRepresentante());
             pstmC.setString(5, cliente.getDireccionEmpresa());
             pstmC.setString(6, cliente.getComunaEmpresa());
-            pstmU.setInt(7, cliente.getIdUsuario()); // TODO USUARIO YA NO TIENE ID?
-            actualizar = pstmC.executeUpdate() > 0;
+            pstmU.setInt(7, cliente.getId_usuario());
+            update = pstmC.executeUpdate() > 0;
+
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-*/
 
         return update;
     }
@@ -107,13 +109,13 @@ public class ClienteDaoImpl implements ICliente{
         String deleteUsuario = "DELETE FROM usuario WHERE id_usuario =?";
         String deleteCliente = "DELETE FROM cliente WHERE id_usuario =?";
 
-  /*      try{
+      try{
             con = Conexion.getConexion();
             PreparedStatement pstmU = con.prepareStatement(deleteUsuario);
-            pstmU.setInt(1, cliente.getRun()); // TODO EN VEZ DE USAR EL ID USÉ EL RUN
+            pstmU.setInt(1, cliente.getId_usuario());
 
             PreparedStatement pstmC = con.prepareStatement(deleteCliente);
-            pstmC.setInt(1, cliente.getRut()); // VER QUÉ SE TOMA POR PARÁMETRO PARA ELIMINAR
+            pstmC.setInt(1, cliente.getId_usuario()); // VER QUÉ SE TOMA POR PARÁMETRO PARA ELIMINAR
                                                             // CLIENTE DE LA TABLA CLIENTE ...
 
             delete = pstmU.executeUpdate() > 0 && pstmC.executeUpdate() > 0;
@@ -123,8 +125,6 @@ public class ClienteDaoImpl implements ICliente{
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-   */
 
         return delete;
         }

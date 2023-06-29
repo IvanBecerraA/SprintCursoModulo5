@@ -17,7 +17,7 @@ public class Cliente extends Usuario{
     private String telefonoRepresentante;
     private String direccionEmpresa;
     private String comunaEmpresa;
-    private int id_usuario;
+    private int id_usuario; // TODO LLAVE FORÁNEA?
 
 
     public Cliente(String nombre, String apellido1, String apellido2, LocalDate fechaNacimiento, int run, String contrasenia,
