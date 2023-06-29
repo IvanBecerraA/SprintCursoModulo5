@@ -13,6 +13,7 @@ import models.Cliente;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,14 +45,15 @@ public class SvCapacitacion extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String action = request.getParameter("action");
+		List<Cliente> clientes = new ArrayList<>();
+		CapacitacionClienteDaoImpl capacitacionClienteDaoImpl = new CapacitacionClienteDaoImpl();
 		CapacitacionDaoImpl capacitacionDaoImpl = new CapacitacionDaoImpl();
 
 		switch (action) {
 			case "create":
 
 				//obtener id de cliente mediante el RUT ingresado en el JSP
-				CapacitacionClienteDaoImpl capacitacionClienteDaoImpl = new CapacitacionClienteDaoImpl();
-				List<Cliente> clientes = capacitacionClienteDaoImpl.read();
+				clientes = capacitacionClienteDaoImpl.read();
 				int id_cliente = 0;
 				for (Cliente cliente : clientes) {
 					if (cliente.getRut() == Integer.parseInt(request.getParameter("rutCliente"))) {
@@ -81,8 +83,17 @@ public class SvCapacitacion extends HttpServlet {
 
 			case "update":
 
+				//obtener RUT de cliente mediante el id ingresado en la DB
+				clientes = capacitacionClienteDaoImpl.read();
+				int id_clienteUpd = 0;
+				for (Cliente cliente : clientes) {
+					if (cliente.getRut() == Integer.parseInt(request.getParameter("rutCliente"))) {
+						id_clienteUpd = cliente.getId_cliente();
+					}
+				}
+
 				Capacitacion capacitacionUpdate = new Capacitacion();
-				capacitacionUpdate.setIdCliente(Integer.parseInt(request.getParameter("rutCliente")));
+				capacitacionUpdate.setIdCliente(id_clienteUpd);
 				capacitacionUpdate.setFecha(LocalDate.parse(request.getParameter("fecha")));
 				capacitacionUpdate.setHora(LocalTime.parse(request.getParameter("hora")));
 				capacitacionUpdate.setLugar(request.getParameter("lugar"));
