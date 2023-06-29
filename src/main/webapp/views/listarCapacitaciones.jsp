@@ -1,4 +1,5 @@
-<%--
+<%@ page import="models.Capacitacion" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: johnn
   Date: 27-06-2023
@@ -38,6 +39,21 @@
         </tr>
         </thead>
         <tbody>
+        <%
+          List<Capacitacion> listaCapacitaciones = (List) request.getAttribute("capacitaciones");
+
+          for (Capacitacion capacitacion : listaCapacitaciones) {
+        %>
+        <tr>
+          <td><%= capacitacion.getId() %></td>
+          <td><%= capacitacion.getIdCliente() %></td>
+          <td><%= capacitacion.getFecha() %></td>
+          <td><%= capacitacion.getHora() %></td>
+          <td><%= capacitacion.getLugar() %></td>
+          <td><%= capacitacion.getDuracion() %></td>
+          <td><%= capacitacion.getCantidadAsistentes() %></td>
+        </tr>
+        <% } %>
         <tr>
           <td>1</td>
           <td>3</td>
