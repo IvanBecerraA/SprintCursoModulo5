@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 Manifest-Version: 1.0
 Created-By: IntelliJ IDEA
 Built-By: felipekessibustos
 Build-Jdk: Oracle OpenJDK version 17.0.7
 
+=======
+Manifest-Version: 1.0
+Created-By: IntelliJ IDEA
+Built-By: oscar
+Build-Jdk: 17.0.7
+
+>>>>>>> c395b0f986dabe5f0d8034481c991b5aa28fc24c
