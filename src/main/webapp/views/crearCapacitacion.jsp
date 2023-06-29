@@ -5,6 +5,9 @@
   Time: 11:30
   To change this template use File | Settings | File Templates.
 --%>
+<%@page import="org.apache.coyote.http11.HeadersTooLargeException"%>
+<%@page import="models.Cliente"%>
+<%@page import="java.util.List"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
  <jsp:include page="head.jsp"/>
@@ -17,7 +20,19 @@
     <div class="col-lg-6 col-sm-12 rounded shadow p-3">
       <h1 class="text-center mb-3">Crear capacitación</h1>
       <form method="post" action="SvCapacitacion" id="formCrearCapacitacion">
-        <input type="text" class="form-control" id="inputRutCliente" name="rutCliente" hidden>
+        <div class="mb-3">
+            <label for="rut" class="form-label">Selecciona el RUT del cliente</label>
+            <select class="form-select" id="rut" name="rut">
+                <%
+                    List<Cliente> listaClientes = (List) request.getAttribute("clientes");
+
+                    for (Cliente cliente : listaClientes) {
+                %>
+                <option value="<%= cliente.getRut() %>"><%= cliente.getRut() %></option>
+                <%-- Aquí puedes mostrar otros campos del cliente si lo deseas: cliente.getNombre(), cliente.getApellido(), etc. --%>
+                <% } %>
+            </select>
+        </div>
         <div class="mb-3">
           <label for="inputFecha" class="form-label">Fecha de la capacitación</label>
           <input type="date" class="form-control" id="inputFecha" name="fecha">
