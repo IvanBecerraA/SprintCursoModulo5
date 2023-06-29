@@ -1,12 +1,17 @@
 package dao;
 
+import models.Administrativo;
 import models.Profesional;
 
 import java.util.List;
 
 public interface IProfesional {
     public boolean create(Profesional profesional);
+    public List<Profesional> read();
     public boolean update(int id);
     public boolean delete (int id);
-    public List<Profesional> list();
+
+
+
 }
+
