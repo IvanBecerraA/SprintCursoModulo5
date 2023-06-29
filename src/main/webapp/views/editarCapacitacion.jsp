@@ -17,11 +17,17 @@
         <div class="col-lg-6 col-sm-12 rounded shadow p-3">
           <h1 class="text-center mb-3">Editar capacitación</h1>
           <form method="post" action="SvCrearCapacitacion" id="formCrearCapacitacion">
+            <input type="text" name="action" value="update" hidden>
             <div class="mb-3">
               <div class="mb-3">
                 <label for="inputId" class="form-label">Identificador</label>
                 <input type="text" class="form-control" id="inputId" name="id" disabled value="1">
               </div>
+              <div class="mb-3">
+                <label for="inputRutCliente" class="form-label">RUT cliente</label>
+                <input type="text" class="form-control" id="inputRutCliente" name="rutCliente" disabled>
+              </div>
+              <div class="mb-3">
               <label for="inputDia" class="form-label">Día de la capacitación</label>
               <select class="form-select" aria-label="Default select example" id="inputDia" name="dia">
                 <option value="" selected>Selecciona un día...</option>

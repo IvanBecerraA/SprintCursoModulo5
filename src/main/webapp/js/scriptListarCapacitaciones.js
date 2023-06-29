@@ -4,17 +4,21 @@ $(document).ready(function () {
     $('#tablaCapacitaciones tbody').on('click', 'tr', function () {
         if ($(this).hasClass('selected')) {
             $(this).removeClass('selected')
+            $('#btnModalBorrar').attr('data-bs-target', '')
+            $('#btnModalEditar').attr('data-bs-target', '')
         } else {
             table.$('tr.selected').removeClass('selected')
             $(this).addClass('selected')
+            $('#btnModalBorrar').attr('data-bs-target', '#modalBorrar')
+            $('#btnModalBorrar').attr('data-bs-target', '#modalEditar')
         }
     })
 
-    $('#btnBorrar').click(function () {
+    $('#btnModalBorrar').click(function () {
         var data = table.row('.selected').data()
-        if (data) {
-            console.log("FUNCIONA")
+        var seleccionadas = table.rows('.selected').data().length
+        if (seleccionadas) {
+            $('#idEliminacion').val(data[0])
         }
-        table.row('.selected').remove().draw(false)
     })
 })

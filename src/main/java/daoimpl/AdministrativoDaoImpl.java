@@ -9,7 +9,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-public class AdministrativoDaoImpl implements IAdministrativo {
+public class AdministrativoDaoImpl
+        implements IAdministrativo {
 
     @Override
     public boolean create(Administrativo administrativo) {
@@ -17,14 +18,14 @@ public class AdministrativoDaoImpl implements IAdministrativo {
         Connection con = null;
         Statement stmt = null;
 
-        String sqlUseSchema = "USE nombre_esquema"; //TODO realizar ajustes cuando base de datos esté funcionando
+        String sqlUseSchema = "USE sql9628208";
 
         String sqlInsertUsuario = "INSERT INTO Usuario VALUES(null,\"" + administrativo.getNombre() + "\"," +
                 "\"" + administrativo.getApellido1() + "\"," +
                 "\"" + administrativo.getApellido2() + "\"," +
                 "\"" + administrativo.getFechaNacimiento() + "\"," +
                 "\"" + administrativo.getRun() + "\"," +
-                "\"" + administrativo.getPassword() + "\"," +
+                "\"" + administrativo.getContrasenia() + "\"," +
                 "\"" + administrativo.getTipo_usuario() + "\");";
 
         String sqlInsertAdministrativo = "INSERT INTO Administrativo (id_administrativo, area, c_anios_experiencia, id_usuario) VALUES" +
@@ -33,7 +34,7 @@ public class AdministrativoDaoImpl implements IAdministrativo {
                 "(SELECT id_usuario FROM Usuario WHERE run = '" + administrativo.getRun() + "'));";
 
         try {
-            con = Conexion.getConexion(); //TODO cambiar nombre de clase que maneja singleton cuando haya sido crada
+            con = Conexion.getConexion();
             stmt = con.createStatement();
             stmt.execute(sqlUseSchema);
             stmt.executeUpdate(sqlInsertUsuario);
