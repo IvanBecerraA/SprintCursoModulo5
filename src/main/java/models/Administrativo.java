@@ -2,7 +2,8 @@ package models;
 
 import lombok.*;
 
-import java.util.Date;
+import java.time.LocalDate;
+
 
 @Getter
 @Setter
@@ -10,19 +11,21 @@ import java.util.Date;
 @AllArgsConstructor
 @ToString
 public class Administrativo extends Usuario{
+    private int id_administrativo;
     private String area;
     private String experienciaPrevia;
+    private int id_usuario;
 
     public Administrativo(String nombre,
                           String apellido1,
                           String apellido2,
-                          Date fechaNacimiento,
+                          LocalDate fechaNacimiento,
                           int run,
-                          String password,
+                          String contrasenia,
                           int tipo_usuario,
                           String area,
                           String experienciaPrevia) {
-        super(nombre, apellido1, apellido2, fechaNacimiento, run, password, tipo_usuario);
+        super(nombre, apellido1, apellido2, fechaNacimiento, run, contrasenia, tipo_usuario);
         this.area = area;
         this.experienciaPrevia = experienciaPrevia;
     }

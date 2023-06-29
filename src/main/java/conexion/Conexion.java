@@ -9,6 +9,7 @@ public class Conexion {
     private Conexion(){
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
+            //conexion = DriverManager.getConnection("jdbc:mysql://sql9.freesqldatabase.com/sql9628208", "sql9628208", "SLa8UgTXBw");
             conexion = DriverManager.getConnection("jdbc:mysql://sql9.freesqldatabase.com/sql9628208", "sql9628208", "SLa8UgTXBw");
             if (conexion != null){
                 System.out.println("Conexion correcta");

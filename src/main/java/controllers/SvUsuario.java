@@ -16,6 +16,8 @@ import models.Profesional;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -25,9 +27,9 @@ import java.util.List;
 @WebServlet("/")
 public class SvUsuario extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private ClienteDaoImpl clienteDao;
-    private ProfesionalDaoImpl profesionalDao;
-    private AdministrativoDaoImpl administrativoDao;
+    private ClienteDaoImpl clienteDao = new ClienteDaoImpl();
+    private ProfesionalDaoImpl profesionalDao = new ProfesionalDaoImpl();
+    private AdministrativoDaoImpl administrativoDao = new AdministrativoDaoImpl();
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -154,42 +156,50 @@ public class SvUsuario extends HttpServlet {
         String nombre = request.getParameter("nombre");
         String apellido1 = request.getParameter("apellido1");
         String apellido2 = request.getParameter("apellido2");
-        String fechaNacimiento = request.getParameter("fechaNacimiento"); // TODO Debe ser de tipo DATE o LOCALDATE
-        int run = Integer.parseInt(request.getParameter("run")); //TODO DEBE SER INT
+        String fechaNacimiento = request.getParameter("fechaNacimiento");
+        int run = Integer.parseInt(request.getParameter("run"));
         String contrasena = request.getParameter("contrasena");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        LocalDate fecha_Nacimiento = LocalDate.parse(fechaNacimiento, formatter);
 
         switch (tipoDeUsuario){
 
             case 1:
-                //TODO CLIENTE
+
                 String razonSocial = request.getParameter("razonSocial");
                 String giroEmpresa = request.getParameter("giroEmpresa");
-                int rut = Integer.parseInt(request.getParameter("rut")); // TODO DEBE SER INT?
+                int rut = Integer.parseInt(request.getParameter("rut"));
                 String telefonoRepresentante = request.getParameter("telefonoRepresentante");
                 String direccionEmpresa = request.getParameter("direccionEmpresa");
                 String comunaEmpresa = request.getParameter("comunaEmpresa");
 
-                //Cliente cliente = new Cliente(nombre, apellido1,apellido2,fechaNacimiento,run,contrasena,tipoDeUsuario,razonSocial,giroEmpresa,rut,telefonoRepresentante,direccionEmpresa,comunaEmpresa);
-                //clienteDao.create(cliente);
+                Cliente cliente = new Cliente(nombre, apellido1,apellido2,fecha_Nacimiento,run,contrasena,tipoDeUsuario,razonSocial,giroEmpresa,rut,telefonoRepresentante,direccionEmpresa,comunaEmpresa);
+                clienteDao.create(cliente);
                 break;
 
             case 2:
+
                 String titulo = request.getParameter("titulo");
                 String fecha_ingreso = request.getParameter("fechaIngreso");
 
-                Profesional profesional = new Profesional(nombre, apellido1,apellido2,fechaNacimiento,run,contrasena,tipoDeUsuario,titulo,fecha_ingreso);
+                LocalDate fechaIngreso = LocalDate.parse(fecha_ingreso, formatter);
+
+                Profesional profesional = new Profesional(nombre, apellido1,apellido2,fecha_Nacimiento,run,contrasena,tipoDeUsuario,titulo,fechaIngreso);
                 profesionalDao.create(profesional);
                 break;
 
             case 3:
-                // TODO ADMINISTRATIVO
+
                 String area = request.getParameter("area");
                 String expPrevia = request.getParameter("experienciaPrevia");
 
-//                Administrativo administrativo = new Administrativo(nombre, apellido1, apellido2,
-//                                                fechaNacimiento, run, contrasena, tipoDeUsuario,
-//                                                area, expPrevia);
-//                administrativoDao.create(administrativo); //TODO DESCOMENTAR CUANDO TIPOS DE DATOS HAYAN SIDO ARREGLADOS
+                Administrativo administrativo = new Administrativo(
+                        nombre, apellido1, apellido2, fecha_Nacimiento, run,
+                        contrasena, tipoDeUsuario, area, expPrevia);
+                System.out.println(administrativo);
+                System.out.println(administrativo.getFechaNacimiento());
+                //administrativoDao.create(administrativo);
                 break;
         }
 
@@ -211,7 +221,7 @@ public class SvUsuario extends HttpServlet {
     private void delete(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         try {
-            clienteDao.delete(id);
+           // clienteDao.delete(Cliente cliente); REVISAR
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -222,13 +232,24 @@ public class SvUsuario extends HttpServlet {
 
 
         // Editar para modificar los 3 tipos de usarios
-    private void update(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+        private void update(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+            String razonSocial = request.getParameter("razonSocial");
+            String giroEmpresa = request.getParameter("giroEmpresa");
+            int rut = Integer.parseInt(request.getParameter("rut"));
+            String telefonoRepresentante = request.getParameter("telefonoRepresentante");
+            String direccionEmpresa = request.getParameter("direccionEmpresa");
+            String comunaEmpresa = request.getParameter("comunaEmpresa");
+
+            //Cliente cliente = new Cliente(razonSocial, giroEmpresa,rut,telefonoRepresentante,direccionEmpresa,comunaEmpresa);
+
+            //clienteDao.update(cliente);
+            response.sendRedirect("list");
+
+
+        }
 
 
 
-
-
-    }
 
 
 
