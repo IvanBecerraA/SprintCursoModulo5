@@ -44,8 +44,9 @@
 					id="rut"
 					class="form-control form-control-sm"
 					name="rut"
+					pattern="\d{1,8}"
 					required
-					placeholder="77.123.XXX-X"
+					placeholder="77123456"
 				/>
 			</div>
 		</div>
