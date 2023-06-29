@@ -20,9 +20,10 @@
     <div class="col-lg-6 col-sm-12 rounded shadow p-3">
       <h1 class="text-center mb-3">Crear capacitación</h1>
       <form method="post" action="SvCapacitacion" id="formCrearCapacitacion">
+        <input type="text" name="action" value="create" hidden>
         <div class="mb-3">
-            <label for="rut" class="form-label">Selecciona el RUT del cliente</label>
-            <select class="form-select" id="rut" name="rut">
+            <label for="rutCliente" class="form-label">Selecciona el RUT del cliente</label>
+            <select class="form-select" id="rutCliente" name="rutCliente">
                 <%
                     List<Cliente> listaClientes = (List) request.getAttribute("clientes");
 
