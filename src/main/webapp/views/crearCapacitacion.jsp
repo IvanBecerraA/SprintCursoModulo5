@@ -17,22 +17,10 @@
     <div class="col-lg-6 col-sm-12 rounded shadow p-3">
       <h1 class="text-center mb-3">Crear capacitación</h1>
       <form method="post" action="SvCapacitacion" id="formCrearCapacitacion">
+        <input type="text" class="form-control" id="inputRutCliente" name="rutCliente" hidden>
         <div class="mb-3">
-                  <label for="inputRutCliente" class="form-label">RUT cliente</label>
-                  <input type="text" class="form-control" id="inputRutCliente" name="rutCliente">
-                </div>
-        <div class="mb-3">
-          <label for="inputDia" class="form-label">Día de la capacitación</label>
-          <select class="form-select" aria-label="Default select example" id="inputDia" name="dia">
-            <option value="" selected>Selecciona un día...</option>
-            <option value="1">Lunes</option>
-            <option value="2">Martes</option>
-            <option value="3">Miercoles</option>
-            <option value="4">Jueves</option>
-            <option value="5">Viernes</option>
-            <option value="6">Sábado</option>
-            <option value="7">Domingo</option>
-          </select>
+          <label for="inputFecha" class="form-label">Fecha de la capacitación</label>
+          <input type="date" class="form-control" id="inputFecha" name="fecha">
         </div>
         <div class="mb-3">
           <label for="inputHora" class="form-label">Hora de la capacitación</label>
@@ -62,6 +50,6 @@
 
 <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="js/validacionFormularios.js"></script>
+<script src="../js/validacionFormulariosCapacitacion.js"></script>
 </body>
 </html>

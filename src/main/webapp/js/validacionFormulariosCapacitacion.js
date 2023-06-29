@@ -1,7 +1,7 @@
 $(document).ready(function() {
     $("#formCrearCapacitacion").validate({
         rules: {
-            dia: {
+            fecha: {
                 required: true
             },
             hora: {
