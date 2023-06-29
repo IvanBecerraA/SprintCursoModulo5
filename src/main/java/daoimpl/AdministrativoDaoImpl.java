@@ -17,7 +17,7 @@ public class AdministrativoDaoImpl implements IAdministrativo {
         Connection con = null;
         Statement stmt = null;
 
-        String sqlUseSchema = "USE sql9628208"; //TODO realizar ajustes cuando base de datos esté funcionando
+        String sqlUseSchema = "USE sql9628208";
 
         String sqlInsertUsuario = "INSERT INTO Usuario VALUES(null,\"" + administrativo.getNombre() + "\"," +
                 "\"" + administrativo.getApellido1() + "\"," +
@@ -33,7 +33,7 @@ public class AdministrativoDaoImpl implements IAdministrativo {
                 "(SELECT id_usuario FROM Usuario WHERE run = '" + administrativo.getRun() + "'));";
 
         try {
-            con = Conexion.getConexion(); //TODO cambiar nombre de clase que maneja singleton cuando haya sido crada
+            con = Conexion.getConexion();
             stmt = con.createStatement();
             stmt.execute(sqlUseSchema);
             stmt.executeUpdate(sqlInsertUsuario);

@@ -15,7 +15,7 @@ public class ClienteDaoImpl implements ICliente{
         Connection con = null;
         Statement stmt = null;
 
-        String sqlUseSchema = "USE sql9628208"; //TODO realizar ajustes cuando base de datos esté funcionando
+        String sqlUseSchema = "USE sql9628208";
 
         String sqlInsertUsuario = "INSERT INTO Usuario VALUES(null,\"" + cliente.getNombre() + "\"," +
                 "\"" + cliente.getApellido1() + "\"," +
@@ -25,7 +25,7 @@ public class ClienteDaoImpl implements ICliente{
                 "\"" + cliente.getContrasenia() + "\"," +
                 "\"" + cliente.getTipo_usuario() + "\");";
 
-        String sqlInsertCliente = "INSERT INTO Cliente (titulo, fecha_ingreso) VALUES" + // TODO hola, checkear los atributos de la tabla
+        String sqlInsertCliente = "INSERT INTO Cliente VALUES" +
                 "(null,\"" + cliente.getRazonSocial() + "\"," +
                 "\"" + cliente.getGiroEmpresa() + "\"," +
                 "\"" + cliente.getRut() + "\"," +
@@ -34,7 +34,7 @@ public class ClienteDaoImpl implements ICliente{
                 "\"" + cliente.getComunaEmpresa() + "\"," +
                 "(SELECT id_usuario FROM Usuario WHERE run = '" + cliente.getRun() + "'));";
         try {
-            con = Conexion.getConexion(); //TODO cambiar nombre de clase que maneja singleton cuando haya sido crada
+            con = Conexion.getConexion();
             stmt = con.createStatement();
             stmt.execute(sqlUseSchema);
             stmt.executeUpdate(sqlInsertUsuario);

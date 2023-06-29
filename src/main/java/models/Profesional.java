@@ -16,6 +16,7 @@ public class Profesional extends Usuario {
     private LocalDate fecha_ingreso;
 
     public Profesional(String nombre, String apellido1, String apellido2, LocalDate fechaNacimiento, int run, String contrasenia, int tipoDeUsuario, String titulo, LocalDate fechaIngreso) {
+        super(nombre, apellido1, apellido2, fechaNacimiento, run, contrasenia, tipoDeUsuario);
         this.titulo=titulo;
         this.fecha_ingreso=fechaIngreso;
     }
