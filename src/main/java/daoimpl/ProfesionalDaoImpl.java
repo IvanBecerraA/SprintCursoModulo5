@@ -47,6 +47,23 @@ public class ProfesionalDaoImpl implements IProfesional {
 
     @Override
     public boolean update(int id) {
+        Connection con = null;
+        Statement stm = null;
+
+        boolean eliminar = false;
+
+        String eliminarSql = "DELETE FROM cliente WHERE id =" + id;
+        try {
+            con = Conexion.getConexion();
+            stm = con.createStatement();
+            stm.execute(eliminarSql);
+            eliminar = true;
+            stm.close();
+            con.close();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
 
         return false;
