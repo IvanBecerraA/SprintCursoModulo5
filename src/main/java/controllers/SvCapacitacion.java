@@ -6,10 +6,11 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import models.Capacitacion;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 /**
@@ -40,23 +41,60 @@ public class SvCapacitacion extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		Capacitacion capacitacion = new Capacitacion();
-		capacitacion.setRutCliente(request.getParameter("rutCliente"));
-		capacitacion.setDia(request.getParameter("dia"));
-		capacitacion.setHora(request.getParameter("hora"));
-		capacitacion.setLugar(request.getParameter("lugar"));
-		capacitacion.setDuracion(request.getParameter("duracion"));
-		capacitacion.setCantidadAsistentes(Integer.parseInt(request.getParameter("cantidadAsistentes")));
+		String action = request.getParameter("action");
+		CapacitacionDaoImpl capacitacionDaoImpl = new CapacitacionDaoImpl();
+
+		switch (action) {
+			case "create":
+
+				Capacitacion capacitacion = new Capacitacion();
+				capacitacion.setIdCliente(Integer.parseInt(request.getParameter("rutCliente")));
+				capacitacion.setFecha(LocalDate.parse(request.getParameter("fecha")));
+				capacitacion.setHora(LocalTime.parse(request.getParameter("hora")));
+				capacitacion.setLugar(request.getParameter("lugar"));
+				capacitacion.setDuracion(Integer.parseInt(request.getParameter("duracion")));
+				capacitacion.setCantidadAsistentes(Integer.parseInt(request.getParameter("cantidadAsistentes")));
+
+				capacitacionDaoImpl.create(capacitacion);
+				break;
+
+			case "read":
+
+				List<Capacitacion> capacitaciones = capacitacionDaoImpl.read();
+
+				request.setAttribute("capacitaciones", capacitaciones);
+				request.getRequestDispatcher("views/listarCapacitaciones.jsp").forward(request, response);
+
+				break;
+
+			case "update":
+
+				Capacitacion capacitacionUpdate = new Capacitacion();
+				capacitacionUpdate.setIdCliente(Integer.parseInt(request.getParameter("rutCliente")));
+				capacitacionUpdate.setFecha(LocalDate.parse(request.getParameter("fecha")));
+				capacitacionUpdate.setHora(LocalTime.parse(request.getParameter("hora")));
+				capacitacionUpdate.setLugar(request.getParameter("lugar"));
+				capacitacionUpdate.setDuracion(Integer.parseInt(request.getParameter("duracion")));
+				capacitacionUpdate.setCantidadAsistentes(Integer.parseInt(request.getParameter("cantidadAsistentes")));
+
+				capacitacionDaoImpl.update(capacitacionUpdate);
+				break;
+
+			case "delete":
+				capacitacionDelete(request);
+				break;
+
+			default:
+				System.out.println("Error en el CRUD de Capacitacion");
+		}
+
+	}
+
+	private void capacitacionDelete(HttpServletRequest request) {
+		int id = Integer.parseInt(request.getParameter("id"));
 
 		CapacitacionDaoImpl capacitacionDaoImpl = new CapacitacionDaoImpl();
-		capacitacionDaoImpl.create(capacitacion);
-
-		List<Capacitacion> capacitaciones = capacitacionDaoImpl.read();
-		
-		HttpSession session = request.getSession();
-		session.setAttribute("capacitaciones", capacitaciones);
-		
-		response.sendRedirect("views/listaCapacitacion.jsp");
+		capacitacionDaoImpl.delete(id);
 	}
 
 }

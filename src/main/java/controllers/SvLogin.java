@@ -14,20 +14,18 @@ import java.io.PrintWriter;
 /**
  * Servlet implementation class Login
  */
-@WebServlet("/login.jsp")
-public class Login extends HttpServlet {
+@WebServlet("/loginServlet")
+public class SvLogin extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    private final String RUN = "run";
-    private final String PASSWORD = "password";
-
-
+    private final String RUN = "admin";
+    private final String PASSWORD = "1234";
 
     /**
      * @see HttpServlet#HttpServlet()
      */
 
-    public Login() {
+    public SvLogin() {
         super();
 
     }
@@ -47,8 +45,8 @@ public class Login extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String requestUsuario = "1234";
-        String requestPassword = "1234";
+        String requestUsuario = "";
+        String requestPassword = "";
 
         PrintWriter out = response.getWriter();
 
@@ -58,16 +56,15 @@ public class Login extends HttpServlet {
         if(!RUN.contentEquals(requestUsuario) || !PASSWORD.contentEquals(requestPassword)) {
             out.println("<script type=\"text/javascript\">");
             out.println("alert('RUN o password incorrectos');");
-            out.println("location='login';"); //el profe lo tenía como .jsp
+            out.println("location='views/login.jsp';"); //el profe lo tenía como .jsp
             out.println("</script>");
 
-        }else {
+        } else {
             HttpSession sesionUsuario= request.getSession(true);
             sesionUsuario.setAttribute("Nombre", requestUsuario);
-            RequestDispatcher rd = request.getRequestDispatcher("crearcapacitacion"); //el profe lo tenía cómo .jsp
+            RequestDispatcher rd = request.getRequestDispatcher("views/crearCapacitacion.jsp"); //el profe lo tenía cómo .jsp
             rd.forward(request, response);
         }
-
     }
 
 }
