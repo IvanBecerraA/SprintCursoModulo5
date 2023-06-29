@@ -19,9 +19,13 @@
                           <li class="nav-item">
                              <a class="nav-link active" href="<%= request.getContextPath() %>/views/listarCapacitaciones.jsp">Listar capacitación</a>
                           </li>
+                          <%
+                          int perfilUsuario = (int) session.getAttribute("tipoUsuario");
+                          if(perfilUsuario == 1){ %>
                           <li class="nav-item">
                              <a class="nav-link active" href="<%= request.getContextPath() %>/views/crearCapacitacion.jsp">Crear capacitación</a>
                           </li>
+                         <% }%>
                          <li class="nav-item">
                              <a class="nav-link active" href="<%= request.getContextPath() %>/views/contacto.jsp">Contacto</a>
                          </li>
