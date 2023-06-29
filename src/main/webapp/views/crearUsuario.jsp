@@ -5,12 +5,21 @@
 	<head>
 		<title>Crear Usuario</title>
 		<%@ include file='head.jsp' %>
+		<style>
+            /* add a red border to invalid input fields */
+            input:focus:invalid {
+                border: 2px solid red;
+            }
+            input:valid {
+                border: 2px solid green;
+            }
+        </style>
 	</head>
 	<body>
 		<%@ include file='header.jsp' %>
 
 		<div class="container mx-auto" style="width: 80vw">
-			<form action="/../SprintCursoModulo5/create" method="post">
+			<form action="/../SprintCursoModulo5/create" method="post" id="formCrearUsuario">
 				<div class="row d-flex justify-content-between mt-4">
 					<h2 class="p-10">Formulario Crear Usuario</h2>
 					<div class="text-center">
@@ -42,6 +51,7 @@
 								id="nombre"
 								name="nombre"
 								placeholder="Juan"
+								pattern="[a-zA-Z\s]+"
 								required
 							/>
 						</div>
@@ -57,6 +67,7 @@
 								id="apellido1"
 								name="apellido1"
 								placeholder="Perez"
+								pattern="[a-zA-Z\s]+"
 								required
 							/>
 						</div>
@@ -72,6 +83,7 @@
 								id="apellido2"
 								name="apellido2"
 								placeholder="Pereira"
+								pattern="[a-zA-Z\s]+"
 								required
 							/>
 						</div>
@@ -102,6 +114,7 @@
 								id="run"
 								name="run"
 								placeholder="11222333-3"
+								pattern="\d{1,9}"
 								required
 							/>
 						</div>
@@ -194,6 +207,18 @@
                     administrativo.style.display = 'none';
                 }
             }
+
+            // Asigna el form a una constante
+            const form = document.querySelector('formCrearUsuario');
+
+            // Agrega un evento Listener al evento submit del form
+            form.addEventListener('submit', (event) => {
+                // Verifica que el form tenga todos los inputs validos
+                if (!form.checkValidity()) {
+                    // Evita que se envíe formulario a servlet en caso que un campo no esté validado
+                    event.preventDefault();
+                }
+            });
 		</script>
 	</body>
 </html>

@@ -12,6 +12,6 @@ public interface ICapacitacion {
 
     boolean update(Capacitacion capacitacion);
 
-    boolean delete(Capacitacion capacitacion);
+    boolean delete(int id);
 
 }
