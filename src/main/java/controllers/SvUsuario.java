@@ -253,7 +253,7 @@ public class SvUsuario extends HttpServlet {
                     String comunaEmpresa = request.getParameter("comunaEmpresa");
 
                     Cliente cliente = new Cliente(nombre, apellido1,apellido2,fecha_Nacimiento,run,contrasena,tipoDeUsuario,razonSocial,giroEmpresa,rut,telefonoRepresentante,direccionEmpresa,comunaEmpresa);
-                    clienteDao.create(cliente);
+                    clienteDao.update(cliente);
                     break;
 
                 case 2:
@@ -264,7 +264,7 @@ public class SvUsuario extends HttpServlet {
                     LocalDate fechaIngreso = LocalDate.parse(fecha_ingreso, formatter);
 
                     Profesional profesional = new Profesional(nombre, apellido1,apellido2,fecha_Nacimiento,run,contrasena,tipoDeUsuario,titulo,fechaIngreso);
-                    profesionalDao.create(profesional);
+                    profesionalDao.update(profesional.getId_usuario());
                     break;
 
                 case 3:
@@ -277,7 +277,7 @@ public class SvUsuario extends HttpServlet {
                             contrasena, tipoDeUsuario, area, expPrevia);
                     System.out.println(administrativo);
                     System.out.println(administrativo.getFechaNacimiento());
-                    //administrativoDao.create(administrativo);
+                    administrativoDao.update(administrativo.getId_usuario());
                     break;
             }
 
