@@ -1,4 +1,6 @@
-<header>
+  <%@ page language="java" contentType="text/html; charset=UTF-8"
+      pageEncoding="UTF-8"%>
+  <header>
          <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #7952b3;">
              <div class="container-fluid">
                  <a class="navbar-brand" href="#">Asesorías 0007</a>
