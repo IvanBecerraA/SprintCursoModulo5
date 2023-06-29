@@ -5,7 +5,7 @@
   Time: 14:29
   To change this template use File | Settings | File Templates.
 --%>
-<%@page import="controllers.ProcesoListarUsuario"%>
+
 <%@page import="models.Usuario"%>
 <%@page import="java.util.ArrayList"%>
 
@@ -56,7 +56,7 @@
     %>
     <!--Generamos los datos de usuario-->
     <tr class="text-center">
-        <td><%=x.getIdUsuario() %></td>
+        <td><%=x.getId_usuario() %></td>
         <td><%=x.getNombre() %></td>
         <td><%=x.getApellido1() %></td>
         <td><%=x.getApellido2() %></td>
@@ -65,12 +65,12 @@
         <td><%=tipoUsuario %></td>
         <!--Creamos el formulario para recuperar el ID y redirigirnos a su servlet respectivo-->
         <td><form action="/../SprintCursoModulo5/update" method="POST"><!--actualizar-->
-            <input type="hidden" name="idUsuario" value="<%=x.getIdUsuario() %>">
+            <input type="hidden" name="idUsuario" value="<%=x.getId_usuario() %>">
             <input type="hidden" name="tipoUsuario" value="<%=tipoUsuario %>">
             <button type="submit" class="btn btn-success" name="actualizarFormulario" value="Editar"><i class="bi bi-pencil-square"></i></button>
         </form></td>
         <td><form action="/../SprintCursoModulo5/delete" method="POST"><!--eliminar-->
-            <input type="hidden" name="idUsuario" value="<%=x.getIdUsuario() %>">
+            <input type="hidden" name="idUsuario" value="<%=x.getId_usuario() %>">
             <input type="hidden" name="tipoUsuario" value="<%=tipoUsuario %>">
             <button type="submit" class="btn btn-danger" name="eliminar" value="Eliminar"><i class="bi bi-trash"></i></button>
         </form></td>

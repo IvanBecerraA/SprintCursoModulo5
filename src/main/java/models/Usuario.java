@@ -29,4 +29,6 @@ public class Usuario {
         this.contrasenia = contrasenia;
         this.tipo_usuario = tipoUsuario;
     }
+
+
 }

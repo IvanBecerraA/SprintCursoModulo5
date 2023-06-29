@@ -3,6 +3,7 @@ package controllers;
 import daoimpl.AdministrativoDaoImpl;
 import daoimpl.ClienteDaoImpl;
 import daoimpl.ProfesionalDaoImpl;
+import daoimpl.UsuarioDaoImpl;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -30,6 +31,9 @@ public class SvUsuario extends HttpServlet {
     private ClienteDaoImpl clienteDao = new ClienteDaoImpl();
     private ProfesionalDaoImpl profesionalDao = new ProfesionalDaoImpl();
     private AdministrativoDaoImpl administrativoDao = new AdministrativoDaoImpl();
+    private PrintWriter out;
+    private UsuarioDaoImpl usuarioDao = new UsuarioDaoImpl();
+
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -48,8 +52,6 @@ public class SvUsuario extends HttpServlet {
                 showNewForm(request, response);
                 break;
             case "/create":
-                System.out.println("Hello from POST!");
-                // implementacion
                 try {
                     create(request, response);
                 } catch (SQLException e) {
@@ -90,7 +92,6 @@ public class SvUsuario extends HttpServlet {
                 showNewForm(request, response);
                 break;
             case "/create":
-                System.out.println("Hello from GET!");
                 // Redirecciona a crearUsuario
                 getServletContext().getRequestDispatcher("/views/crearUsuario.jsp").forward(request, response);
                 break;
@@ -151,6 +152,7 @@ public class SvUsuario extends HttpServlet {
 
 
     private void create(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+        String crear = null;
         // Datos básicos del Usuario, transversal a todas las clases
         int  tipoDeUsuario = Integer.parseInt(request.getParameter("floatingSelect"));// ID del Select
         String nombre = request.getParameter("nombre");
@@ -176,6 +178,7 @@ public class SvUsuario extends HttpServlet {
 
                 Cliente cliente = new Cliente(nombre, apellido1,apellido2,fecha_Nacimiento,run,contrasena,tipoDeUsuario,razonSocial,giroEmpresa,rut,telefonoRepresentante,direccionEmpresa,comunaEmpresa);
                 clienteDao.create(cliente);
+                crear = "Cliente";
                 break;
 
             case 2:
@@ -187,21 +190,27 @@ public class SvUsuario extends HttpServlet {
 
                 Profesional profesional = new Profesional(nombre, apellido1,apellido2,fecha_Nacimiento,run,contrasena,tipoDeUsuario,titulo,fechaIngreso);
                 profesionalDao.create(profesional);
+                crear = "Profesional";
                 break;
 
             case 3:
 
                 String area = request.getParameter("area");
-                String expPrevia = request.getParameter("experienciaPrevia");
+                int expPrevia = Integer.parseInt(request.getParameter("experienciaPrevia"));
 
                 Administrativo administrativo = new Administrativo(
                         nombre, apellido1, apellido2, fecha_Nacimiento, run,
                         contrasena, tipoDeUsuario, area, expPrevia);
-                System.out.println(administrativo);
-                System.out.println(administrativo.getFechaNacimiento());
-                //administrativoDao.create(administrativo);
+                administrativoDao.create(administrativo);
+                crear = "Administrativo";
                 break;
         }
+
+        out = response.getWriter();
+        out.println("<script type=\"text/javascript\">");
+        out.println("alert('Usuario creado con éxito');");
+        out.println("location='/create'");
+        out.println("</script>");
 
         response.sendRedirect("list"); // Redije a lista de usuarios
 
@@ -266,6 +275,16 @@ public class SvUsuario extends HttpServlet {
 
 
     private void listUsers(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException{
+        //Envio mi lista de usuarios a la pagina de jps a través de la variable en html llamada usuariosHtml
+        try {
+            request.setAttribute("usuariosHtml", this.usuarioDao.list());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        // redirigir a página "/listarUsuarios.jsp" con la lista de usuariosHtml
+        getServletContext().getRequestDispatcher("/views/listarUsuarios.jsp").forward(request,response);
+
+
         /*
         try{
             List<Cliente> listaClientes = clienteDao.list();

@@ -1,5 +1,6 @@
 package controllers;
 
+import daoimpl.CapacitacionClienteDaoImpl;
 import daoimpl.CapacitacionDaoImpl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -7,6 +8,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import models.Capacitacion;
+import models.Cliente;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -47,8 +49,18 @@ public class SvCapacitacion extends HttpServlet {
 		switch (action) {
 			case "create":
 
+				//obtener id de cliente mediante el RUT ingresado en el JSP
+				CapacitacionClienteDaoImpl capacitacionClienteDaoImpl = new CapacitacionClienteDaoImpl();
+				List<Cliente> clientes = capacitacionClienteDaoImpl.read();
+				int id_cliente = 0;
+				for (Cliente cliente : clientes) {
+					if (cliente.getRut() == Integer.parseInt(request.getParameter("rutCliente"))) {
+						id_cliente = cliente.getId_cliente();
+					}
+				}
+
 				Capacitacion capacitacion = new Capacitacion();
-				capacitacion.setIdCliente(Integer.parseInt(request.getParameter("rutCliente")));
+				capacitacion.setIdCliente(id_cliente);
 				capacitacion.setFecha(LocalDate.parse(request.getParameter("fecha")));
 				capacitacion.setHora(LocalTime.parse(request.getParameter("hora")));
 				capacitacion.setLugar(request.getParameter("lugar"));
