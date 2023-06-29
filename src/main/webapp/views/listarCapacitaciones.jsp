@@ -29,19 +29,28 @@
         <thead>
         <tr>
           <th>#ID</th>
-          <th>Nombre</th>
-          <th>RUT Cliente</th>
-          <th>Asistentes</th>
+          <th>#ID Cliente</th>
+          <th>Fecha de realización</th>
+          <th>Hora</th>
+          <th>Lugar</th>
+          <th>Duración</th>
+          <th>N° Asistentes</th>
         </tr>
         </thead>
         <tbody>
         <tr>
           <td>1</td>
-          <td>1</td>
-          <td>1</td>
-          <td>1</td>
+          <td>3</td>
+          <td>2023-01-01</td>
+          <td>20:20</td>
+          <td>Calle 1</td>
+          <td>90</td>
+          <td>10</td>
         </tr>
         <tr>
+          <td>2</td>
+          <td>2</td>
+          <td>2</td>
           <td>2</td>
           <td>2</td>
           <td>2</td>
@@ -52,20 +61,32 @@
           <td>3</td>
           <td>3</td>
           <td>3</td>
+          <td>3</td>
+          <td>3</td>
+          <td>3</td>
         </tr>
         <tr>
           <td>4</td>
           <td>4</td>
           <td>4</td>
           <td>4</td>
+          <td>4</td>
+          <td>4</td>
+          <td>4</td>
         </tr>
         <tr>
           <td>5</td>
           <td>5</td>
           <td>5</td>
           <td>5</td>
+          <td>5</td>
+          <td>5</td>
+          <td>5</td>
         </tr>
         <tr>
+          <td>6</td>
+          <td>6</td>
+          <td>6</td>
           <td>6</td>
           <td>6</td>
           <td>6</td>
@@ -130,12 +151,12 @@
                   <input type="number" class="form-control" id="inputID" name="ID" disabled>
                 </div>
                 <div class="mb-3">
-                  <label for="inputRut" class="form-label">Rut de la empresa cliente</label>
-                  <input type="number" class="form-control" id="inputAsistentes" name="cantidadAsistentes">
+                  <label for="inputIdCliente" class="form-label">ID Cliente</label>
+                  <input type="number" class="form-control" id="inputIdCliente" name="idCliente" disabled>
                 </div>
                 <div class="mb-3">
                   <label for="inputFecha" class="form-label">Fecha de la capacitación</label>
-                  <input type="date" class="form-control" id="inputFecha" name="fecha">
+                  <input type="date" class="form-control" id="inputFecha" name="fecha" value="">
                 </div>
                 <div class="mb-3">
                   <label for="inputHora" class="form-label">Hora de la capacitación</label>
@@ -151,7 +172,7 @@
                 </div>
                 <div class="mb-3">
                   <label for="inputAsistentes" class="form-label">Cantidad de asistentes</label>
-                  <input type="number" class="form-control" id="inputRut" name="cantidadAsistentes">
+                  <input type="number" class="form-control" id="inputAsistentes" name="cantidadAsistentes">
                 </div>
                 <div class="d-grid mb-3">
                   <button type="submit" id="btnConfirmarEditar" class="btn btn-success">Guardar</button>
