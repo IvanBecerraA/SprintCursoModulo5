@@ -208,11 +208,11 @@ public class SvUsuario extends HttpServlet {
 
         out = response.getWriter();
         out.println("<script type=\"text/javascript\">");
-        out.println("alert('Usuario creado con éxito');");
-        out.println("location='/create'");
+        out.println("alert('Usuario creado con exito');");
+        out.println("location='/list'");
         out.println("</script>");
 
-        response.sendRedirect("list"); // Redije a lista de usuarios
+        //response.sendRedirect("list"); // Redije a lista de usuarios
 
 
     }
