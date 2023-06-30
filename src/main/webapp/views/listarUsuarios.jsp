@@ -76,7 +76,7 @@
     %>
     <!--Generamos los datos de usuario-->
     <tr class="text-center align-middle">
-        <td><%=x.getId_usuario() %></td>
+        <td class="fw-bold"><%=x.getId_usuario() %></td>
         <td><%=x.getNombre() %></td>
         <td><%=x.getApellido1() %></td>
         <td><%=x.getApellido2() %></td>
