@@ -25,7 +25,7 @@
           border-top-right-radius: 8px;
         }
 
-        tbody tr:last-child th:first-child {
+        tr:last-child td:first-child {
           border-bottom-left-radius: 8px;
         }
 
