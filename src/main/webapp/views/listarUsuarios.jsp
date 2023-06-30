@@ -24,6 +24,14 @@
         .table th:last-child {
           border-top-right-radius: 8px;
         }
+
+        tbody tr:last-child th:first-child {
+          border-bottom-left-radius: 8px;
+        }
+
+        tr:last-child td:last-child {
+          border-bottom-right-radius: 8px;
+        }
         </style>
 </head>
 <body>
@@ -32,12 +40,12 @@
 
 <!-- título y boton crear usuario  -->
 <div style="display: flex; flex-direction: column;">
-    <h1 class="text-center mt-5">Listado de Usuarios</h1>
-    <button type="button" style="width: 150px;" class="btn btn-primary m-auto">Crear Usuario</button>
+    <h2 class="text-center mt-5">Listado de Usuarios</h2>
+    <button type="button" style="width: 150px;" class="btn btn-primary m-auto mb-3">Crear Usuario</button>
 </div>
 
-<div class="container mb-5" style="min-height: 55vh;">
-<div class="row grid gap-6 w-70 m-auto mt-3" style="box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); border-radius: 8px;">
+  <div class="container mb-5 pb-3" style="min-height: 55vh;">
+    <div class="row m-auto mt-5" style="box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); border-radius: 8px;">
 <!--Generamos una tabla-->
 <table class="table">
     <!--Cabecera de mi tabla-->
