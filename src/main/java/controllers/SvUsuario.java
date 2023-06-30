@@ -294,7 +294,7 @@ public class SvUsuario extends HttpServlet {
                     break;
             }
 
-            response.sendRedirect("list"); // Redije a lista de usuarios
+            //response.sendRedirect("list"); // Redije a lista de usuarios
 
 
         }
