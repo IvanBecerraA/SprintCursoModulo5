@@ -17,7 +17,7 @@
     <!-- PARA ICONOS BOOTSTRAP EDITAR/ELIMINAR  -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
         <style>
-        thead th{
+        .table thead th{
           background-color: #7952b3;
           color: #fff;
         }
@@ -48,7 +48,7 @@
     <button type="button" style="width: 150px;" class="btn btn-primary m-auto mb-2">Crear Usuario</button>
 </div>
 
-  <div class="container mb-5 pb-3" style="min-height: 55vh; max-width: 75%;">
+  <div class="container mb-5 pb-3" style="min-height: 55vh;">
     <div class="row m-auto mt-5" style="box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); border-radius: 8px;">
 <!--Generamos una tabla-->
 <table class="table mb-0">
