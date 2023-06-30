@@ -113,7 +113,7 @@
 								class="form-control form-control-sm"
 								id="run"
 								name="run"
-								placeholder="11222333-3"
+								placeholder="11222333"
 								pattern="\d{1,9}"
 								required
 							/>
@@ -146,6 +146,11 @@
 				</div>
 			</form>
 		</div>
+		<div class="alert ${alertClass} alert-dismissible fade show" role="alert">
+          ${message}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
 		<%@ include file='footer.jsp' %>
 		<script>
             <!-- SCRIPT PARA MOSTRAR CAMPOS ADICIONALES -->

@@ -56,7 +56,7 @@ public class CapacitacionClienteDaoImpl implements ICliente {
     }
 
     @Override
-    public boolean delete(Cliente cliente) {
-        return false;
+    public boolean delete(int id) { //Cambié el tipo de dato pero no afecta en tu código
+        return false;              // Cualquier cosas me hablas o borras este comentario jeje salutes
     }
 }

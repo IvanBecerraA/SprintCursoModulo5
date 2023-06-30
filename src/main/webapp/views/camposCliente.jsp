@@ -46,7 +46,7 @@
 					name="rut"
 					pattern="\d{1,8}"
 					required
-					placeholder="77123XXX"
+					placeholder="77123456"
 				/>
 			</div>
 		</div>

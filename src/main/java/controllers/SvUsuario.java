@@ -48,9 +48,7 @@ public class SvUsuario extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getServletPath(); // Devuelve un string con el nombre o ruta del request (nombre del action del form)"
         switch (action) {
-            case "/new":
-                showNewForm(request, response);
-                break;
+
             case "/create":
                 try {
                     create(request, response);
@@ -88,9 +86,7 @@ public class SvUsuario extends HttpServlet {
 
         String action = request.getServletPath(); // Devuelve un string con el nombre o ruta del request (nombre del action del form)"
         switch (action) {
-            case "/new":
-                showNewForm(request, response);
-                break;
+
             case "/create":
                 // Redirecciona a crearUsuario
                 getServletContext().getRequestDispatcher("/views/crearUsuario.jsp").forward(request, response);
@@ -121,35 +117,6 @@ public class SvUsuario extends HttpServlet {
     }
 
 
-/*
-
-    Esto es un esqueleto de servlet sujeto a modificaciones
-
-    La idea sería usar este servlet para el crud de los 3 usuarios
-    faltaría editar el switch, los métodos, links de redireccionamientos, etc
-
-    dejé espacio entre los métodos para no pisar líneas cuando hagamos modificaciones
-    pero ojalá coordinarnos para trabajar sobre ese servlet
-*
-*
-* */
-
-
-
-
-    private void showNewForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("user-form.jsp");
-        dispatcher.forward(request, response);
-    }
-
-
-
-
-
-
-
-
-
 
     private void create(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
         String crear = null;
@@ -177,6 +144,7 @@ public class SvUsuario extends HttpServlet {
                 String comunaEmpresa = request.getParameter("comunaEmpresa");
 
                 Cliente cliente = new Cliente(nombre, apellido1,apellido2,fecha_Nacimiento,run,contrasena,tipoDeUsuario,razonSocial,giroEmpresa,rut,telefonoRepresentante,direccionEmpresa,comunaEmpresa);
+
                 clienteDao.create(cliente);
                 crear = "Cliente";
                 break;
@@ -217,30 +185,35 @@ public class SvUsuario extends HttpServlet {
 
     }
 
-
-
-
-
-
-
-
-
-
-
     private void delete(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        try {
-           // clienteDao.delete(Cliente cliente); REVISAR
-        } catch (Exception e) {
-            e.printStackTrace();
+        int  tipoDeUsuario = Integer.parseInt(request.getParameter("floatingSelect"));
+        int id = Integer.parseInt(request.getParameter("id_usuario"));
+
+        switch (tipoDeUsuario){
+            case 1:
+                clienteDao.delete(id);
+                break;
+
+            case 2:
+                profesionalDao.delete(id);
+                break;
+
+            case 3:
+                administrativoDao.delete(id);
+                break;
         }
+
+        out = response.getWriter();
+        out.println("<script type=\"text/javascript\">");
+        out.println("alert('Usuario Eliminado con exito');");
+        out.println("location='/list'");
+        out.println("</script>");
+
+        //response.sendRedirect("list");
 
     }
 
 
-
-
-        // Editar para modificar los 3 tipos de usarios
         private void update(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
             // Datos básicos del Usuario, transversal a todas las clases
             int  tipoDeUsuario = Integer.parseInt(request.getParameter("floatingSelect"));// ID del Select
@@ -293,28 +266,9 @@ public class SvUsuario extends HttpServlet {
                     break;
             }
 
-            response.sendRedirect("list"); // Redije a lista de usuarios
-
+            //response.sendRedirect("list"); // Redije a lista de usuarios
 
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     private void listUsers(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException{
         //Envio mi lista de usuarios a la pagina de jps a través de la variable en html llamada usuariosHtml
@@ -327,21 +281,7 @@ public class SvUsuario extends HttpServlet {
         getServletContext().getRequestDispatcher("/views/listarUsuarios.jsp").forward(request,response);
 
 
-        /*
-        try{
-            List<Cliente> listaClientes = clienteDao.list();
-            request.setAttribute("listaClientes", listaClientes);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("user-list.jsp");
-            dispatcher.forward(request, response);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-         */
-
     }
-
-
 
 
 
