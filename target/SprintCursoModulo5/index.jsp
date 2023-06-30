@@ -1,3 +1,10 @@
+<<<<<<< HEAD
+<html>
+<body>
+<h2>Hello World!</h2>
+</body>
+</html>
+=======
   <%@ page language="java" contentType="text/html; charset=UTF-8"
       pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -108,3 +115,4 @@
         crossorigin="anonymous"></script>
 </body>
 </html>
+>>>>>>> c395b0f986dabe5f0d8034481c991b5aa28fc24c

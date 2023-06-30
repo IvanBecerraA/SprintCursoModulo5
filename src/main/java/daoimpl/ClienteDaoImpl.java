@@ -73,7 +73,6 @@ public class ClienteDaoImpl implements ICliente{
         try {
             con = Conexion.getConexion();
             PreparedStatement pstmU = con.prepareStatement(updateUsuario);
-            pstmU.executeQuery();
             pstmU.setString(1, cliente.getNombre());
             pstmU.setString(2, cliente.getApellido1());
             pstmU.setString(3, cliente.getApellido2());
@@ -91,8 +90,12 @@ public class ClienteDaoImpl implements ICliente{
             pstmC.setString(4, cliente.getTelefonoRepresentante());
             pstmC.setString(5, cliente.getDireccionEmpresa());
             pstmC.setString(6, cliente.getComunaEmpresa());
-            pstmU.setInt(7, cliente.getId_usuario());
+            pstmC.setInt(7, cliente.getId_usuario());
             update = pstmC.executeUpdate() > 0;
+
+            pstmU.close();
+            pstmC.close();
+            //con.close(); TODO CONSULTAR: SE DEBE CERRAR LA CONEXIÓN?
 
 
         } catch (SQLException e) {
@@ -103,23 +106,28 @@ public class ClienteDaoImpl implements ICliente{
     }
 
     @Override
-    public boolean delete(Cliente cliente) {
+    public boolean delete(int id) {
 
-        Connection con;
+        Connection con = null;
         boolean delete = false;
+        PreparedStatement pstmU = null;
+        PreparedStatement pstmC = null;
         String deleteUsuario = "DELETE FROM usuario WHERE id_usuario =?";
         String deleteCliente = "DELETE FROM cliente WHERE id_usuario =?";
 
       try{
             con = Conexion.getConexion();
-            PreparedStatement pstmU = con.prepareStatement(deleteUsuario);
-            pstmU.setInt(1, cliente.getId_usuario());
+            pstmU = con.prepareStatement(deleteUsuario);
+            pstmU.setInt(1, id);
+            int rowsAffectedU = pstmU.executeUpdate();
+            pstmU.close();
 
-            PreparedStatement pstmC = con.prepareStatement(deleteCliente);
-            pstmC.setInt(1, cliente.getId_usuario());
+            pstmC = con.prepareStatement(deleteCliente);
+            pstmC.setInt(1, id);
+            int rowsAffectedC = pstmC.executeUpdate();
+            pstmC.close();
 
-
-            delete = pstmU.executeUpdate() > 0 && pstmC.executeUpdate() > 0;
+            delete = rowsAffectedU > 0 && rowsAffectedC > 0;
             // Si se realizó la consulta el método executeUpdate
             // retorna 1, si 1 > 0 = true => delete() retorna true
 

@@ -30,7 +30,7 @@
         <thead>
         <tr>
           <th>#ID</th>
-          <th>#ID Cliente</th>
+          <th>Rut del cliente</th>
           <th>Fecha de realización</th>
           <th>Hora</th>
           <th>Lugar</th>
