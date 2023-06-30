@@ -1,5 +1,6 @@
 package daoimpl;
 
+
 import conexion.Conexion;
 import dao.ICliente;
 import models.Cliente;
@@ -16,7 +17,7 @@ public class ClienteDaoImpl implements ICliente{
         Connection con = null;
         Statement stmt = null;
 
-        String sqlUseSchema = "USE sql9628208";
+        //String sqlUseSchema = "USE sql9628208";
 
         String sqlInsertUsuario = "INSERT INTO Usuario VALUES(null,\"" + cliente.getNombre() + "\"," +
                 "\"" + cliente.getApellido1() + "\"," +
@@ -37,7 +38,7 @@ public class ClienteDaoImpl implements ICliente{
         try {
             con = Conexion.getConexion();
             stmt = con.createStatement();
-            stmt.execute(sqlUseSchema);
+            //stmt.execute(sqlUseSchema);
             stmt.executeUpdate(sqlInsertUsuario);
             stmt.executeUpdate(sqlInsertCliente);
             create = true;

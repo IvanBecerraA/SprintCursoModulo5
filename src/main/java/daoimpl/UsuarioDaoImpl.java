@@ -23,7 +23,7 @@ public class UsuarioDaoImpl implements IUsuario {
         try {
             con= Conexion.getConexion();
             stmt= con.createStatement();
-            rs = stmt.executeQuery("select * from sql9628208.Usuario;");
+            rs = stmt.executeQuery("select * from Usuario;");
             while (rs.next()){
                 usu = new Usuario(rs.getInt(1),rs.getString(2),
                         rs.getString(3),rs.getString(4), LocalDate.parse(rs.getString(5)),

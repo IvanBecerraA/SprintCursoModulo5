@@ -16,7 +16,7 @@ public class LoginDaoImpl implements ILogin {
         Usuario user1 = new Usuario();
 
         try {
-            String sqlLogin = "SELECT id_usuario, nombre, apellido1, apellido2, fecha_nacimiento, run, contrasenia, tipo_usuario FROM sql9628208.Usuario WHERE run =" +run;
+            String sqlLogin = "SELECT id_usuario, nombre, apellido1, apellido2, fecha_nacimiento, run, contrasenia, tipo_usuario FROM Usuario WHERE run =" +run;
 
             Connection conexion = Conexion.getConexion();
             Statement stm = conexion.createStatement();

@@ -18,7 +18,7 @@ public class AdministrativoDaoImpl
         Connection con = null;
         Statement stmt = null;
 
-        String sqlUseSchema = "USE sql9628208";
+        //String sqlUseSchema = "USE sprint_m5";
 
         String sqlInsertUsuario = "INSERT INTO Usuario VALUES(null,\"" + administrativo.getNombre() + "\"," +
                 "\"" + administrativo.getApellido1() + "\"," +
@@ -36,7 +36,7 @@ public class AdministrativoDaoImpl
         try {
             con = Conexion.getConexion();
             stmt = con.createStatement();
-            stmt.execute(sqlUseSchema);
+            //stmt.execute(sqlUseSchema);
             stmt.executeUpdate(sqlInsertUsuario);
             stmt.executeUpdate(sqlInsertAdministrativo);
             create = true;

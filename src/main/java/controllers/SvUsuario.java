@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * Servlet implementation class SvUsuarios
  */
-@WebServlet("/")
+@WebServlet("/usuario")
 public class SvUsuario extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private ClienteDaoImpl clienteDao = new ClienteDaoImpl();

@@ -20,7 +20,7 @@ public class ProfesionalDaoImpl implements IProfesional {
         Connection con = null;
         Statement stmt = null;
 
-        String sqlUseSchema = "USE sql9628208";
+        //String sqlUseSchema = "USE sql9628208";
 
         String sqlInsertUsuario = "INSERT INTO Usuario VALUES(null,\"" + profesional.getNombre() + "\"," +
                 "\"" + profesional.getApellido1() + "\"," +
@@ -37,7 +37,7 @@ public class ProfesionalDaoImpl implements IProfesional {
         try {
             con = Conexion.getConexion();
             stmt = con.createStatement();
-            stmt.execute(sqlUseSchema);
+            //stmt.execute(sqlUseSchema);
             stmt.executeUpdate(sqlInsertUsuario);
             stmt.executeUpdate(sqlInsertProfesional);
             create = true;

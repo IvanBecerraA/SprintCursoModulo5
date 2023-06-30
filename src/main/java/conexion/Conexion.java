@@ -9,8 +9,9 @@ public class Conexion {
     private Conexion(){
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            //conexion = DriverManager.getConnection("jdbc:mysql://sql9.freesqldatabase.com/sql9628208", "sql9628208", "SLa8UgTXBw");
-            conexion = DriverManager.getConnection("jdbc:mysql://sql9.freesqldatabase.com/sql9628208", "sql9628208", "SLa8UgTXBw");
+           // conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/sprint_m5", "root", "admin");
+            //conexion = DriverManager.getConnection("jdbc:mysql://sql9.freesqldatabase.com/sql9629710", "sql9629710", "rzzwgfnJwA");
+            conexion = DriverManager.getConnection("jdbc:mysql://db4free.net/prueba_bootcamp", "nelson_bootcamp", "bootcamp2023");
             if (conexion != null){
                 System.out.println("Conexion correcta");
             }else{
