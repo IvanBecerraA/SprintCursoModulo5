@@ -34,7 +34,6 @@ public class SvUsuario extends HttpServlet {
     private PrintWriter out;
     private UsuarioDaoImpl usuarioDao = new UsuarioDaoImpl();
 
-
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -42,7 +41,6 @@ public class SvUsuario extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -115,8 +113,6 @@ public class SvUsuario extends HttpServlet {
                 break;
         }
     }
-
-
 
     private void create(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
         String crear = null;
@@ -195,11 +191,11 @@ public class SvUsuario extends HttpServlet {
                 break;
 
             case 2:
-                profesionalDao.delete(id);
+                profesionalDao.delete(id); // TODO Implementar médoto delete() en dao
                 break;
 
             case 3:
-                administrativoDao.delete(id);
+                administrativoDao.delete(id); // TODO Implementar médoto delete() en dao
                 break;
         }
 
@@ -285,7 +281,8 @@ public class SvUsuario extends HttpServlet {
                 //enviamos a sus respectivos formularios segun su tipousuario
                 switch (tipoUsuario) {
                     case "Cliente":
-                        System.out.println("Clente");
+                        request.setAttribute("clienteHtml", this.clienteDao.listOne(idUsuario));
+                        getServletContext().getRequestDispatcher("/views/actualizarAdministrativo.jsp").forward(request, response);
                         break;
                     case "Profesional":
                         break;
@@ -309,7 +306,19 @@ public class SvUsuario extends HttpServlet {
                 String tipoUsuario = idTipo==1?(idTipo==2?"Profesional":"Cliente"):"Administrativo";
                 switch (tipoUsuario) {
                     case "Cliente":
-                        /* Codigo si es CLiente*/
+
+                        cli.setId_usuario(idUsuario); cli.setNombre(nombre); cli.setApellido1(apellido1);
+                        cli.setApellido2(apellido2); cli.setContrasenia(password); cli.setFechaNacimiento(FechaNacimiento);
+                        // todo checkear que coincidan los "name" del formulario
+                        cli.setId_cliente(Integer.parseInt(request.getParameter("idCliente")));
+                        cli.setRazonSocial(request.getParameter("razonSocial"));
+                        cli.setGiroEmpresa(request.getParameter("giroEmpresa"));
+                        cli.setRut(Integer.parseInt(request.getParameter("rut")));
+                        cli.setTelefonoRepresentante(request.getParameter("telefonoRepresentante"));
+                        cli.setDireccionEmpresa(request.getParameter("direccionEmpresa"));
+                        cli.setDireccionEmpresa(request.getParameter("direccionEmpresa"));
+
+                        this.clienteDao.update(cli);
                         break;
                     case "Profesional":
                         /* Codigo si es Profesional*/
