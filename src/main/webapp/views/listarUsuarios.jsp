@@ -84,12 +84,12 @@
         <td><%=x.getRun() %></td>
         <td><%=tipoUsuario %></td>
         <!--Creamos el formulario para recuperar el ID y redirigirnos a su servlet respectivo-->
-        <td><form action="/../SprintCursoModulo5/update" method="POST"><!--actualizar-->
+        <td class="align-middle"><form action="/../SprintCursoModulo5/update" method="POST"><!--actualizar-->
             <input type="hidden" name="idUsuario" value="<%=x.getId_usuario() %>">
             <input type="hidden" name="tipoUsuario" value="<%=tipoUsuario %>">
             <button type="submit" class="btn btn-success" name="actualizarFormulario" value="Editar"><i class="bi bi-pencil-square"></i></button>
         </form></td>
-        <td><form action="/../SprintCursoModulo5/delete" method="POST"><!--eliminar-->
+        <td class="align-middle"><form action="/../SprintCursoModulo5/delete" method="POST"><!--eliminar-->
             <input type="hidden" name="idUsuario" value="<%=x.getId_usuario() %>">
             <input type="hidden" name="tipoUsuario" value="<%=tipoUsuario %>">
             <button type="submit" class="btn btn-danger" name="eliminar" value="Eliminar"><i class="bi bi-trash"></i></button>
