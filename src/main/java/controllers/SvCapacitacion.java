@@ -62,7 +62,7 @@ public class SvCapacitacion extends HttpServlet {
 				}
 
 				Capacitacion capacitacion = new Capacitacion();
-				capacitacion.setIdCliente(id_cliente);
+				capacitacion.setRutCliente(id_cliente);
 				capacitacion.setFecha(LocalDate.parse(request.getParameter("fecha")));
 				capacitacion.setHora(LocalTime.parse(request.getParameter("hora")));
 				capacitacion.setLugar(request.getParameter("lugar"));
@@ -74,9 +74,20 @@ public class SvCapacitacion extends HttpServlet {
 
 			case "read":
 
+				clientes = capacitacionClienteDaoImpl.read();
 				List<Capacitacion> capacitaciones = capacitacionDaoImpl.read();
+				List<Capacitacion> capacitacionesRut = new ArrayList<>();
 
-				request.setAttribute("capacitaciones", capacitaciones);
+				for (Cliente cliente : clientes) {
+					for (Capacitacion capacitacion1 : capacitaciones) {
+						if (cliente.getId_cliente() == capacitacion1.getRutCliente()) {
+							capacitacion1.setRutCliente(cliente.getRut());
+						}
+						capacitacionesRut.add(capacitacion1);
+					}
+				}
+
+				request.setAttribute("capacitaciones", capacitacionesRut);
 				request.getRequestDispatcher("views/listarCapacitaciones.jsp").forward(request, response);
 
 				break;
@@ -93,7 +104,7 @@ public class SvCapacitacion extends HttpServlet {
 				}
 
 				Capacitacion capacitacionUpdate = new Capacitacion();
-				capacitacionUpdate.setIdCliente(id_clienteUpd);
+				capacitacionUpdate.setRutCliente(id_clienteUpd);
 				capacitacionUpdate.setFecha(LocalDate.parse(request.getParameter("fecha")));
 				capacitacionUpdate.setHora(LocalTime.parse(request.getParameter("hora")));
 				capacitacionUpdate.setLugar(request.getParameter("lugar"));
@@ -104,20 +115,15 @@ public class SvCapacitacion extends HttpServlet {
 				break;
 
 			case "delete":
-				capacitacionDelete(request);
+
+				int id = Integer.parseInt(request.getParameter("id"));
+				capacitacionDaoImpl.delete(id);
 				break;
 
 			default:
 				System.out.println("Error en el CRUD de Capacitacion");
 		}
 
-	}
-
-	private void capacitacionDelete(HttpServletRequest request) {
-		int id = Integer.parseInt(request.getParameter("id"));
-
-		CapacitacionDaoImpl capacitacionDaoImpl = new CapacitacionDaoImpl();
-		capacitacionDaoImpl.delete(id);
 	}
 
 }

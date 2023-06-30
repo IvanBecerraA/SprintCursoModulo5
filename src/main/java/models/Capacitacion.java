@@ -13,7 +13,7 @@ import java.time.LocalTime;
 public class Capacitacion {
 
     private int id;
-    private int idCliente;
+    private int rutCliente;
     private LocalDate fecha;
     private LocalTime hora;
     private String lugar;
