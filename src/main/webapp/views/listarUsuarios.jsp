@@ -49,7 +49,7 @@
 <!--Generamos una tabla-->
 <table class="table mb-0">
     <!--Cabecera de mi tabla-->
-    <thead class="text-center">
+    <thead class="text-center align-middle">
     <th style="background-color: #7952b3" class="text-white" scope="col"> ID </th>
     <th style="background-color: #7952b3" class="text-white" scope="col"> Nombre </th>
     <th style="background-color: #7952b3" class="text-white" scope="col"> Apellido Paterno </th>
@@ -75,7 +75,7 @@
             }
     %>
     <!--Generamos los datos de usuario-->
-    <tr class="text-center">
+    <tr class="text-center align-middle">
         <td><%=x.getId_usuario() %></td>
         <td><%=x.getNombre() %></td>
         <td><%=x.getApellido1() %></td>
