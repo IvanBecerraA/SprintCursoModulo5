@@ -57,8 +57,36 @@ public class AdministrativoDaoImpl
     }
 
     @Override
-    public boolean update(int id) {
-        return false;
+    public boolean update(Administrativo administrativo) {
+        boolean update = false;
+        Statement stmt=null;
+        Connection con=null;
+        String sqlUsu = "update usuario\n" +
+                "set nombre= '"+administrativo.getNombre()+"',\n" +
+                "apellido1 = '"+administrativo.getApellido1()+"',\n" +
+                "apellido2 = '"+administrativo.getApellido2()+"',\n" +
+                "fecha_nacimiento = '"+administrativo.getFechaNacimiento()+"',\n" +
+                "contrasenia='"+administrativo.getContrasenia()+"'\n" +
+                "where id_usuario = "+administrativo.getId_usuario()+";";
+        String sqlAdm= "UPDATE administrativo " +
+                "SET area = '" +administrativo.getArea()
+                +"', c_anios_experiencia = '" +administrativo.getExperienciaPrevia()
+                + "' WHERE id_administrativo = "+administrativo.getId_administrativo();
+        try {
+            con= Conexion.getConexion();
+            stmt= con.createStatement();
+            stmt.executeUpdate(sqlUsu);
+            stmt.executeUpdate(sqlAdm);
+            update=true;
+            stmt.close();
+            //con.close();
+            System.out.println("Se actualizo correctamente");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println("No se pudo actualizar");
+        return update;
+
     }
 
     @Override
@@ -91,7 +119,7 @@ public class AdministrativoDaoImpl
 
             }
             stmt.close();
-            con.close();
+            //con.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

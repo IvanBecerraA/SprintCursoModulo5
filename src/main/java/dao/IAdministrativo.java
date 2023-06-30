@@ -10,7 +10,7 @@ public interface IAdministrativo {
 
     public List<Administrativo> read();
 
-    public boolean update(int id);
+    public boolean update(Administrativo administrativo);
 
     public boolean delete(int id);
     public Administrativo listOne(int id_usuario);

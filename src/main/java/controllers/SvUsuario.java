@@ -262,7 +262,7 @@ public class SvUsuario extends HttpServlet {
                             contrasena, tipoDeUsuario, area, expPrevia);
                     System.out.println(administrativo);
                     System.out.println(administrativo.getFechaNacimiento());
-                    administrativoDao.update(administrativo.getId_usuario());
+                    //administrativoDao.update(administrativo.getId_usuario());
                     break;
             }
 
