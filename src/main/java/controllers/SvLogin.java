@@ -1,5 +1,7 @@
 package controllers;
 
+import dao.ILogin;
+import daoimpl.LoginDaoImpl;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -7,6 +9,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import models.Usuario;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,10 +19,18 @@ import java.io.PrintWriter;
  */
 @WebServlet("/loginServlet")
 public class SvLogin extends HttpServlet {
+
     private static final long serialVersionUID = 1L;
 
-    private final String RUN = "admin";
-    private final String PASSWORD = "1234";
+    private int runIntput;
+    private String passwordInput ;
+
+    private ILogin userILogin = new LoginDaoImpl();
+
+    private Usuario us;
+
+    private int tipoUsuarioSV;
+
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -53,16 +64,35 @@ public class SvLogin extends HttpServlet {
         requestUsuario = request.getParameter("run");
         requestPassword = request.getParameter("password");
 
-        if(!RUN.contentEquals(requestUsuario) || !PASSWORD.contentEquals(requestPassword)) {
+        int requestUsuarioInt = Integer.parseInt(requestUsuario);
+
+        System.out.println(Integer.parseInt(requestUsuario) + " " + requestPassword);
+
+        us = userILogin.userLogin(requestUsuarioInt);
+        String prueba = us.getNombre();
+        System.out.println(prueba);
+
+        runIntput = requestUsuarioInt;
+        passwordInput = requestPassword;
+        tipoUsuarioSV = us.getTipo_usuario();
+
+
+        if(!(runIntput == us.getRun()) || !passwordInput.equals(us.getContrasenia())) {
             out.println("<script type=\"text/javascript\">");
             out.println("alert('RUN o password incorrectos');");
             out.println("location='views/login.jsp';"); //el profe lo tenía como .jsp
             out.println("</script>");
 
         } else {
+
             HttpSession sesionUsuario= request.getSession(true);
+<<<<<<< HEAD
             sesionUsuario.setAttribute("Nombre", requestUsuario);
             RequestDispatcher rd = request.getRequestDispatcher("views/listarCapacitaciones.jsp"); //el profe lo tenía cómo .jsp
+=======
+            sesionUsuario.setAttribute("tipoUsuario", tipoUsuarioSV);
+            RequestDispatcher rd = request.getRequestDispatcher("/SprintCursoModulo5/SvCapacitacionCreate"); //el profe lo tenía cómo .jsp
+>>>>>>> d3a72b6551e89139aa44995a0ec0b8fe6d630056
             rd.forward(request, response);
         }
     }
