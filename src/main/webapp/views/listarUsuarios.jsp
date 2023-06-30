@@ -17,6 +17,10 @@
     <!-- PARA ICONOS BOOTSTRAP EDITAR/ELIMINAR  -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
         <style>
+        thead th{
+          background-color: #7952b3;
+          color: #fff;
+        }
         .table th:first-child {
           border-top-left-radius: 8px;
         }
@@ -44,21 +48,21 @@
     <button type="button" style="width: 150px;" class="btn btn-primary m-auto mb-2">Crear Usuario</button>
 </div>
 
-  <div class="container mb-5 pb-3" style="min-height: 55vh;">
+  <div class="container mb-5 pb-3" style="min-height: 55vh; max-width: 75%;">
     <div class="row m-auto mt-5" style="box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); border-radius: 8px;">
 <!--Generamos una tabla-->
 <table class="table mb-0">
     <!--Cabecera de mi tabla-->
     <thead class="text-center align-middle">
-    <th style="background-color: #7952b3" class="text-white" scope="col"> ID </th>
-    <th style="background-color: #7952b3" class="text-white" scope="col"> Nombre </th>
-    <th style="background-color: #7952b3" class="text-white" scope="col"> Apellido Paterno </th>
-    <th style="background-color: #7952b3" class="text-white" scope="col"> Apellido Materno </th>
-    <th style="background-color: #7952b3" class="text-white" scope="col"> Fecha de nacimiento </th>
-    <th style="background-color: #7952b3" class="text-white" scope="col"> run</th>
-    <th style="background-color: #7952b3" class="text-white" scope="col"> Tipo de usuario</th>
-    <th style="background-color: #7952b3" class="text-white" scope="col"> Editar </th>
-    <th style="background-color: #7952b3" class="text-white" scope="col"> Eliminar </th>
+    <th scope="col"> ID </th>
+    <th scope="col"> Nombre </th>
+    <th scope="col"> Apellido Paterno </th>
+    <th scope="col"> Apellido Materno </th>
+    <th scope="col"> Fecha de nacimiento </th>
+    <th scope="col"> run</th>
+    <th scope="col"> Tipo de usuario</th>
+    <th scope="col"> Editar </th>
+    <th scope="col"> Eliminar </th>
     </thead><!--Cerramos cabecera de mi tabla-->
     <%
         //Recuperamos el contenedor usuarios pero por su nombre Html
