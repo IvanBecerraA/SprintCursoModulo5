@@ -3,6 +3,7 @@ package daoimpl;
 
 import conexion.Conexion;
 import dao.ICliente;
+import models.Administrativo;
 import models.Cliente;
 
 import java.sql.*;
@@ -43,7 +44,7 @@ public class ClienteDaoImpl implements ICliente{
             stmt.executeUpdate(sqlInsertCliente);
             create = true;
             stmt.close();
-            con.close();
+            //con.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -96,7 +97,7 @@ public class ClienteDaoImpl implements ICliente{
 
             pstmU.close();
             pstmC.close();
-            //con.close(); TODO CONSULTAR: SE DEBE CERRAR LA CONEXIÓN?
+            //con.close();
 
 
         } catch (SQLException e) {
@@ -138,4 +139,37 @@ public class ClienteDaoImpl implements ICliente{
 
         return delete;
         }
+
+    @Override
+    public Cliente listOne(int id_usuario) {
+        Cliente cl = null;//instanciamos una clase Cliente
+        Statement stmt=null; //instanciamos el statement
+        Connection con=null;//instanciamos el con
+        ResultSet rs= null;//instanciamos el ResulSet que nos sirve para ejecutar comandos sql
+
+        try {
+            con= Conexion.getConexion();//llamamos a nuestra conexion de la bd
+            stmt= con.createStatement();//llamamos a nuestros metodos executeQuery(), executeUpdate(),execute()
+            rs = stmt.executeQuery("select * " +
+                    "from usuario u " +
+                    "inner join cliente c " +
+                    "on u.id_usuario = c.id_usuario " +
+                    "where c.id_usuario = "+ id_usuario+
+                    " Limit 1;");
+            while (rs.next()){
+                cl = new Cliente(rs.getInt(1),rs.getString(2),
+                        rs.getString(3),rs.getString(4), LocalDate.parse(rs.getString(5)),
+                        rs.getInt(6),rs.getString(7),rs.getInt(8),
+
+                        rs.getInt(9),rs.getString(10),rs.getString(11),
+                        rs.getInt(12),rs.getString(13),rs.getString(14),rs.getString(15));
+
+            }
+            stmt.close();
+            //con.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return cl;
     }
+}
