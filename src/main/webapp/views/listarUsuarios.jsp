@@ -41,13 +41,13 @@
 <!-- título y boton crear usuario  -->
 <div style="display: flex; flex-direction: column;">
     <h2 class="text-center mt-5">Listado de Usuarios</h2>
-    <button type="button" style="width: 150px;" class="btn btn-primary m-auto mb-3">Crear Usuario</button>
+    <button type="button" style="width: 150px;" class="btn btn-primary m-auto mb-2">Crear Usuario</button>
 </div>
 
   <div class="container mb-5 pb-3" style="min-height: 55vh;">
     <div class="row m-auto mt-5" style="box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); border-radius: 8px;">
 <!--Generamos una tabla-->
-<table class="table">
+<table class="table mb-0">
     <!--Cabecera de mi tabla-->
     <thead class="text-center">
     <th style="background-color: #7952b3" class="text-white" scope="col"> ID </th>
