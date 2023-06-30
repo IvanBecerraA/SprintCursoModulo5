@@ -1,7 +1,6 @@
 package daoimpl;
 
 import conexion.Conexion;
-import dao.ICliente;
 import models.Cliente;
 
 import java.sql.Connection;
@@ -11,16 +10,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CapacitacionClienteDaoImpl implements ICliente {
+public class CapacitacionClienteDaoImpl {
 
     Connection connection = null;
 
-    @Override
-    public boolean create(Cliente cliente) {
-        return false;
-    }
-
-    @Override
     public List<Cliente> read() {
 
         String sql = "SELECT id_cliente, rut FROM Cliente";
@@ -30,7 +23,6 @@ public class CapacitacionClienteDaoImpl implements ICliente {
             connection = Conexion.getConexion();
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
-
 
             while (resultSet.next()) {
                 Cliente cliente = new Cliente();
@@ -50,13 +42,4 @@ public class CapacitacionClienteDaoImpl implements ICliente {
 
     }
 
-    @Override
-    public boolean update(Cliente cliente) {
-        return false;
-    }
-
-    @Override
-    public boolean delete(int id) { //Cambié el tipo de dato pero no afecta en tu código
-        return false;              // Cualquier cosas me hablas o borras este comentario jeje salutes
-    }
 }
