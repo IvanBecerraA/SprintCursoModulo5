@@ -16,6 +16,15 @@
     <%@ include file='head.jsp' %>
     <!-- PARA ICONOS BOOTSTRAP EDITAR/ELIMINAR  -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+        <style>
+        .table th:first-child {
+          border-top-left-radius: 8px;
+        }
+
+        .table th:last-child {
+          border-top-right-radius: 8px;
+        }
+        </style>
 </head>
 <body>
 <!-- navbar  -->
@@ -26,6 +35,9 @@
     <h1 class="text-center mt-5">Listado de Usuarios</h1>
     <button type="button" style="width: 150px;" class="btn btn-primary m-auto">Crear Usuario</button>
 </div>
+
+<div class="container mb-5" style="min-height: 55vh;">
+<div class="row grid gap-6 w-70 m-auto mt-3" style="box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); border-radius: 8px;">
 <!--Generamos una tabla-->
 <table class="table">
     <!--Cabecera de mi tabla-->
@@ -77,6 +89,8 @@
     </tr>
     <% } %>
 </table>
+</div>
+</div>
 
 <!-- agregando footer, que contiene además script de bootstrap  -->
 <%@ include file='footer.jsp' %>
