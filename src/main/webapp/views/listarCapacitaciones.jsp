@@ -1,4 +1,5 @@
-<%--
+<%@ page import="models.Capacitacion" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: johnn
   Date: 27-06-2023
@@ -7,16 +8,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Capacitaciones</title>
-  <link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-</head>
-
+ <jsp:include page="head.jsp"/>
 <body>
 
 <%@ include file='header.jsp' %>
@@ -28,8 +20,7 @@
       <table class="table table-striped table-hover" id="tablaCapacitaciones">
         <thead>
         <tr>
-          <th>#ID</th>
-          <th>#ID Cliente</th>
+          <th>Rut del cliente</th>
           <th>Fecha de realización</th>
           <th>Hora</th>
           <th>Lugar</th>
@@ -38,6 +29,21 @@
         </tr>
         </thead>
         <tbody>
+
+        <%
+          List<Capacitacion> listaCapacitaciones = (List) request.getAttribute("capacitaciones");
+
+          for (Capacitacion capacitacion : listaCapacitaciones) {
+        %>
+        <tr>
+          <td><%= capacitacion.getRutCliente() %></td>
+          <td><%= capacitacion.getFecha() %></td>
+          <td><%= capacitacion.getHora() %></td>
+          <td><%= capacitacion.getLugar() %></td>
+          <td><%= capacitacion.getDuracion() %></td>
+          <td><%= capacitacion.getCantidadAsistentes() %></td>
+        </tr>
+        <% } %>
         <tr>
           <td>1</td>
           <td>3</td>

@@ -24,7 +24,7 @@ public class CapacitacionDaoImpl implements ICapacitacion {
 
         String sql = "INSERT INTO Capacitacion VALUES " +
                 "(null, '"+
-                capacitacion.getIdCliente() +"', '"+
+                capacitacion.getRutCliente() +"', '"+
                 capacitacion.getFecha() +"', '"+
                 capacitacion.getHora() +"', '"+
                 capacitacion.getLugar() +"', '"+
@@ -84,7 +84,7 @@ public class CapacitacionDaoImpl implements ICapacitacion {
         String sql = "UPDATE Capacitacion\n" +
                 "SET\n" +
                 "id_capacitacion = "+ capacitacion.getId() +", " +
-                "id_cliente = "+ capacitacion.getIdCliente() +", " +
+                "id_cliente = "+ capacitacion.getRutCliente() +", " +
                 "fecha_capacitacion = \""+ capacitacion.getFecha() +"\", " +
                 "hora = \""+ capacitacion.getHora() +"\", " +
                 "lugar = \""+ capacitacion.getLugar() +"\", " +

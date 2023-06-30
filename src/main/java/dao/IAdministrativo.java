@@ -13,5 +13,6 @@ public interface IAdministrativo {
     public boolean update(int id);
 
     public boolean delete(int id);
+    public Administrativo listOne(int id_usuario);
 
 }
