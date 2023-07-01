@@ -1,6 +1,7 @@
   <%@ page language="java" contentType="text/html; charset=UTF-8"
       pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<html>
 <%@ include file="/views/head.jsp" %>
 
 <body>
@@ -11,7 +12,7 @@
                     <div class="card mb-3" style="max-width: 100%;">
                         <div class="row g-0">
                             <div class="col-s-12 col-md-5">
-                                <img src="images/oficina1.jpeg" class="img-fluid rounded-start ps-5 my-5" alt="oficina">
+                                <img src="https://raw.githubusercontent.com/IvanBecerraA/SprintCursoModulo5/develop/src/main/webapp/images/oficina1.jpeg" class="img-fluid rounded-start ps-5 my-5" alt="oficina">
                             </div>
                             <div class="col-s-12 col-md-7">
                                 <div class="card-body">
@@ -49,14 +50,14 @@
                         </div>
                         <div class="carousel-inner">
                             <div class="carousel-item active" data-bs-interval="5000">
-                                <img src="images/ambiente-laboral.jpeg" class="d-block w-100" alt="oficina">
+                                <img src="https://raw.githubusercontent.com/IvanBecerraA/SprintCursoModulo5/develop/src/main/webapp/images/ambiente-laboral.jpeg" class="d-block w-100" alt="oficina">
                                 <div class="carousel-caption d-none d-md-block" style="background-color: #3e2e5774;">
                                     <h5>Ambientes seguros, trabajadores protegidos</h5>
                                     <p>Confía en nuestra compañía para una prevención de riesgos laborales efectiva.</p>
                                 </div>
                             </div>
                             <div class="carousel-item" data-bs-interval="5000">
-                                <img src="images/normativa.jpeg" class="d-block w-100" alt="...">
+                                <img src="https://raw.githubusercontent.com/IvanBecerraA/SprintCursoModulo5/develop/src/main/webapp/images/normativa.jpeg" class="d-block w-100" alt="...">
                                 <div class="carousel-caption d-none d-md-block" style="background-color: #2d1c47ac;">
                                     <h5>Cumple con la normativa y optimiza costos</h5>
                                     <p>Nuestro servicio tecnológico en prevención de riesgos te ofrece una solución completa y
@@ -64,7 +65,7 @@
                                 </div>
                             </div>
                             <div class="carousel-item" data-bs-interval="5000">
-                                <img src="images/productividad.jpeg" class="d-block w-100" alt="...">
+                                <img src="https://raw.githubusercontent.com/IvanBecerraA/SprintCursoModulo5/develop/src/main/webapp/images/productividad.jpeg" class="d-block w-100" alt="...">
                                 <div class="carousel-caption d-none d-md-block" style="background-color: #3e2e5774;">
                                     <h5>Mejora la productividad y reduce accidentes</h5>
                                     <p>Descubre cómo nuestra asesoría en prevención de riesgos transforma tu lugar de trabajo.

@@ -2,6 +2,9 @@ package models;
 
 import lombok.*;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -10,11 +13,11 @@ import lombok.*;
 public class Capacitacion {
 
     private int id;
-    private String rutCliente;
-    private String dia;
-    private String hora;
+    private int rutCliente;
+    private LocalDate fecha;
+    private LocalTime hora;
     private String lugar;
-    private String duracion;
+    private int duracion;
     private int cantidadAsistentes;
 	
 }
