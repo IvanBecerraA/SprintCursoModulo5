@@ -157,11 +157,14 @@
     $('#tablaCapacitaciones tbody').on('click', 'tr', function () {
         if ($(this).hasClass('selected')) {
             $(this).removeClass('selected')
+            $(this).removeClass('table-primary')
             $('#btnModalBorrar').attr('data-bs-target', '')
             $('#btnModalEditar').attr('data-bs-target', '')
         } else {
             table.$('tr.selected').removeClass('selected')
+            table.$('tr.table-primary').removeClass('table-primary')
             $(this).addClass('selected')
+            $(this).addClass('table-primary')
             $('#btnModalBorrar').attr('data-bs-target', '#modalBorrar')
             $('#btnModalEditar').attr('data-bs-target', '#modalEditar')
         }
