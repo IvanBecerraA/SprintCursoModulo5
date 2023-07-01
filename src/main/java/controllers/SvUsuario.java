@@ -191,7 +191,7 @@ public class SvUsuario extends HttpServlet {
                 break;
 
             case 2:
-                profesionalDao.delete(id); // TODO Implementar médoto delete() en dao
+                profesionalDao.delete(id);
                 break;
 
             case 3:
