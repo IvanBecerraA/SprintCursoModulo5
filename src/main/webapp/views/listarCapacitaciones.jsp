@@ -8,11 +8,14 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
  <jsp:include page="head.jsp"/>
-</head>
+ <style>
+   label.error {
+     color: red;
+     font-style: italic;
+   }
+ </style>
 <body>
-
 <%@ include file='header.jsp' %>
 
 <div class="container mt-5" style="height: 750px;">
@@ -53,20 +56,21 @@
     </div>
   </div>
 
-  <div class="row d-flex justify-content-center">
-    <div class="col-lg-6 col-sm-12">
+  <div class="row">
+    <div class="col-lg-4 col-sm-12">
       <form method="GET" action="SvCapacitacionCreate" id="formCrearCapacitacion">
           <div class="col d-grid mb-3">
             <button type="submit" class="btn btn-primary">Crear</button>
           </div>
       </form>
-      <div class="col d-grid mb-3">
-        <button id="btnModalEditar" class="btn btn-info" data-bs-toggle="modal" data-bs-target="">Editar</button>
-      </div>
-      <div class="col d-grid mb-3">
-        <button id="btnModalBorrar" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="">Borrar</button>
-      </div>
     </div>
+    <div class="col-sm-12 col-lg-4 d-grid mb-3">
+      <button id="btnModalEditar" class="btn btn-info" data-bs-toggle="modal" data-bs-target="">Editar</button>
+    </div>
+    <div class="col-sm-12 col-lg-4 d-grid mb-3">
+      <button id="btnModalBorrar" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="">Borrar</button>
+    </div>
+
   </div>
 
 </div>
@@ -152,47 +156,87 @@
 
 <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
         crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 <script>
     var table = $('#tablaCapacitaciones').DataTable()
+    $(document).ready(function() {
+      $('#tablaCapacitaciones tbody').on('click', 'tr', function () {
+          if ($(this).hasClass('selected')) {
+              $(this).removeClass('selected')
+              $(this).removeClass('table-primary')
+              $('#btnModalBorrar').attr('data-bs-target', '')
+              $('#btnModalEditar').attr('data-bs-target', '')
+          } else {
+              table.$('tr.selected').removeClass('selected')
+              table.$('tr.table-primary').removeClass('table-primary')
+              $(this).addClass('selected')
+              $(this).addClass('table-primary')
+              $('#btnModalBorrar').attr('data-bs-target', '#modalBorrar')
+              $('#btnModalEditar').attr('data-bs-target', '#modalEditar')
+          }
+      })
 
-    $('#tablaCapacitaciones tbody').on('click', 'tr', function () {
-        if ($(this).hasClass('selected')) {
-            $(this).removeClass('selected')
-            $(this).removeClass('table-primary')
-            $('#btnModalBorrar').attr('data-bs-target', '')
-            $('#btnModalEditar').attr('data-bs-target', '')
-        } else {
-            table.$('tr.selected').removeClass('selected')
-            table.$('tr.table-primary').removeClass('table-primary')
-            $(this).addClass('selected')
-            $(this).addClass('table-primary')
-            $('#btnModalBorrar').attr('data-bs-target', '#modalBorrar')
-            $('#btnModalEditar').attr('data-bs-target', '#modalEditar')
-        }
-    })
+      $('#btnModalBorrar').click(function () {
+          console.log("btnModalBorrar");
+          var data = table.row('.selected').data()
+          var seleccionadas = table.rows('.selected').data().length
+          if (seleccionadas) {
+              $('#idEliminacion').val(data[0])
+          }
+      })
 
-    $('#btnModalBorrar').click(function () {
-        console.log("btnModalBorrar");
-        var data = table.row('.selected').data()
-        var seleccionadas = table.rows('.selected').data().length
-        if (seleccionadas) {
-            $('#idEliminacion').val(data[0])
-        }
-    })
+      $('#btnModalEditar').click(function () {
+          var data = table.row('.selected').data()
+          var seleccionadas = table.rows('.selected').data().length
+          if (seleccionadas) {
+              $('#inputID').val(data[0])
+              $('#inputIdCliente').val(data[1])
+              $('#inputFecha').val(data[2])
+              $('#inputHora').val(data[3])
+              $('#inputLugar').val(data[4])
+              $('#inputDuracion').val(data[5])
+              $('#inputAsistentes').val(data[6])
+          }
+      })
+      $.validator.addMethod("fechaSuperiorActual", function(value) {
+        var fechaIngresada = new Date(value);
+        var fechaActual = new Date();
+        return fechaIngresada > fechaActual;
+      }, "La fecha debe ser posterior a la fecha actual.");
 
-    $('#btnModalEditar').click(function () {
-        var data = table.row('.selected').data()
-        var seleccionadas = table.rows('.selected').data().length
-        if (seleccionadas) {
-            $('#inputID').val(data[0])
-            $('#inputIdCliente').val(data[1])
-            $('#inputFecha').val(data[2])
-            $('#inputHora').val(data[3])
-            $('#inputLugar').val(data[4])
-            $('#inputDuracion').val(data[5])
-            $('#inputAsistentes').val(data[6])
+      $("#formEditarCapacitacion").validate({
+        rules: {
+          fecha: {
+            required: true,
+            fechaSuperiorActual: true
+          },
+          hora: {
+            required: true
+          },
+          lugar: {
+            required: true,
+            minlength: 5
+          },
+          duracion: {
+            required: true,
+            number: true,
+            min: 1
+          },
+          cantidadAsistentes: {
+            required: true,
+            number : true,
+            min: 1
+          }
         }
+      })
+
+      jQuery.extend(jQuery.validator.messages, {
+        required: "Este campo es obligatorio.",
+        number : "Este campo debe contener solo números",
+        minlength: jQuery.validator.format("Ingresa al menos {0} carácteres."),
+        min: jQuery.validator.format("Ingresa un valor minimo de {0}."),
+      })
     })
 </script>
 </body>
