@@ -70,26 +70,10 @@ public class SvCapacitacion extends HttpServlet {
 				capacitacion.setCantidadAsistentes(Integer.parseInt(request.getParameter("cantidadAsistentes")));
 
 				capacitacionDaoImpl.create(capacitacion);
-				break;
 
 			case "read":
 
-				clientes = capacitacionClienteDaoImpl.read();
-				List<Capacitacion> capacitaciones = capacitacionDaoImpl.read();
-				List<Capacitacion> capacitacionesRut = new ArrayList<>();
-
-				for (Cliente cliente : clientes) {
-					for (Capacitacion capacitacion1 : capacitaciones) {
-						if (cliente.getId_cliente() == capacitacion1.getRutCliente()) {
-							capacitacion1.setRutCliente(cliente.getRut());
-						}
-						capacitacionesRut.add(capacitacion1);
-					}
-				}
-
-				request.setAttribute("capacitaciones", capacitacionesRut);
-				request.getRequestDispatcher("views/listarCapacitaciones.jsp").forward(request, response);
-
+				read(request, response);
 				break;
 
 			case "update":
@@ -104,6 +88,7 @@ public class SvCapacitacion extends HttpServlet {
 				}
 
 				Capacitacion capacitacionUpdate = new Capacitacion();
+				capacitacionUpdate.setId(Integer.parseInt(request.getParameter("id")));
 				capacitacionUpdate.setRutCliente(id_clienteUpd);
 				capacitacionUpdate.setFecha(LocalDate.parse(request.getParameter("fecha")));
 				capacitacionUpdate.setHora(LocalTime.parse(request.getParameter("hora")));
@@ -112,18 +97,44 @@ public class SvCapacitacion extends HttpServlet {
 				capacitacionUpdate.setCantidadAsistentes(Integer.parseInt(request.getParameter("cantidadAsistentes")));
 
 				capacitacionDaoImpl.update(capacitacionUpdate);
+
+				read(request, response);
 				break;
 
 			case "delete":
 
-				int id = Integer.parseInt(request.getParameter("id"));
+				int id = Integer.parseInt(request.getParameter("idDelete"));
 				capacitacionDaoImpl.delete(id);
+
+				read(request, response);
 				break;
 
 			default:
 				System.out.println("Error en el CRUD de Capacitacion");
 		}
 
+	}
+
+	private void read(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		List<Cliente> clientes;
+		CapacitacionClienteDaoImpl capacitacionClienteDaoImpl = new CapacitacionClienteDaoImpl();
+		CapacitacionDaoImpl capacitacionDaoImpl = new CapacitacionDaoImpl();
+
+		clientes = capacitacionClienteDaoImpl.read();
+		List<Capacitacion> capacitaciones = capacitacionDaoImpl.read();
+		List<Capacitacion> capacitacionesRut = new ArrayList<>();
+
+		for (Cliente cliente : clientes) {
+			for (Capacitacion capacitacion1 : capacitaciones) {
+				if (cliente.getId_cliente() == capacitacion1.getRutCliente()) {
+					capacitacion1.setRutCliente(cliente.getRut());
+				}
+				capacitacionesRut.add(capacitacion1);
+			}
+		}
+
+		request.setAttribute("capacitaciones", capacitacionesRut);
+		request.getRequestDispatcher("views/listarCapacitaciones.jsp").forward(request, response);
 	}
 
 }
