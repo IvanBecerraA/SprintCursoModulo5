@@ -13,7 +13,7 @@
     <div class="row justify-content-center">
         <div class="col-lg-6">
 
-<form id="contactForm" method="post" class="mx-auto">
+<form id="contactForm" method="post" class="mx-auto" action="<%= request.getContextPath() %>/contactosv">>
     <div class="form-group">
         <label for="nombre">Nombre:</label>
         <input type="text" class="form-control" id="nombre" name="nombre" required style="width: 400px">
@@ -49,7 +49,7 @@
         <script>
             // Función para validar el formulario y mostrar el cuerpo del mensaje en una alerta
             function validarFormulario(event) {
-                event.preventDefault();
+                //event.preventDefault();
 
                 var nombre = document.getElementById('nombre').value;
                 var apellidos = document.getElementById('apellidos').value;
@@ -59,9 +59,9 @@
 
                 // Expresión regular para validar el formato del correo
                 var correoRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-                var nombreRegex = /^[A-Za-z]+$/;
+                var nombreRegex =  /^[A-Za-zñÑ]+$/;
                 var telefonoRegex = /^\+\d{6,11}$/;
-                var apellidoRegex = /^[A-Za-z]+$/;
+                var apellidoRegex = /^[A-Za-zñÑ]+$/;
 
                 // Validar todos los campos (no deben estar vacíos)
                 if (nombre.trim() === '' || apellidos.trim() === '' || telefono.trim() === '' || email.trim() === '' || mensaje.trim() === '') {
