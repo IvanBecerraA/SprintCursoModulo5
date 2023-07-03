@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * Servlet implementation class SvUsuarios
  */
-@WebServlet("/usuario")
+@WebServlet("/")
 public class SvUsuario extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private ClienteDaoImpl clienteDao = new ClienteDaoImpl();
@@ -33,6 +33,7 @@ public class SvUsuario extends HttpServlet {
     private AdministrativoDaoImpl administrativoDao = new AdministrativoDaoImpl();
     private PrintWriter out;
     private UsuarioDaoImpl usuarioDao = new UsuarioDaoImpl();
+    private boolean enviado;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -50,6 +51,7 @@ public class SvUsuario extends HttpServlet {
             case "/create":
                 try {
                     create(request, response);
+
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
@@ -114,7 +116,7 @@ public class SvUsuario extends HttpServlet {
         }
     }
 
-    private void create(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+    private void create(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
         String crear = null;
         // Datos básicos del Usuario, transversal a todas las clases
         int  tipoDeUsuario = Integer.parseInt(request.getParameter("floatingSelect"));// ID del Select
@@ -140,8 +142,7 @@ public class SvUsuario extends HttpServlet {
                 String comunaEmpresa = request.getParameter("comunaEmpresa");
 
                 Cliente cliente = new Cliente(nombre, apellido1,apellido2,fecha_Nacimiento,run,contrasena,tipoDeUsuario,razonSocial,giroEmpresa,rut,telefonoRepresentante,direccionEmpresa,comunaEmpresa);
-
-                clienteDao.create(cliente);
+                enviado = true; // clienteDao.create(cliente);
                 crear = "Cliente";
                 break;
 
@@ -153,7 +154,7 @@ public class SvUsuario extends HttpServlet {
                 LocalDate fechaIngreso = LocalDate.parse(fecha_ingreso, formatter);
 
                 Profesional profesional = new Profesional(nombre, apellido1,apellido2,fecha_Nacimiento,run,contrasena,tipoDeUsuario,titulo,fechaIngreso);
-                profesionalDao.create(profesional);
+                enviado = profesionalDao.create(profesional);
                 crear = "Profesional";
                 break;
 
@@ -165,20 +166,25 @@ public class SvUsuario extends HttpServlet {
                 Administrativo administrativo = new Administrativo(
                         nombre, apellido1, apellido2, fecha_Nacimiento, run,
                         contrasena, tipoDeUsuario, area, expPrevia);
-                administrativoDao.create(administrativo);
+                enviado = administrativoDao.create(administrativo);
                 crear = "Administrativo";
                 break;
         }
 
-        out = response.getWriter();
-        out.println("<script type=\"text/javascript\">");
-        out.println("alert('Usuario creado con exito');");
-        out.println("location='/list'");
-        out.println("</script>");
+        // Envío de Alerta por Usuario registrado
+        try {
+            if (enviado) {
+                String mensaje = crear + " ha sido creado correctamente";
+                request.setAttribute("valido", mensaje);
+            } else {
+                String mensaje = "Ha ocurrido un error al crear el usuario";
+                request.setAttribute("error", mensaje);
+            }
 
-        //response.sendRedirect("list"); // Redije a lista de usuarios
-
-
+            request.getRequestDispatcher("/usuario").forward(request, response);
+        } catch (Exception ex) {
+            // Manejar cualquier excepción que pueda ocurrir
+        }
     }
 
     private void delete(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {

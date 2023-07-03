@@ -104,6 +104,32 @@
 </div>
 </div>
 
+<% if (request.getAttribute("valido") != null || request.getAttribute("error") != null) { %>
+    <input type="hidden" id="idValido" value="<%=request.getAttribute("valido")%>"/>
+    <input type="hidden" id="idError" value="<%=request.getAttribute("error")%>"/>
+    <script>
+        window.onload = function() {
+            var idValido = document.getElementById('idValido');
+            var idError = document.getElementById('idError');
+            if (idValido.value !== "") {
+                Swal.fire({
+                    title: 'Felicidades!',
+                    text: idValido.value,
+                    confirmButtonText: 'OK',
+                    icon: 'success'
+                });
+            } else {
+                Swal.fire({
+                    title: 'Error!',
+                    text: idError.value,
+                    confirmButtonText: 'OK',
+                    icon: 'error'
+                });
+            }
+        };
+    </script>
+<% } %>
+
 <!-- agregando footer, que contiene además script de bootstrap  -->
 <%@ include file='footer.jsp' %>
 </body>
