@@ -1,8 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ page import="models.Cliente" %>
 <!-- Campos adicionales para Cliente -->
 <div id="cliente" class="cantainer" style="display: none">
 	<h2 class="mt-4">Datos del usuario Cliente</h2>
+
+	<%
+        Cliente cli = new Cliente();
+        cli = (Cliente) request.getAttribute("editarCliente");
+    %>
 
 	<!-- Razón Social -->
 	<div class="row gutter-2 mt-4">
@@ -15,6 +20,7 @@
 					class="form-control form-control-sm"
 					name="razonSocial"
 					placeholder="Los Marines"
+					value="<%= cli != null ? cli.getRazonSocial() : "" %>"
 					required
 				/>
 			</div>
@@ -31,6 +37,7 @@
 					name="giroEmpresa"
 					required
 					placeholder="Developers"
+					value="<%= cli != null ? cli.getGiroEmpresa() : "" %>"
 				/>
 			</div>
 		</div>
@@ -47,6 +54,7 @@
 					pattern="\d{1,8}"
 					required
 					placeholder="77123456"
+					value="<%= cli != null ? cli.getRut() : "" %>"
 				/>
 			</div>
 		</div>
@@ -62,6 +70,7 @@
 					name="telefonoRepresentante"
 					required
 					placeholder="+56987654321"
+					value="<%= cli != null ? cli.getTelefonoRepresentante() : "" %>"
 				/>
 			</div>
 		</div>
@@ -77,6 +86,7 @@
 					name="direccionEmpresa"
 					required
 					placeholder="Avenida Siempre Viva s/n"
+					value="<%= cli != null ? cli.getDireccionEmpresa() : "" %>"
 				/>
 			</div>
 		</div>
@@ -92,6 +102,7 @@
 					name="comunaEmpresa"
 					required
 					placeholder="Por algún lugar"
+					value="<%= cli != null ? cli.getComunaEmpresa() : "" %>"
 				/>
 			</div>
 		</div>
