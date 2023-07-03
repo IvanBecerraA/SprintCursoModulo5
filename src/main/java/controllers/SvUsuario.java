@@ -142,7 +142,7 @@ public class SvUsuario extends HttpServlet {
                 String comunaEmpresa = request.getParameter("comunaEmpresa");
 
                 Cliente cliente = new Cliente(nombre, apellido1,apellido2,fecha_Nacimiento,run,contrasena,tipoDeUsuario,razonSocial,giroEmpresa,rut,telefonoRepresentante,direccionEmpresa,comunaEmpresa);
-                enviado = true; // clienteDao.create(cliente);
+                enviado = clienteDao.create(cliente);
                 crear = "Cliente";
                 break;
 
