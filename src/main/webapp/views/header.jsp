@@ -29,10 +29,10 @@
                           </li>
                          <% }%>
                          <li class="nav-item">
-                             <a class="nav-link active" href="<%= request.getContextPath() %>/views/contacto.jsp">Contacto</a>
+                             <a class="nav-link active" href="contactosv">Contacto</a>
                          </li>
                          <li class="nav-item">
-                             <a class="nav-link active" href="<%= request.getContextPath() %>/index.jsp">Cerrar sesión</a>
+                             <a class="nav-link active" href="index">Cerrar sesión</a>
                          </li>
                      </ul>
                  </div>
