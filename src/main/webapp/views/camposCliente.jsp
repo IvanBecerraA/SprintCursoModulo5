@@ -4,6 +4,11 @@
 <div id="cliente" class="cantainer" style="display: none">
 	<h2 class="mt-4">Datos del usuario Cliente</h2>
 
+	<%
+        Cliente cli = new Cliente();
+        cli = (Cliente) request.getAttribute("editarCliente");
+    %>
+
 	<!-- Razón Social -->
 	<div class="row gutter-2 mt-4">
 		<div class="col-md-4 mb-3">
