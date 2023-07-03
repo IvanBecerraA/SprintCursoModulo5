@@ -13,7 +13,7 @@
     <div class="row justify-content-center">
         <div class="col-lg-6">
 
-<form id="contactForm" method="post" class="mx-auto" action="<%= request.getContextPath() %>/contactosv">>
+<form id="contactForm" method="post" class="mx-auto" action="<%= request.getContextPath() %>/contactosv">
     <div class="form-group">
         <label for="nombre">Nombre:</label>
         <input type="text" class="form-control" id="nombre" name="nombre" required style="width: 400px">
@@ -26,12 +26,12 @@
 
     <div class="form-group">
         <label for="telefono">Teléfono:</label>
-        <input type="text" class="form-control" id="telefono" name="telefono" required style="width: 400px">
+        <input type="text" class="form-control" id="telefono" name="telefono" required style="width: 400px" placeholder="+5699998888">
     </div>
 
     <div class="form-group">
         <label for="email">Email:</label>
-        <input type="email" class="form-control" id="email" name="email" required maxlength="100" style="width: 400px;">
+        <input type="email" class="form-control" id="email" name="email" required maxlength="100" style="width: 400px;" placeholder="micorreo@email.com">
         <small id="emailHelp" class="form-text text-muted">Nunca compartiremos tu correo electrónico con nadie más.</small>
     </div>
 

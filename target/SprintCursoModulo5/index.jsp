@@ -1,13 +1,7 @@
-<<<<<<< HEAD
-<html>
-<body>
-<h2>Hello World!</h2>
-</body>
-</html>
-=======
   <%@ page language="java" contentType="text/html; charset=UTF-8"
       pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<html>
 <%@ include file="/views/head.jsp" %>
 
 <body>
@@ -108,11 +102,10 @@
                 </section>
     </main>
 
-<%@ include file="/views/footer.jsp" %>
+<jsp:include page="/views/footer.jsp"/>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
         crossorigin="anonymous"></script>
 </body>
 </html>
->>>>>>> c395b0f986dabe5f0d8034481c991b5aa28fc24c
