@@ -248,6 +248,8 @@ public class SvUsuario extends HttpServlet {
         */
             String botonFormulario = request.getParameter("actualizarFormulario");
 
+
+
             //preguntamos si entramos desde la lista
             if (botonFormulario != "" && botonFormulario != null) {
                 //rescatamos el IdUsuario y tipo usuario
@@ -271,8 +273,11 @@ public class SvUsuario extends HttpServlet {
 
             } else {
                 //Cargamos todos los campos de Usuario que se tendra por defecto en cada update
-                int idUsuario = Integer.parseInt(request.getParameter("floatingSelect"));//recuperando id
+                System.out.println("Entré al else");
+                int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));//recuperando id
+                System.out.println(request.getParameter("idUsuario"));
                 int idTipo = Integer.parseInt(request.getParameter("idtipo"));//recuperando id tipo usuario
+                System.out.println(request.getParameter("idtipo"));
                 String nombre = (request.getParameter("nombre"));
                 String apellido1 = (request.getParameter("apellido1"));
                 String apellido2 = (request.getParameter("apellido2"));

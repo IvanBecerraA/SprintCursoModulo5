@@ -106,8 +106,8 @@ public class AdministrativoDaoImpl
             con= Conexion.getConexion();//llamamos a nuestra conexion de la bd
             stmt= con.createStatement();//llamamos a nuestros metodos executeQuery(), executeUpdate(),execute()
             rs = stmt.executeQuery("select * " +
-                    "from usuario u " +
-                    "inner join administrativo a " +
+                    "from prueba_bootcamp.Usuario u " +
+                    "inner join prueba_bootcamp.Administrativo a " +
                     "on u.id_usuario = a.id_usuario " +
                     "where a.id_usuario = "+ id_usuario+
                     " Limit 1;");

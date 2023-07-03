@@ -22,10 +22,13 @@
     --%>
 		<div class="container mx-auto" style="width: 80vw">
 			<form action="update" method="post" id="formEditarUsuario">
+
 				<%
 				    Cliente cli = new Cliente();
 				    cli = (Cliente) request.getAttribute("editarCliente");
 				%>
+			  <input type="hidden" name="idUsuario" value="<%=cli.getId_usuario()%>">
+              <input type="hidden" name="idtipo" value="<%=cli.getTipo_usuario()%>">
 				<div class="row d-flex justify-content-between mt-4">
 					<h2 class="p-10">Formulario Editar Usuario</h2>
 					<div class="text-center">

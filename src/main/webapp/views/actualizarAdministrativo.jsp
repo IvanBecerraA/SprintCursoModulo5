@@ -21,7 +21,7 @@
 
 
 %>
-<form action="/../SprintCursoModulo5/update" method="GET" >
+<form action="update" method="post" >
   <!--Datos ocultos-->
   <input type="hidden" name="idUsuario" value="<%=adm.getId_usuario()%>">
   <input type="hidden" name="idtipo" value="<%=adm.getTipo_usuario()%>">
