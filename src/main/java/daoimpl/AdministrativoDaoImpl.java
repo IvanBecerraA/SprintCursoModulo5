@@ -91,6 +91,26 @@ public class AdministrativoDaoImpl
 
     @Override
     public boolean delete(int id) {
+        boolean delete = false;
+        Statement stmt = null;
+        Connection con = null;
+
+        String sqlUsuario = "DELETE FROM Usuario WHERE id_usuario = " + id + ";";
+        String sqlAdministrativo = "DELETE FROM Administrativo WHERE id_usuario = " + id + ";";
+
+        try {
+            con = Conexion.getConexion();
+            stmt = con.createStatement();
+            stmt.executeUpdate(sqlAdministrativo); //Primero DEBE borrar administrativo
+            stmt.executeUpdate(sqlUsuario);
+            delete = true;
+            stmt.close();
+            System.out.println("Eliminación Administrativo Correcta");
+        } catch (SQLException e) {
+            System.out.println("No se pudo eliminar");
+            throw new RuntimeException(e);
+        }
+
         return false;
     }
 

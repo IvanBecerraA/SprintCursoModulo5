@@ -211,27 +211,26 @@ public class SvUsuario extends HttpServlet {
     }
 
     private void delete(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
-        int  tipoDeUsuario = Integer.parseInt(request.getParameter("floatingSelect"));
-        int id = Integer.parseInt(request.getParameter("id_usuario"));
-
+        String  tipoDeUsuario = request.getParameter("tipoUsuario");
+        int id = Integer.parseInt(request.getParameter("idUsuario"));
         switch (tipoDeUsuario){
-            case 1:
+            case "Cliente":
                 clienteDao.delete(id);
                 break;
 
-            case 2:
+            case "Profesional":
                 profesionalDao.delete(id);
                 break;
 
-            case 3:
-                administrativoDao.delete(id); // TODO Implementar médoto delete() en dao
+            case "Administrativo":
+                administrativoDao.delete(id);
                 break;
         }
 
         out = response.getWriter();
         out.println("<script type=\"text/javascript\">");
         out.println("alert('Usuario Eliminado con exito');");
-        out.println("location='/list'");
+        out.println("location='usuario'");
         out.println("</script>");
 
         //response.sendRedirect("list");
