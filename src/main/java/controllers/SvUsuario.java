@@ -35,7 +35,7 @@ public class SvUsuario extends HttpServlet {
     private AdministrativoDaoImpl administrativoDao = new AdministrativoDaoImpl();
     private PrintWriter out;
     private UsuarioDaoImpl usuarioDao = new UsuarioDaoImpl();
-    private boolean enviado;
+    private boolean enviado = false;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -165,7 +165,7 @@ public class SvUsuario extends HttpServlet {
                 String comunaEmpresa = request.getParameter("comunaEmpresa");
 
                 Cliente cliente = new Cliente(nombre, apellido1,apellido2,fecha_Nacimiento,run,contrasena,tipoDeUsuario,razonSocial,giroEmpresa,rut,telefonoRepresentante,direccionEmpresa,comunaEmpresa);
-                enviado = true; // clienteDao.create(cliente);
+                enviado = clienteDao.create(cliente);
                 crear = "Cliente";
                 break;
 
@@ -190,6 +190,7 @@ public class SvUsuario extends HttpServlet {
                         nombre, apellido1, apellido2, fecha_Nacimiento, run,
                         contrasena, tipoDeUsuario, area, expPrevia);
                 enviado = administrativoDao.create(administrativo);
+                System.out.println(enviado);
                 crear = "Administrativo";
                 break;
         }
@@ -197,6 +198,7 @@ public class SvUsuario extends HttpServlet {
         // Envío de Alerta por Usuario registrado
         try {
             if (enviado) {
+                System.out.println(enviado);
                 String mensaje = crear + " ha sido creado correctamente";
                 request.setAttribute("valido", mensaje);
             } else {

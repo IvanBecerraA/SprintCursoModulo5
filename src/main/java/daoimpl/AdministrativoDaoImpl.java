@@ -43,7 +43,7 @@ public class AdministrativoDaoImpl
             stmt.executeUpdate(sqlInsertAdministrativo);
             create = true;
             stmt.close();
-            con.close();
+            //con.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

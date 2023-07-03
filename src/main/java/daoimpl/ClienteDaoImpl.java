@@ -3,7 +3,6 @@ package daoimpl;
 
 import conexion.Conexion;
 import dao.ICliente;
-import models.Administrativo;
 import models.Cliente;
 
 import java.sql.*;
@@ -44,7 +43,7 @@ public class ClienteDaoImpl implements ICliente{
             stmt.executeUpdate(sqlInsertCliente);
             create = true;
             stmt.close();
-            //con.close();
+            // con.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
