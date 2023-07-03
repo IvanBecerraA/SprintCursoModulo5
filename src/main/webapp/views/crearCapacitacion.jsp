@@ -8,7 +8,7 @@
 <%@page import="org.apache.coyote.http11.HeadersTooLargeException"%>
 <%@page import="models.Cliente"%>
 <%@page import="java.util.List"%>
-
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
  <jsp:include page="head.jsp"/>
  <style>

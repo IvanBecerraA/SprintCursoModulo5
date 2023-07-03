@@ -27,7 +27,7 @@ import java.io.IOException;
         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             // TODO Auto-generated method stub
             this.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
-            //response.sendRedirect("/index.jsp");
+
         }
 
         /**
