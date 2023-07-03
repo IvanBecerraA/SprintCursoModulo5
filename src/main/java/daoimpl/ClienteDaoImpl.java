@@ -151,8 +151,8 @@ public class ClienteDaoImpl implements ICliente{
             con= Conexion.getConexion();//llamamos a nuestra conexion de la bd
             stmt= con.createStatement();//llamamos a nuestros metodos executeQuery(), executeUpdate(),execute()
             rs = stmt.executeQuery("select * " +
-                    "from usuario u " +
-                    "inner join cliente c " +
+                    "from prueba_bootcamp.Usuario u " +
+                    "inner join prueba_bootcamp.Cliente c " +
                     "on u.id_usuario = c.id_usuario " +
                     "where c.id_usuario = "+ id_usuario+
                     " Limit 1;");
