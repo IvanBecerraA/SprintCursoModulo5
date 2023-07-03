@@ -14,14 +14,16 @@
                          <li class="nav-item">
                              <a class="nav-link active" href="<%= request.getContextPath() %>/views/crearUsuario.jsp">Crear usuarios</a>
                          </li>
-                          <li class="nav-item">
-                             <a class="nav-link active" href="<%= request.getContextPath() %>/views/listarCapacitaciones.jsp">Listar capacitación</a>
-                          </li>
+                         <form method="post" action="SvCapacitacion?action=read" id="formCapacitacionRead">
+                              <li class="nav-item">
+                                 <button type="submit" class="nav-link active">Listar capacitación</button>
+                              </li>
+                          </form>
                           <%
                           int perfilUsuario = (int) session.getAttribute("tipoUsuario");
                           if(perfilUsuario == 1){ %>
                           <li class="nav-item">
-                             <a class="nav-link active" href="<%= request.getContextPath() %>/views/crearCapacitacion.jsp">Crear capacitación</a>
+                             <a class="nav-link active" href="SvCapacitacionCreate">Crear capacitación</a>
                           </li>
                          <% }%>
                          <li class="nav-item">
