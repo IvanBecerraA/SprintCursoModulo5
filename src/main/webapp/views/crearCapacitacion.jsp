@@ -10,9 +10,13 @@
 <%@page import="java.util.List"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
  <jsp:include page="head.jsp"/>
-</head>
+ <style>
+     label.error {
+         color: red;
+         font-style: italic;
+     }
+ </style>
 <body>
 
 <jsp:include page="header.jsp"/>
@@ -68,6 +72,47 @@
 
 <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="../js/validacionFormulariosCapacitacion.js"></script>
+<script>
+    $(document).ready(function() {
+        $.validator.addMethod("fechaSuperiorActual", function(value) {
+            var fechaIngresada = new Date(value);
+            var fechaActual = new Date();
+            return fechaIngresada > fechaActual;
+        }, "La fecha debe ser posterior a la fecha actual.");
+
+        $("#formCrearCapacitacion").validate({
+            rules: {
+                fecha: {
+                    required: true,
+                    fechaSuperiorActual: true
+                },
+                hora: {
+                    required: true
+                },
+                lugar: {
+                    required: true,
+                    minlength: 5
+                },
+                duracion: {
+                    required: true,
+                    number: true,
+                    min: 1
+                },
+                cantidadAsistentes: {
+                    required: true,
+                    number : true,
+                    min: 1
+                }
+            }
+        })
+
+        jQuery.extend(jQuery.validator.messages, {
+            required: "Este campo es obligatorio.",
+            number : "Este campo debe contener solo números",
+            minlength: jQuery.validator.format("Ingresa al menos {0} carácteres."),
+            min: jQuery.validator.format("Ingresa un valor minimo de {0}."),
+        })
+    })
+</script>
 </body>
 </html>
