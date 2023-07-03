@@ -2,15 +2,10 @@ package daoimpl;
 
 import conexion.Conexion;
 import dao.IProfesional;
-import models.Administrativo;
-import models.Capacitacion;
 import models.Profesional;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class ProfesionalDaoImpl implements IProfesional {
@@ -82,6 +77,50 @@ public class ProfesionalDaoImpl implements IProfesional {
     @Override
     public boolean update(int id) {
         return false;
+    }
+
+    @Override
+    public boolean update(Profesional profesional) {
+        Connection con;
+        boolean update = false;
+
+        /* Consultas preparadas:
+        -Permiten pasar parámetros a las sentencas sql
+        -Previene de ataques de inyección sql
+        -Tienen mejor rendimiento, son dinámicas (Al ser precompiladas y reutilizables)
+         Probaré usar este tipo de consulta*/
+
+        String updateUsuario = "UPDATE Usuario SET nombre =?, apellido1 =?, apellido2 =?," +
+                "fecha_nacimiento =?, run =?, contrasenia =?, tipo_usuario =? WHERE id_usuario =?";
+        String updateProfesional = "UPDATE Profesional SET titulo =?, fecha_ingreso =?" +
+                " WHERE id_usuario =?";
+
+        try {
+            con = Conexion.getConexion();
+            PreparedStatement pstmU = con.prepareStatement(updateUsuario);
+            pstmU.executeQuery();
+            pstmU.setString(1, profesional.getNombre());
+            pstmU.setString(2, profesional.getApellido1());
+            pstmU.setString(3, profesional.getApellido2());
+            //pstmU.setDate(4, cliente.getFechaNacimiento()); TODO CASTEAR A LOCALDATE
+            pstmU.setInt(5, profesional.getRun());
+            pstmU.setString(6, profesional.getContrasenia());
+            pstmU.setInt(7, profesional.getTipo_usuario()); //
+            pstmU.setInt(8, profesional.getId_usuario()); //
+
+            PreparedStatement pstmC = con.prepareStatement(updateProfesional);
+            pstmC.executeQuery();
+            pstmC.setString(1, profesional.getTitulo());
+            pstmC.setDate(2, Date.valueOf(profesional.getFecha_ingreso()));
+
+            update = pstmC.executeUpdate() > 0;
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return update;
     }
 
     @Override
