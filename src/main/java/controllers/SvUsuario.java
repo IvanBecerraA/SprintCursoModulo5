@@ -112,6 +112,8 @@ public class SvUsuario extends HttpServlet {
                     case "Profesional":
                         break;
                     case "Administrativo":
+                        System.out.println("id: "+idUsuario);
+                        System.out.println("tipoUsuario: "+tipoUsuario);
                         //llamamos los campos de nuestra tabla Administrativo + Usuario filatrado por el idUsuario y lo enviamos al HTML
                         request.setAttribute("administrativosHtml", this.administrativoDao.listOne(idUsuario));
                         //Nos dirigimos a nuestro formulario para modificar
@@ -211,27 +213,26 @@ public class SvUsuario extends HttpServlet {
     }
 
     private void delete(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
-        int  tipoDeUsuario = Integer.parseInt(request.getParameter("floatingSelect"));
-        int id = Integer.parseInt(request.getParameter("id_usuario"));
-
+        String  tipoDeUsuario = request.getParameter("tipoUsuario");
+        int id = Integer.parseInt(request.getParameter("idUsuario"));
         switch (tipoDeUsuario){
-            case 1:
+            case "Cliente":
                 clienteDao.delete(id);
                 break;
 
-            case 2:
+            case "Profesional":
                 profesionalDao.delete(id);
                 break;
 
-            case 3:
-                administrativoDao.delete(id); // TODO Implementar médoto delete() en dao
+            case "Administrativo":
+                administrativoDao.delete(id);
                 break;
         }
 
         out = response.getWriter();
         out.println("<script type=\"text/javascript\">");
         out.println("alert('Usuario Eliminado con exito');");
-        out.println("location='/list'");
+        out.println("location='usuario'");
         out.println("</script>");
 
         //response.sendRedirect("list");
@@ -269,13 +270,14 @@ public class SvUsuario extends HttpServlet {
                         //llamamos los campos de nuestra tabla Administrativo + Usuario filatrado por el idUsuario y lo enviamos al HTML
                         request.setAttribute("administrativosHtml", this.administrativoDao.listOne(idUsuario));
                         //Nos dirigimos a nuestro formulario para modificar
-                        getServletContext().getRequestDispatcher("/views/actualizarAdministrativo.jsp").forward(request, response);
+                        getServletContext().getRequestDispatcher("/views/editarAdministrativo.jsp").forward(request, response);
                         break;
                 }
 
             } else {
                 //Cargamos todos los campos de Usuario que se tendra por defecto en cada update
                 System.out.println("Entré al else");
+                System.out.println(request.getParameter("idUsuario"));
                 int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));//recuperando id
                 System.out.println(request.getParameter("idUsuario"));
                 int idTipo = Integer.parseInt(request.getParameter("idtipo"));//recuperando id tipo usuario
@@ -288,7 +290,6 @@ public class SvUsuario extends HttpServlet {
                 String tipoUsuario = idTipo==1?(idTipo==2?"Profesional":"Cliente"):"Administrativo";
                 switch (tipoUsuario) {
                     case "Cliente":
-
                         cli.setNombre(nombre); cli.setApellido1(apellido1);
                         cli.setApellido2(apellido2); cli.setContrasenia(password); cli.setFechaNacimiento(FechaNacimiento);
                         cli.setId_cliente(Integer.parseInt(request.getParameter("idCliente")));
@@ -305,9 +306,14 @@ public class SvUsuario extends HttpServlet {
                         /* Codigo si es Profesional*/
                         break;
                     case "Administrativo":
+                        System.out.println("Entro al Administrativo");
                         //hacemos un Set para nuestra clase Administrador
-                        adm.setId_usuario(idUsuario); adm.setNombre(nombre); adm.setApellido1(apellido1);
-                        adm.setApellido2(apellido2);adm.setContrasenia(password);adm.setFechaNacimiento(FechaNacimiento);
+                        adm.setId_usuario(idUsuario);
+                        adm.setNombre(nombre);
+                        adm.setApellido1(apellido1);
+                        adm.setApellido2(apellido2);
+                        adm.setContrasenia(password);
+                        adm.setFechaNacimiento(FechaNacimiento);
                         //recuperamos los datos que pertenecen a nuestra propia clase desde el formulario
                         adm.setId_administrativo(Integer.parseInt(request.getParameter("idAdministrativo")));
                         adm.setArea(request.getParameter("area"));
@@ -318,7 +324,7 @@ public class SvUsuario extends HttpServlet {
                 }
             }
             //Nos envia a Listar usuario solo si no entra al if
-            response.sendRedirect("listarUsuarios.jsp");
+            listUsers(request,response);
         }
 
     private void listUsers(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException{
