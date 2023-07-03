@@ -30,23 +30,7 @@
 
 				<div class="row d-flex justify-content-between mt-4">
 					<h2 class="p-10">Formulario Editar Usuario</h2>
-					<div class="text-center">
-						<label for="floatingSelect">Tipo de Usuario</label>
-						<select
-							class="form-select mx-auto"
-							id="floatingSelect"
-							name="floatingSelect"
-							onchange="camposAdicionales()"
-							required
-							style="width: 200px"
 
-						>
-							<option value="">Selecciona un perfil</option>
-						    <option value="1">Cliente</option>
-							<option value="2">Profesional</option>
-							<option value="3">Administrativo</option>
-						</select>
-					</div>
 				</div>
 				<div class="row gutter-2 mt-4">
 					<!-- Datos basicos de usuario -->
@@ -145,9 +129,115 @@
 						</div>
 					</div>
 				</div>
-				<%@ include file='camposCliente.jsp' %>
-				<%@ include file='camposProfesional.jsp' %>
-				<%@ include file='camposAdministrativo.jsp' %>
+
+				<!-- Campos adicionales para Cliente -->
+                <div id="cliente" class="cantainer"">
+
+                	<!-- Razón Social -->
+                	<div class="row gutter-2 mt-4">
+                		<div class="col-md-4 mb-3">
+                			<div class="form-group">
+                				<label for="razonSocial">Nombre Empresa o Razón Social</label>
+                				<input
+                					type="text"
+                					id="razonSocial"
+                					class="form-control form-control-sm"
+                					name="razonSocial"
+                					placeholder="Los Marines"
+                					value="<%= cli != null ? cli.getRazonSocial() : "" %>"
+                					required
+                				/>
+                			</div>
+                		</div>
+
+                		<!-- Giro Empresa -->
+                		<div class="col-md-4 mb-3">
+                			<div class="form-group">
+                				<label for="giroEmpresa">Giro de la Empresa</label>
+                				<input
+                					type="text"
+                					id="giroEmpresa"
+                					class="form-control form-control-sm"
+                					name="giroEmpresa"
+                					required
+                					placeholder="Developers"
+                					value="<%= cli != null ? cli.getGiroEmpresa() : "" %>"
+                				/>
+                			</div>
+                		</div>
+
+                		<!-- Rut Empresa -->
+                		<div class="col-md-4 mb-3">
+                			<div class="form-group">
+                				<label for="rut">Rut de la Empresa</label>
+                				<input
+                					type="text"
+                					id="rut"
+                					class="form-control form-control-sm"
+                					name="rut"
+                					pattern="\d{1,8}"
+                					required
+                					placeholder="77123456"
+                					value="<%= cli != null ? cli.getRut() : "" %>"
+                				/>
+                			</div>
+                		</div>
+
+                		<!-- Teléfono del Representante -->
+                		<div class="col-md-4 mb-3">
+                			<div class="form-group">
+                				<label for="telefonoRepresentante">Teléfono del Representante</label>
+                				<input
+                					type="text"
+                					id="telefonoRepresentante"
+                					class="form-control form-control-sm"
+                					name="telefonoRepresentante"
+                					required
+                					placeholder="+56987654321"
+                					value="<%= cli != null ? cli.getTelefonoRepresentante() : "" %>"
+                				/>
+                			</div>
+                		</div>
+
+                		<!-- Dirección de la Empresa -->
+                		<div class="col-md-4 mb-3">
+                			<div class="form-group">
+                				<label for="direccionEmpresa">Dirección de la Empresa</label>
+                				<input
+                					type="text"
+                					id="direccionEmpresa"
+                					class="form-control form-control-sm"
+                					name="direccionEmpresa"
+                					required
+                					placeholder="Avenida Siempre Viva s/n"
+                					value="<%= cli != null ? cli.getDireccionEmpresa() : "" %>"
+                				/>
+                			</div>
+                		</div>
+
+                		<!-- Comuna de la Empresa -->
+                		<div class="col-md-4 mb-3">
+                			<div class="form-group">
+                				<label for="comunaEmpresa">Comuna de la Empresa</label>
+                				<input
+                					type="text"
+                					id="comunaEmpresa"
+                					class="form-control form-control-sm"
+                					name="comunaEmpresa"
+                					required
+                					placeholder="Por algún lugar"
+                					value="<%= cli != null ? cli.getComunaEmpresa() : "" %>"
+                				/>
+                			</div>
+                		</div>
+
+                		<!-- Id Usuario -->
+                        <input type="hidden" name="idUsuario" value="<%= cli != null ? cli.getId_usuario() : "" %>"/>
+                        <input type="hidden" name="idTipo" value="<%= cli != null ? cli.getId_usuario() : "" %>"/>
+
+                	</div>
+                </div>
+
 
 				<!-- botones, cancelar resetea form -->
 				<div class="text-center">
@@ -156,68 +246,10 @@
 				</div>
 			</form>
 		</div>
-		<div class="alert ${alertClass} alert-dismissible fade show" role="alert">
-          ${message}
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+
 
 		<%@ include file='footer.jsp' %>
 		<script>
-            <!-- SCRIPT PARA MOSTRAR CAMPOS ADICIONALES -->
-            function camposAdicionales() {
-                var select = document.getElementById('floatingSelect');
-                var cliente = document.getElementById('cliente');
-                var profesional = document.getElementById('profesional');
-                var administrativo = document.getElementById('administrativo');
-                if (select.value === '1') {
-                    cliente.style.display = 'block';
-                    // Activa required en caso que hayan sido desactivadas
-                    cliente.querySelectorAll('input').forEach(function(input) {
-                        input.setAttribute('required', 'required');
-                    });
-                    // Desactiva los required de los perfiles no seleccionados
-                    profesional.querySelectorAll('input[required]').forEach(function(input) {
-                        input.removeAttribute('required');
-                    });
-                    administrativo.querySelectorAll('input[required]').forEach(function(input) {
-                        input.removeAttribute('required');
-                    });
-                } else {
-                    cliente.style.display = 'none';
-                }
-                if (select.value === '2') {
-                    profesional.style.display = 'block';
-                    // Activa required en caso que hayan sido desactivadas
-                    profesional.querySelectorAll('input').forEach(function(input) {
-                        input.setAttribute('required', 'required');
-                    });
-                    // Desactiva los required de los perfiles no seleccionados
-                    cliente.querySelectorAll('input[required]').forEach(function(input) {
-                        input.removeAttribute('required');
-                    });
-                    administrativo.querySelectorAll('input[required]').forEach(function(input) {
-                        input.removeAttribute('required');
-                    });
-                } else {
-                    profesional.style.display = 'none';
-                }
-                if (select.value === '3') {
-                    administrativo.style.display = 'block';
-                    // Activa required en caso que hayan sido desactivadas
-                    administrativo.querySelectorAll('input').forEach(function(input) {
-                        input.setAttribute('required', 'required');
-                    });
-                    // Desactiva los required de los perfiles no seleccionados
-                    cliente.querySelectorAll('input[required]').forEach(function(input) {
-                        input.removeAttribute('required');
-                    });
-                    profesional.querySelectorAll('input[required]').forEach(function(input) {
-                        input.removeAttribute('required');
-                    });
-                } else {
-                    administrativo.style.display = 'none';
-                }
-            }
             // Asigna el form a una constante
             const form = document.querySelector('formCrearUsuario');
             // Agrega un evento Listener al evento submit del form
