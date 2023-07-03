@@ -85,7 +85,6 @@ public class ClienteDaoImpl implements ICliente{
             pstmU.setInt(8, cliente.getId_usuario()); //
 
             PreparedStatement pstmC = con.prepareStatement(updateCliente);
-            pstmC.executeQuery();
             pstmC.setString(1, cliente.getRazonSocial());
             pstmC.setString(2, cliente.getGiroEmpresa());
             pstmC.setInt(3, cliente.getRut());
@@ -151,8 +150,8 @@ public class ClienteDaoImpl implements ICliente{
             con= Conexion.getConexion();//llamamos a nuestra conexion de la bd
             stmt= con.createStatement();//llamamos a nuestros metodos executeQuery(), executeUpdate(),execute()
             rs = stmt.executeQuery("select * " +
-                    "from usuario u " +
-                    "inner join cliente c " +
+                    "from prueba_bootcamp.Usuario u " +
+                    "inner join prueba_bootcamp.Cliente c " +
                     "on u.id_usuario = c.id_usuario " +
                     "where c.id_usuario = "+ id_usuario+
                     " Limit 1;");

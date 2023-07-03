@@ -87,7 +87,7 @@ public class SvLogin extends HttpServlet {
 
             HttpSession sesionUsuario= request.getSession(true);
             sesionUsuario.setAttribute("tipoUsuario", tipoUsuarioSV);
-            RequestDispatcher rd = request.getRequestDispatcher("/usuario"); //el profe lo tenía cómo .jsp
+            RequestDispatcher rd = request.getRequestDispatcher("/SvUsuario"); //el profe lo tenía cómo .jsp
             rd.forward(request, response);
         }
     }
