@@ -21,7 +21,7 @@
 
 <jsp:include page="header.jsp"/>
 
-<div class="container" style="height: 750px;">
+<div class="container" style="min-height: 750px;">
   <div class="row d-flex justify-content-center my-5 justify-content-center">
     <div class="col-lg-6 col-sm-12 rounded shadow p-3">
       <h1 class="text-center mb-3">Crear capacitación</h1>

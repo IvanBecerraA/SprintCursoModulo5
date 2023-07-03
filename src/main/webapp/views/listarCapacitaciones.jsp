@@ -18,7 +18,7 @@
 <body>
 <%@ include file='header.jsp' %>
 
-<div class="container mt-5" style="height: 750px;">
+<div class="container mt-5" style="min-height: 750px;">
   <div class="row mb-3">
     <h1 class="text-center mb-3">Listado de capacitaciones</h1>
     <div class="col-12 table-responsive">
@@ -68,7 +68,7 @@
       <button id="btnModalEditar" class="btn btn-info" data-bs-toggle="modal" data-bs-target="">Editar</button>
     </div>
     <div class="col-sm-12 col-lg-4 d-grid mb-3">
-      <button id="btnModalBorrar" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="">Borrar</button>
+      <button id="btnModalBorrar" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="">Borrar</button>
     </div>
 
   </div>

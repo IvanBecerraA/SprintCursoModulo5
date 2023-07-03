@@ -128,8 +128,9 @@ public class SvCapacitacion extends HttpServlet {
 			for (Capacitacion capacitacion1 : capacitaciones) {
 				if (cliente.getId_cliente() == capacitacion1.getRutCliente()) {
 					capacitacion1.setRutCliente(cliente.getRut());
+					capacitacionesRut.add(capacitacion1);
 				}
-				capacitacionesRut.add(capacitacion1);
+
 			}
 		}
 
