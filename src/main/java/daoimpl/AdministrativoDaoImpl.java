@@ -9,13 +9,14 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AdministrativoDaoImpl implements IAdministrativo {
     @Override
     public boolean create(int id_usuario, Administrativo administrativo) {
-        boolean create = false;
+        /*boolean create = false;
         Connection con= null;
         Statement stmt= null;
 
@@ -41,7 +42,8 @@ public class AdministrativoDaoImpl implements IAdministrativo {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return create;
+        return create;*/
+        return false;
     }
 
     @Override
@@ -49,13 +51,7 @@ public class AdministrativoDaoImpl implements IAdministrativo {
         boolean update = false;
         Statement stmt=null;
         Connection con=null;
-        String sqlUsu = "update usuario\n" +
-                "set nombre= '"+administrativo.getNombre()+"',\n" +
-                "apellido1 = '"+administrativo.getApellido1()+"',\n" +
-                "apellido2 = '"+administrativo.getApellido2()+"',\n" +
-                "fecha_nacimiento = '"+administrativo.getFechaNacimiento()+"',\n" +
-                "contrasenia='"+administrativo.getPassword()+"'\n" +
-                "where id_usuario = "+administrativo.getIdUsuario()+";";
+
         String sqlAdm= "UPDATE administrativo " +
                 "SET area = '" +administrativo.getArea()
                 +"', c_anios_experiencia = '" +administrativo.getExperienciaPrevia()
@@ -63,7 +59,6 @@ public class AdministrativoDaoImpl implements IAdministrativo {
         try {
             con= conexion.conectar();
             stmt= con.createStatement();
-            stmt.executeUpdate(sqlUsu);
             stmt.executeUpdate(sqlAdm);
             update=true;
             stmt.close();
@@ -110,6 +105,36 @@ public class AdministrativoDaoImpl implements IAdministrativo {
         try {
             con= conexion.conectar();//llamamos a nuestra conexion de la bd
             stmt= con.createStatement();//llamamos a nuestros metodos executeQuery(), executeUpdate(),execute()
+            rs = stmt.executeQuery("select * "
+                    +"from administrativo "
+                    +"where id_usuario = "+ id_usuario
+                    +" Limit 1");
+            if (rs.next()) { // Verificar si hay filas en el conjunto de resultados
+                adm = new Administrativo(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3));
+            }else{
+                adm = new Administrativo();
+            }
+
+            stmt.close();
+
+            con.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return adm;
+        /*
+        Administrativo adm = null;//instanciamos una clase Administrativo
+        Statement stmt=null; //instanciamos el statement
+        Connection con=null;//instanciamos el con
+        ResultSet rs= null;//instanciamos el ResulSet que nos sirve para ejecutar comandos sql
+
+        try {
+            con= conexion.conectar();//llamamos a nuestra conexion de la bd
+            stmt= con.createStatement();//llamamos a nuestros metodos executeQuery(), executeUpdate(),execute()
             rs = stmt.executeQuery("select * " +
                     "from usuario u " +
                     "inner join administrativo a " +
@@ -118,17 +143,42 @@ public class AdministrativoDaoImpl implements IAdministrativo {
                     " Limit 1;");
             while (rs.next()){
                 adm = new Administrativo(rs.getInt(1),rs.getString(2),
-                        rs.getString(3),rs.getString(4),rs.getDate(5),
+                        rs.getString(3),rs.getString(4), LocalDate.parse(rs.getString(5)),
                         rs.getInt(6),rs.getString(7),rs.getInt(8),
                         rs.getInt(9),rs.getString(10),rs.getString(11));
-                
+
             }
             stmt.close();
             con.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return adm;
+        return adm;*/
     }
+
+    @Override
+    public boolean createAdm(int id_usuario, Administrativo administrativo) {
+        boolean create = false;
+        Connection con= null;
+        Statement stmt= null;
+
+        String sql=
+                " INSERT INTO administrativo VALUES(null,'"
+                        +administrativo.getArea()+"','"
+                        +administrativo.getExperienciaPrevia()+"',"
+                        +id_usuario+");";
+        try {
+            con= conexion.conectar();
+            stmt= con.createStatement();
+            stmt.execute(sql);
+            create=true;
+            stmt.close();
+            con.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return create;
+    }
+
 
 }

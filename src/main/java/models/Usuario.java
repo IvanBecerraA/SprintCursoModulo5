@@ -2,6 +2,7 @@ package models;
 
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.PrimitiveIterator;
 
@@ -15,7 +16,7 @@ public class Usuario {
     private String nombre;
     private String apellido1;
     private String apellido2;
-    private Date fechaNacimiento;
+    private LocalDate fechaNacimiento;
     private int run;
     private String password;
     private int tipo_usuario;
