@@ -165,6 +165,7 @@ public class ClienteDaoImpl implements ICliente{
                         rs.getInt(12),rs.getString(13),rs.getString(14),rs.getString(15));
 
             }
+            System.out.println("List Cliente "+cl.getId_usuario() );
             stmt.close();
             //con.close();
         } catch (SQLException e) {
