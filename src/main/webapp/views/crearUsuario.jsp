@@ -3,8 +3,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Crear Usuario</title>
 		<%@ include file='head.jsp' %>
+		<title>Crear Usuario</title>
 		<style>
             /* add a red border to invalid input fields */
             input:focus:invalid {
@@ -19,7 +19,7 @@
 		<%@ include file='header.jsp' %>
 
 		<div class="container mx-auto" style="width: 80vw">
-			<form action="/../SprintCursoModulo5/create" method="post" id="formCrearUsuario">
+			<form action="/SprintCursoModulo5/create" method="post" id="formCrearUsuario">
 				<div class="row d-flex justify-content-between mt-4">
 					<h2 class="p-10">Formulario Crear Usuario</h2>
 					<div class="text-center">
@@ -113,7 +113,7 @@
 								class="form-control form-control-sm"
 								id="run"
 								name="run"
-								placeholder="11222333-3"
+								placeholder="11222333"
 								pattern="\d{1,9}"
 								required
 							/>
@@ -146,6 +146,7 @@
 				</div>
 			</form>
 		</div>
+
 		<%@ include file='footer.jsp' %>
 		<script>
             <!-- SCRIPT PARA MOSTRAR CAMPOS ADICIONALES -->
@@ -212,13 +213,13 @@
             const form = document.querySelector('formCrearUsuario');
 
             // Agrega un evento Listener al evento submit del form
-            form.addEventListener('submit', (event) => {
+//            form.addEventListener('submit', (event) => {
                 // Verifica que el form tenga todos los inputs validos
-                if (!form.checkValidity()) {
+ //               if (!form.checkValidity()) {
                     // Evita que se envíe formulario a servlet en caso que un campo no esté validado
-                    event.preventDefault();
-                }
-            });
+ //                   event.preventDefault();
+ //               }
+ //           });
 		</script>
 	</body>
 </html>

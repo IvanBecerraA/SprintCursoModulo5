@@ -2,8 +2,9 @@
       pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<head>
 <%@ include file="/views/head.jsp" %>
-
+</head>
 <body>
 <%@ include file="/views/nav-inicio.jsp" %>
 
