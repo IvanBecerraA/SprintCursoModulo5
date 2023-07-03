@@ -31,7 +31,8 @@ public class UsuarioDaoImpl implements IUsuario {
                 usuarios.add(usu);
             }
             stmt.close();
-            con.close();
+            rs.close();
+            //con.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

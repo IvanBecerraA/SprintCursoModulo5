@@ -32,5 +32,14 @@ public class Cliente extends Usuario{
         this.comunaEmpresa = comunaEmpresa;
     }
 
-
+    public Cliente(int id_usuario, String nombre, String apellido1, String apellido2, LocalDate fechaNacimiento, int run, String contrasenia, int tipo_usuario, int id_cliente, String razonSocial, String giroEmpresa, int rut, String telefonoRepresentante, String direccionEmpresa, String comunaEmpresa) {
+        super(id_usuario, nombre, apellido1, apellido2, fechaNacimiento, run, contrasenia, tipo_usuario);
+        this.id_cliente = id_cliente;
+        this.razonSocial = razonSocial;
+        this.giroEmpresa = giroEmpresa;
+        this.rut = rut;
+        this.telefonoRepresentante = telefonoRepresentante;
+        this.direccionEmpresa = direccionEmpresa;
+        this.comunaEmpresa = comunaEmpresa;
+    }
 }

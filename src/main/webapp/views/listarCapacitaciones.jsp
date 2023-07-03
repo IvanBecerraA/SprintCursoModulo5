@@ -20,6 +20,7 @@
       <table class="table table-striped table-hover" id="tablaCapacitaciones">
         <thead>
         <tr>
+          <th hidden>ID</th>
           <th>Rut del cliente</th>
           <th>Fecha de realización</th>
           <th>Hora</th>
@@ -36,6 +37,7 @@
           for (Capacitacion capacitacion : listaCapacitaciones) {
         %>
         <tr>
+          <td hidden><%= capacitacion.getId() %></td>
           <td><%= capacitacion.getRutCliente() %></td>
           <td><%= capacitacion.getFecha() %></td>
           <td><%= capacitacion.getHora() %></td>
@@ -44,60 +46,6 @@
           <td><%= capacitacion.getCantidadAsistentes() %></td>
         </tr>
         <% } %>
-        <tr>
-          <td>1</td>
-          <td>3</td>
-          <td>2023-01-01</td>
-          <td>20:20</td>
-          <td>Calle 1</td>
-          <td>90</td>
-          <td>10</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>3</td>
-          <td>3</td>
-          <td>3</td>
-          <td>3</td>
-          <td>3</td>
-          <td>3</td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td>4</td>
-          <td>4</td>
-          <td>4</td>
-          <td>4</td>
-          <td>4</td>
-          <td>4</td>
-        </tr>
-        <tr>
-          <td>5</td>
-          <td>5</td>
-          <td>5</td>
-          <td>5</td>
-          <td>5</td>
-          <td>5</td>
-          <td>5</td>
-        </tr>
-        <tr>
-          <td>6</td>
-          <td>6</td>
-          <td>6</td>
-          <td>6</td>
-          <td>6</td>
-          <td>6</td>
-          <td>6</td>
-        </tr>
         </tbody>
       </table>
     </div>
@@ -105,9 +53,11 @@
 
   <div class="row d-flex justify-content-center">
     <div class="col-lg-6 col-sm-12">
-      <div class="col d-grid mb-3">
-        <button id="btnCrear" class="btn btn-primary">Crear</button>
-      </div>
+      <form method="GET" action="SvCapacitacionCreate" id="formCrearCapacitacion">
+          <div class="col d-grid mb-3">
+            <button type="submit" class="btn btn-primary">Crear</button>
+          </div>
+      </form>
       <div class="col d-grid mb-3">
         <button id="btnModalEditar" class="btn btn-info" data-bs-toggle="modal" data-bs-target="">Editar</button>
       </div>
@@ -131,7 +81,8 @@
       </div>
       <div class="modal-footer">
         <form method="post" action="SvCapacitacion" id="formEliminarCapacitacion">
-          <input type="text" name="action" id="idEliminacion" hidden>
+          <input type="text" name="action" value="delete" hidden>
+          <input type="text" name="idDelete" id="idEliminacion" hidden>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Cancelar</button>
           <button type="submit" class="btn btn-danger" id="btnConfirmarBorrar">Confirmar</button>
         </form>
@@ -151,18 +102,18 @@
         <div class="container" style="height: 750px;">
           <div class="row d-flex justify-content-center justify-content-center">
             <div class="col-lg-6 col-sm-12 rounded shadow p-3">
-              <form method="post" action="SvCapacitacion" id="formEditarCapacitacion">
+              <form method="post" action="SvCapacitacion?action=update" id="formEditarCapacitacion">
                 <div class="mb-3">
-                  <label for="inputID" class="form-label" >ID</label>
-                  <input type="number" class="form-control" id="inputID" name="ID" disabled>
+                  <label for="inputID" class="form-label" hidden>ID</label>
+                  <input type="number" class="form-control" id="inputID" name="id" hidden>
                 </div>
                 <div class="mb-3">
-                  <label for="inputIdCliente" class="form-label">ID Cliente</label>
-                  <input type="number" class="form-control" id="inputIdCliente" name="idCliente" disabled>
+                  <label for="inputIdCliente" class="form-label" hidden>ID Cliente</label>
+                  <input type="number" class="form-control" id="inputIdCliente" name="rutCliente" hidden>
                 </div>
                 <div class="mb-3">
                   <label for="inputFecha" class="form-label">Fecha de la capacitación</label>
-                  <input type="date" class="form-control" id="inputFecha" name="fecha" value="">
+                  <input type="date" class="form-control" id="inputFecha" name="fecha">
                 </div>
                 <div class="mb-3">
                   <label for="inputHora" class="form-label">Hora de la capacitación</label>
@@ -200,7 +151,48 @@
 <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
         crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-<script src="../js/scriptListarCapacitaciones.js"></script>
+<script>
+    var table = $('#tablaCapacitaciones').DataTable()
+
+    $('#tablaCapacitaciones tbody').on('click', 'tr', function () {
+        if ($(this).hasClass('selected')) {
+            $(this).removeClass('selected')
+            $(this).removeClass('table-primary')
+            $('#btnModalBorrar').attr('data-bs-target', '')
+            $('#btnModalEditar').attr('data-bs-target', '')
+        } else {
+            table.$('tr.selected').removeClass('selected')
+            table.$('tr.table-primary').removeClass('table-primary')
+            $(this).addClass('selected')
+            $(this).addClass('table-primary')
+            $('#btnModalBorrar').attr('data-bs-target', '#modalBorrar')
+            $('#btnModalEditar').attr('data-bs-target', '#modalEditar')
+        }
+    })
+
+    $('#btnModalBorrar').click(function () {
+        console.log("btnModalBorrar");
+        var data = table.row('.selected').data()
+        var seleccionadas = table.rows('.selected').data().length
+        if (seleccionadas) {
+            $('#idEliminacion').val(data[0])
+        }
+    })
+
+    $('#btnModalEditar').click(function () {
+        var data = table.row('.selected').data()
+        var seleccionadas = table.rows('.selected').data().length
+        if (seleccionadas) {
+            $('#inputID').val(data[0])
+            $('#inputIdCliente').val(data[1])
+            $('#inputFecha').val(data[2])
+            $('#inputHora').val(data[3])
+            $('#inputLugar').val(data[4])
+            $('#inputDuracion').val(data[5])
+            $('#inputAsistentes').val(data[6])
+        }
+    })
+</script>
 </body>
 
 </html>

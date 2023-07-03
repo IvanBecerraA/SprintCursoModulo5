@@ -34,7 +34,6 @@ public class SvUsuario extends HttpServlet {
     private PrintWriter out;
     private UsuarioDaoImpl usuarioDao = new UsuarioDaoImpl();
 
-
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -42,7 +41,6 @@ public class SvUsuario extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -115,8 +113,6 @@ public class SvUsuario extends HttpServlet {
                 break;
         }
     }
-
-
 
     private void create(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
         String crear = null;
@@ -199,7 +195,7 @@ public class SvUsuario extends HttpServlet {
                 break;
 
             case 3:
-                administrativoDao.delete(id);
+                administrativoDao.delete(id); // TODO Implementar médoto delete() en dao
                 break;
         }
 
@@ -214,8 +210,8 @@ public class SvUsuario extends HttpServlet {
     }
 
 
-        private void update(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
-            // Datos básicos del Usuario, transversal a todas las clases
+        private void update(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
+            /*// Datos básicos del Usuario, transversal a todas las clases
             int  tipoDeUsuario = Integer.parseInt(request.getParameter("floatingSelect"));// ID del Select
             String nombre = request.getParameter("nombre");
             String apellido1 = request.getParameter("apellido1");
@@ -262,12 +258,86 @@ public class SvUsuario extends HttpServlet {
                             contrasena, tipoDeUsuario, area, expPrevia);
                     System.out.println(administrativo);
                     System.out.println(administrativo.getFechaNacimiento());
-                    administrativoDao.update(administrativo.getId_usuario());
+                    //administrativoDao.update(administrativo.getId_usuario());
                     break;
             }
 
-            //response.sendRedirect("list"); // Redije a lista de usuarios
+            //response.sendRedirect("list"); // Redije a lista de usuarios*/
 
+            //Instanciamos las clases
+            Administrativo adm = new Administrativo(); //Administrativo
+            Cliente cli = new Cliente(); //CLiente
+            Profesional pro = new Profesional(); //Profesional
+        /* La variable botonFormulario es para saber si la accion de entrar al update es a través
+        de la listarUsuarios
+        */
+            String botonFormulario = request.getParameter("actualizarFormulario");
+
+            //preguntamos si entramos desde la lista
+            if (botonFormulario != "" && botonFormulario != null) {
+                //rescatamos el IdUsuario y tipo usuario
+                int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
+                String tipoUsuario = request.getParameter("tipoUsuario");
+                //enviamos a sus respectivos formularios segun su tipousuario
+                switch (tipoUsuario) {
+                    case "Cliente":
+                        request.setAttribute("clienteHtml", this.clienteDao.listOne(idUsuario));
+                        getServletContext().getRequestDispatcher("/views/actualizarAdministrativo.jsp").forward(request, response);
+                        break;
+                    case "Profesional":
+                        break;
+                    case "Administrativo":
+                        //llamamos los campos de nuestra tabla Administrativo + Usuario filatrado por el idUsuario y lo enviamos al HTML
+                        request.setAttribute("administrativosHtml", this.administrativoDao.listOne(idUsuario));
+                        //Nos dirigimos a nuestro formulario para modificar
+                        getServletContext().getRequestDispatcher("/views/actualizarAdministrativo.jsp").forward(request, response);
+                        break;
+                }
+
+            } else {
+                //Cargamos todos los campos de Usuario que se tendra por defecto en cada update
+                int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));//recuperando id
+                int idTipo = Integer.parseInt(request.getParameter("idtipo"));//recuperando id tipo usuario
+                String nombre = (request.getParameter("nombre"));
+                String apellido1 = (request.getParameter("apellido1"));
+                String apellido2 = (request.getParameter("apellido2"));
+                String password = (request.getParameter("contrasenia"));
+                LocalDate FechaNacimiento = (LocalDate.parse(request.getParameter("fechaNac")));
+                String tipoUsuario = idTipo==1?(idTipo==2?"Profesional":"Cliente"):"Administrativo";
+                switch (tipoUsuario) {
+                    case "Cliente":
+
+                        cli.setId_usuario(idUsuario); cli.setNombre(nombre); cli.setApellido1(apellido1);
+                        cli.setApellido2(apellido2); cli.setContrasenia(password); cli.setFechaNacimiento(FechaNacimiento);
+                        // todo checkear que coincidan los "name" del formulario
+                        cli.setId_cliente(Integer.parseInt(request.getParameter("idCliente")));
+                        cli.setRazonSocial(request.getParameter("razonSocial"));
+                        cli.setGiroEmpresa(request.getParameter("giroEmpresa"));
+                        cli.setRut(Integer.parseInt(request.getParameter("rut")));
+                        cli.setTelefonoRepresentante(request.getParameter("telefonoRepresentante"));
+                        cli.setDireccionEmpresa(request.getParameter("direccionEmpresa"));
+                        cli.setDireccionEmpresa(request.getParameter("direccionEmpresa"));
+
+                        this.clienteDao.update(cli);
+                        break;
+                    case "Profesional":
+                        /* Codigo si es Profesional*/
+                        break;
+                    case "Administrativo":
+                        //hacemos un Set para nuestra clase Administrador
+                        adm.setId_usuario(idUsuario); adm.setNombre(nombre); adm.setApellido1(apellido1);
+                        adm.setApellido2(apellido2);adm.setContrasenia(password);adm.setFechaNacimiento(FechaNacimiento);
+                        //recuperamos los datos que pertenecen a nuestra propia clase desde el formulario
+                        adm.setId_administrativo(Integer.parseInt(request.getParameter("idAdministrativo")));
+                        adm.setArea(request.getParameter("area"));
+                        adm.setExperienciaPrevia(Integer.parseInt(request.getParameter("experiencia")));
+                        //lo enviamos a nuestro metodo udpate
+                        this.administrativoDao.update(adm);
+                        break;
+                }
+            }
+            //Nos envia a Listar usuario solo si no entra al if
+            response.sendRedirect("listUsers");
         }
 
     private void listUsers(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException{
