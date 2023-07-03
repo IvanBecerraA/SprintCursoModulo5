@@ -9,7 +9,7 @@
                  <div class="collapse navbar-collapse  pe-5" id="navbarNav">
                      <ul class="navbar-nav ms-md-auto">
                         <li class="nav-item">
-                             <a class="nav-link active" href="<%= request.getContextPath() %>/views/listarUsuarios.jsp">Listar usuarios</a>
+                             <a class="nav-link active" href="usuario">Listar usuarios</a>
                          </li>
                          <li class="nav-item">
                              <a class="nav-link active" href="<%= request.getContextPath() %>/views/crearUsuario.jsp">Crear usuarios</a>
