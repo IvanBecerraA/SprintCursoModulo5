@@ -8,35 +8,19 @@
 
 <%@page import="models.Usuario"%>
 <%@page import="java.util.ArrayList"%>
-
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
 <head>
-    <title>Listar Usuarios</title>
+    <title>Listado de Usuarios</title>
     <!-- INCLUYENDO HEAD.JSP PARA TRAER BOOTSTRAP, ESTILOS,ETC  -->
-    <%@ include file='head.jsp' %>
+
     <!-- PARA ICONOS BOOTSTRAP EDITAR/ELIMINAR  -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
         <style>
-        .table thead th{
-          background-color: #7952b3;
-          color: #fff;
-        }
-        .table th:first-child {
-          border-top-left-radius: 8px;
-        }
 
-        .table th:last-child {
-          border-top-right-radius: 8px;
-        }
-
-        tr:last-child td:first-child {
-          border-bottom-left-radius: 8px;
-        }
-
-        tr:last-child td:last-child {
-          border-bottom-right-radius: 8px;
-        }
         </style>
+          <link rel="stylesheet" href="https://cdnjs-cloudflare-com.translate.goog/ajax/libs/twitter-bootstrap/5.3.0-alpha3/css/bootstrap.min.css">
+          <link rel="stylesheet" href="https://cdn-datatables-net.translate.goog/1.13.4/css/dataTables.bootstrap5.min.css">
 </head>
 <body>
 <!-- navbar  -->
@@ -44,14 +28,14 @@
 
 <!-- título y boton crear usuario  -->
 <div style="display: flex; flex-direction: column;">
-    <h2 class="text-center mt-5">Listado de Usuarios</h2>
-    <button type="button" style="width: 150px;" class="btn btn-primary m-auto mb-2">Crear Usuario</button>
+    <h1 class="text-center mt-5">Listado de Usuarios</h1>
+
 </div>
 
-  <div class="container mb-5 pb-3" style="min-height: 55vh;">
-    <div class="row m-auto mt-5" style="box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); border-radius: 8px;">
+  <div class="container mb-5" style="min-height: 55vh;">
+    <div class="row m-auto mt-3" style="">
 <!--Generamos una tabla-->
-<table class="table mb-0">
+<table id="example" class="table table-striped">
     <!--Cabecera de mi tabla-->
     <thead class="text-center align-middle">
     <th scope="col"> ID </th>
@@ -104,7 +88,12 @@
 </table>
 </div>
 </div>
-
+  <script src="https://code-jquery-com.translate.goog/jquery-3.5.1.js"></script>
+  <script src="https://cdn-datatables-net.translate.goog/1.13.4/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn-datatables-net.translate.goog/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+      $('#example').DataTable();
+    </script>
 <% if (request.getAttribute("valido") != null || request.getAttribute("error") != null) { %>
     <input type="hidden" id="idValido" value="<%=request.getAttribute("valido")%>"/>
     <input type="hidden" id="idError" value="<%=request.getAttribute("error")%>"/>
