@@ -20,7 +20,7 @@
 	<%--
 		<%@ include file='header.jsp' %>
     --%>
-		<div class="container mx-auto" style="width: 80vw">
+		<div class="container mx-auto" style="width: 80vw; min-height: 78vh;">
 			<form action="update" method="post" id="formEditarUsuario">
 
 				<%
