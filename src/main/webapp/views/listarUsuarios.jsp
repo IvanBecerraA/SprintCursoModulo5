@@ -12,8 +12,9 @@
 <html>
 <head>
     <title>Listado de Usuarios</title>
-    <!-- INCLUYENDO HEAD.JSP PARA TRAER BOOTSTRAP, ESTILOS,ETC  -->
-
+    <!-- incluyendo iconos de fontawesome para footer, ya que no incluí el head,
+    debido a que los estilos de la tabla de listar capacitaciones topaban con la tabla de acá...  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
     <!-- PARA ICONOS BOOTSTRAP EDITAR/ELIMINAR  -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
         <style>
