@@ -17,9 +17,8 @@
         </style>
 	</head>
 	<body>
-	<%--
 		<%@ include file='header.jsp' %>
-    --%>
+
 		<div class="container mx-auto" style="width: 80vw; min-height: 78vh;">
 			<form action="update" method="post" id="formEditarUsuario">
 
@@ -34,6 +33,12 @@
 				</div>
 				<div class="row gutter-2 mt-4">
 					<!-- Datos basicos de usuario -->
+					<!--Datos ocultos-->
+                          <input type="hidden" name="idUsuario" value="<%=cli.getId_usuario()%>">
+                          <input type="hidden" name="idtipo" value="<%=cli.getTipo_usuario()%>">
+                          <input type="hidden" name="run" value="<%=cli.getRun()%>">
+                          <input type="hidden" name="idCliente" value="<%=cli.getId_cliente()%>">
+
 					<!-- Nombre -->
 					<div class="col-md-4 mb-3">
 						<div class="form-group">
@@ -91,7 +96,7 @@
 								type="date"
 								class="form-control form-control-sm"
 								id="fechaNacimiento"
-								name="fechaNacimiento"
+								name="fechaNac"
 								value="<%= cli != null ? cli.getFechaNacimiento() : "" %>"
 								required
 							/>
@@ -231,9 +236,6 @@
                 			</div>
                 		</div>
 
-                		<!-- Id Usuario -->
-                        <input type="hidden" name="idUsuario" value="<%= cli != null ? cli.getId_usuario() : "" %>"/>
-                        <input type="hidden" name="idTipo" value="<%= cli != null ? cli.getId_usuario() : "" %>"/>
 
                 	</div>
                 </div>

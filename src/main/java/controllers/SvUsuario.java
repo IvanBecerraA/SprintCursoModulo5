@@ -106,6 +106,8 @@ public class SvUsuario extends HttpServlet {
                         misesion.setAttribute("editarCliente", cli);
                         response.sendRedirect("/views/editarCliente.jsp");
                         */
+                        System.out.println("id: "+idUsuario);
+                        System.out.println("tipoUsuario: "+tipoUsuario);
                         request.setAttribute("editarCliente", this.clienteDao.listOne(idUsuario));
                         getServletContext().getRequestDispatcher("/views/editarCliente.jsp").forward(request, response);
                         break;
@@ -285,13 +287,14 @@ public class SvUsuario extends HttpServlet {
                 System.out.println("Entré al else");
                 System.out.println(request.getParameter("idUsuario"));
                 int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));//recuperando id
-                System.out.println(request.getParameter("idUsuario"));
+                System.out.println(request.getParameter("idtipo"));
                 int idTipo = Integer.parseInt(request.getParameter("idtipo"));//recuperando id tipo usuario
                 System.out.println(request.getParameter("idtipo"));
                 String nombre = (request.getParameter("nombre"));
                 String apellido1 = (request.getParameter("apellido1"));
                 String apellido2 = (request.getParameter("apellido2"));
                 String password = (request.getParameter("contrasenia"));
+                System.out.println(password);
                 LocalDate FechaNacimiento = (LocalDate.parse(request.getParameter("fechaNac")));
                 String tipoUsuario;
                 switch (idTipo){
@@ -318,7 +321,6 @@ public class SvUsuario extends HttpServlet {
                         cli.setTelefonoRepresentante(request.getParameter("telefonoRepresentante"));
                         cli.setDireccionEmpresa(request.getParameter("direccionEmpresa"));
                         cli.setComunaEmpresa(request.getParameter("comunaEmpresa"));
-
                         this.clienteDao.update(cli);
                         break;
                     case "Profesional":

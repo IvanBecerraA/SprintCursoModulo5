@@ -3,6 +3,7 @@ package daoimpl;
 
 import conexion.Conexion;
 import dao.ICliente;
+import models.Administrativo;
 import models.Cliente;
 
 import java.sql.*;
@@ -57,87 +58,67 @@ public class ClienteDaoImpl implements ICliente{
 
     @Override
     public boolean update(Cliente cliente) {
-        Connection con;
         boolean update = false;
+        Statement stmt = null;
+        Connection con = null;
 
-        /* Consultas preparadas:
-        -Permiten pasar parámetros a las sentencas sql
-        -Previene de ataques de inyección sql
-        -Tienen mejor rendimiento, son dinámicas (Al ser precompiladas y reutilizables)
-         Probaré usar este tipo de consulta*/
+        String sqlUsu = "UPDATE Usuario " +
+                "SET nombre = '" + cliente.getNombre() + "', " +
+                "apellido1 = '" + cliente.getApellido1() + "', " +
+                "apellido2 = '" + cliente.getApellido2() + "', " +
+                "fecha_nacimiento = '" + cliente.getFechaNacimiento() + "', " +
+                "contrasenia = '" + cliente.getContrasenia() + "' " +
+                "WHERE id_usuario = " + cliente.getId_usuario();
 
-        String updateUsuario = "UPDATE usuario SET nombre =?, apellido1 =?, apellido2 =?," +
-                "fecha_nacimiento =?, run =?, contrasenia =?, tipo_usuario =? WHERE id_usuario =?";
-        String updateCliente = "UPDATE cliente SET razon_social =?, giro =?, rut=?," +
-                "telefono =?, direccion =?, comuna =? WHERE id_usuario =?";
+        String sqlCli = "UPDATE Cliente " +
+                "SET razon_social = '" + cliente.getRazonSocial() + "', " +
+                "giro = '" + cliente.getGiroEmpresa() + "', " +
+                "rut = '" + cliente.getRut() + "', " +
+                "telefono = '" + cliente.getTelefonoRepresentante() + "', " +
+                "direccion = '" + cliente.getDireccionEmpresa() + "', " +
+                "comuna = '" + cliente.getComunaEmpresa() + "' " +
+                "WHERE id_usuario = " + cliente.getId_usuario();
+
 
         try {
             con = Conexion.getConexion();
-            PreparedStatement pstmU = con.prepareStatement(updateUsuario);
-            pstmU.setString(1, cliente.getNombre());
-            pstmU.setString(2, cliente.getApellido1());
-            pstmU.setString(3, cliente.getApellido2());
-            pstmU.setObject(4, cliente.getFechaNacimiento());
-            pstmU.setInt(5, cliente.getRun());
-            pstmU.setString(6, cliente.getContrasenia());
-            pstmU.setInt(7, cliente.getTipo_usuario()); //
-            pstmU.setInt(8, cliente.getId_usuario()); //
-
-            PreparedStatement pstmC = con.prepareStatement(updateCliente);
-            pstmC.executeQuery();
-            pstmC.setString(1, cliente.getRazonSocial());
-            pstmC.setString(2, cliente.getGiroEmpresa());
-            pstmC.setInt(3, cliente.getRut());
-            pstmC.setString(4, cliente.getTelefonoRepresentante());
-            pstmC.setString(5, cliente.getDireccionEmpresa());
-            pstmC.setString(6, cliente.getComunaEmpresa());
-            pstmC.setInt(7, cliente.getId_usuario());
-            update = pstmC.executeUpdate() > 0;
-
-            pstmU.close();
-            pstmC.close();
+            stmt = con.createStatement();
+            stmt.executeUpdate(sqlUsu);
+            stmt.executeUpdate(sqlCli);
+            update = true;
+            stmt.close();
             //con.close();
-
-
+            System.out.println("Se actualizó correctamente.");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
         return update;
     }
 
     @Override
     public boolean delete(int id) {
-
-        Connection con = null;
         boolean delete = false;
-        PreparedStatement pstmU = null;
-        PreparedStatement pstmC = null;
-        String deleteUsuario = "DELETE FROM usuario WHERE id_usuario =?";
-        String deleteCliente = "DELETE FROM cliente WHERE id_usuario =?";
+        Statement stmt = null;
+        Connection con = null;
 
-      try{
+        String sqlUsuario = "DELETE FROM Usuario WHERE id_usuario = " + id + ";";
+        String sqlCliente = "DELETE FROM Cliente WHERE id_usuario = " + id + ";";
+
+        try {
             con = Conexion.getConexion();
-            pstmU = con.prepareStatement(deleteUsuario);
-            pstmU.setInt(1, id);
-            int rowsAffectedU = pstmU.executeUpdate();
-            pstmU.close();
-
-            pstmC = con.prepareStatement(deleteCliente);
-            pstmC.setInt(1, id);
-            int rowsAffectedC = pstmC.executeUpdate();
-            pstmC.close();
-
-            delete = rowsAffectedU > 0 && rowsAffectedC > 0;
-            // Si se realizó la consulta el método executeUpdate
-            // retorna 1, si 1 > 0 = true => delete() retorna true
-
+            stmt = con.createStatement();
+            stmt.executeUpdate(sqlCliente);
+            stmt.executeUpdate(sqlUsuario);
+            delete = true;
+            stmt.close();
+            System.out.println("Eliminación Cliente Correcta");
         } catch (SQLException e) {
+            System.out.println("No se pudo eliminar");
             throw new RuntimeException(e);
         }
 
-        return delete;
-        }
+        return false;
+    }
 
     @Override
     public Cliente listOne(int id_usuario) {
@@ -162,11 +143,13 @@ public class ClienteDaoImpl implements ICliente{
 
                         rs.getInt(9),rs.getString(10),rs.getString(11),
                         rs.getInt(12),rs.getString(13),rs.getString(14),rs.getString(15));
+                cl.setId_usuario(rs.getInt(1));
 
             }
             System.out.println("List Cliente "+cl.getId_usuario() );
             stmt.close();
             //con.close();
+            System.out.println("List ID::"+cl.getId_usuario() +" Campo 2:"+cl.getNombre());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
