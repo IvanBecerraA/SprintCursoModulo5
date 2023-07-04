@@ -90,7 +90,7 @@
               <!-- Area -->
               <div class="col-md-4 mb-3">
                 <div class="form-group">
-                  <label class="form-label">Perfil</label>
+                  <label class="form-label">Area</label>
                   <input class="form-control form-control-sm" type="text" name="area" placeholder="Area"
                     value="<%= adm.getArea()%>" required>
                 </div>
