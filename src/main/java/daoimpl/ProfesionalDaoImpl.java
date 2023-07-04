@@ -2,9 +2,11 @@ package daoimpl;
 
 import conexion.Conexion;
 import dao.IProfesional;
+import models.Administrativo;
 import models.Profesional;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,45 +83,35 @@ public class ProfesionalDaoImpl implements IProfesional {
 
     @Override
     public boolean update(Profesional profesional) {
-        Connection con;
         boolean update = false;
+        Statement stmt = null;
+        Connection con = null;
 
-        /* Consultas preparadas:
-        -Permiten pasar parámetros a las sentencas sql
-        -Previene de ataques de inyección sql
-        -Tienen mejor rendimiento, son dinámicas (Al ser precompiladas y reutilizables)
-         Probaré usar este tipo de consulta*/
+        String sqlUsu = "UPDATE Usuario " +
+                "SET nombre = '" + profesional.getNombre() + "', " +
+                "apellido1 = '" + profesional.getApellido1() + "', " +
+                "apellido2 = '" + profesional.getApellido2() + "', " +
+                "fecha_nacimiento = '" + profesional.getFechaNacimiento() + "', " +
+                "contrasenia = '" + profesional.getContrasenia() + "' " +
+                "WHERE id_usuario = " + profesional.getId_usuario();
 
-        String updateUsuario = "UPDATE Usuario SET nombre =?, apellido1 =?, apellido2 =?," +
-                "fecha_nacimiento =?, run =?, contrasenia =?, tipo_usuario =? WHERE id_usuario =?";
-        String updateProfesional = "UPDATE Profesional SET titulo =?, fecha_ingreso =?" +
-                " WHERE id_usuario =?";
+        String sqlAdm = "UPDATE Profesional " +
+                "SET titulo = '" + profesional.getTitulo() + "', " +
+                "fecha_ingreso = '" + profesional.getFecha_ingreso() + "' " +
+                "WHERE id_usuario = " + profesional.getId_usuario();
 
         try {
             con = Conexion.getConexion();
-            PreparedStatement pstmU = con.prepareStatement(updateUsuario);
-            pstmU.executeQuery();
-            pstmU.setString(1, profesional.getNombre());
-            pstmU.setString(2, profesional.getApellido1());
-            pstmU.setString(3, profesional.getApellido2());
-            //pstmU.setDate(4, cliente.getFechaNacimiento()); TODO CASTEAR A LOCALDATE
-            pstmU.setInt(5, profesional.getRun());
-            pstmU.setString(6, profesional.getContrasenia());
-            pstmU.setInt(7, profesional.getTipo_usuario()); //
-            pstmU.setInt(8, profesional.getId_usuario()); //
-
-            PreparedStatement pstmC = con.prepareStatement(updateProfesional);
-            pstmC.executeQuery();
-            pstmC.setString(1, profesional.getTitulo());
-            pstmC.setDate(2, Date.valueOf(profesional.getFecha_ingreso()));
-
-            update = pstmC.executeUpdate() > 0;
-
-
+            stmt = con.createStatement();
+            stmt.executeUpdate(sqlUsu);
+            stmt.executeUpdate(sqlAdm);
+            update = true;
+            stmt.close();
+            //con.close();
+            System.out.println("Se actualizó correctamente profesional.");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
         return update;
     }
 
@@ -128,6 +120,43 @@ public class ProfesionalDaoImpl implements IProfesional {
         return false;
     }
 
+    @Override
+    public Object listOne(int idUsuario) {
+
+        Profesional pro = null;//instanciamos una clase Administrativo
+        Statement stmt=null; //instanciamos el statement
+        Connection con=null;//instanciamos el con
+        ResultSet rs= null;//instanciamos el ResulSet que nos sirve para ejecutar comandos sql
+        System.out.println(pro);
+        System.out.println(idUsuario);
+
+        try {
+            con= Conexion.getConexion();//llamamos a nuestra conexion de la bd
+            stmt= con.createStatement();//llamamos a nuestros metodos executeQuery(), executeUpdate(),execute()
+            rs = stmt.executeQuery("select * " +
+                    "from Usuario u " +
+                    "inner join Profesional p " +
+                    "on u.id_usuario = p.id_usuario " +
+                    "where p.id_usuario = "+ idUsuario+
+                    " Limit 1;");
+
+            if(rs.next()){
+                pro = new Profesional(rs.getInt(1),rs.getString(2),
+                        rs.getString(3),rs.getString(4), LocalDate.parse(rs.getString(5)),
+                        rs.getInt(6),rs.getString(7),rs.getInt(8),
+                        rs.getInt(9),rs.getString(11),LocalDate.parse(rs.getString(12)));
+                pro.setId_usuario(rs.getInt(1));
+            }
+
+
+            stmt.close();
+            //con.close();
+            System.out.println("List ID::"+pro.getId_usuario() +" Campo 2:"+pro.getNombre());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return pro;
+    }
 
 }
 

@@ -110,6 +110,12 @@ public class SvUsuario extends HttpServlet {
                         getServletContext().getRequestDispatcher("/views/editarCliente.jsp").forward(request, response);
                         break;
                     case "Profesional":
+                        System.out.println("id: "+idUsuario);
+                        System.out.println("tipoUsuario: "+tipoUsuario);
+                        //llamamos los campos de nuestra tabla profesional + Usuario filtrado por el idUsuario y lo enviamos al HTML
+                        request.setAttribute("profesionalHtml", this.profesionalDao.listOne(idUsuario));
+                        //Nos dirigimos a nuestro formulario para modificar
+                        getServletContext().getRequestDispatcher("/views/editarProfesional.jsp").forward(request, response);
                         break;
                     case "Administrativo":
                         System.out.println("id: "+idUsuario);
@@ -287,7 +293,20 @@ public class SvUsuario extends HttpServlet {
                 String apellido2 = (request.getParameter("apellido2"));
                 String password = (request.getParameter("contrasenia"));
                 LocalDate FechaNacimiento = (LocalDate.parse(request.getParameter("fechaNac")));
-                String tipoUsuario = idTipo==1?(idTipo==2?"Profesional":"Cliente"):"Administrativo";
+                String tipoUsuario;
+                switch (idTipo){
+                    case 1:
+                        tipoUsuario = "Cliente";
+                        break;
+                    case 2:
+                        tipoUsuario = "Profesional";
+                        break;
+                    default:
+                        tipoUsuario = "Administrativo";
+                        break;
+
+                }
+                //String tipoUsuario = idTipo==1?(idTipo==2?"Profesional":"Cliente"):"Administrativo";
                 switch (tipoUsuario) {
                     case "Cliente":
                         cli.setNombre(nombre); cli.setApellido1(apellido1);
@@ -304,6 +323,20 @@ public class SvUsuario extends HttpServlet {
                         break;
                     case "Profesional":
                         /* Codigo si es Profesional*/
+                        System.out.println("Entro al Profesional");
+                        //hacemos un Set para nuestra clase profesional
+                        pro.setId_usuario(idUsuario);
+                        pro.setNombre(nombre);
+                        pro.setApellido1(apellido1);
+                        pro.setApellido2(apellido2);
+                        pro.setContrasenia(password);
+                        pro.setFechaNacimiento(FechaNacimiento);
+                        //recuperamos los datos que pertenecen a nuestra propia clase desde el formulario
+                        pro.setId_profesional(Integer.parseInt(request.getParameter("idProfesional")));
+                        pro.setTitulo(request.getParameter("titulo"));
+                        pro.setFecha_ingreso(LocalDate.parse(request.getParameter("fechaIngreso")));
+                        //lo enviamos a nuestro metodo udpate
+                        this.profesionalDao.update(pro);
                         break;
                     case "Administrativo":
                         System.out.println("Entro al Administrativo");

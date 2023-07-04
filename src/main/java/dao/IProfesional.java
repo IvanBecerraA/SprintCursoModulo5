@@ -15,6 +15,6 @@ public interface IProfesional {
     public boolean delete (int id);
 
 
-
+    Object listOne(int idUsuario);
 }
 
