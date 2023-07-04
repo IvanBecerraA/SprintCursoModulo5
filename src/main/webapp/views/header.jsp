@@ -16,7 +16,7 @@
                          <li class="nav-item">
                              <a class="nav-link active" href="/create">Crear usuarios</a>
                          </li>
-                         <form method="post" action="SvCapacitacion?action=read" id="formCapacitacionRead">
+                         <form class="m-0" method="post" action="SvCapacitacion?action=read" id="formCapacitacionRead">
                               <li class="nav-item">
                                  <button type="submit" class="nav-link active">Listar capacitación</button>
                               </li>
