@@ -8,12 +8,12 @@
 
 <%@page import="models.Usuario"%>
 <%@page import="java.util.ArrayList"%>
-
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
 <head>
     <title>Listado de Usuarios</title>
     <!-- INCLUYENDO HEAD.JSP PARA TRAER BOOTSTRAP, ESTILOS,ETC  -->
-    <%@ include file='head.jsp' %>
+
     <!-- PARA ICONOS BOOTSTRAP EDITAR/ELIMINAR  -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
         <style>
@@ -28,12 +28,12 @@
 
 <!-- título y boton crear usuario  -->
 <div style="display: flex; flex-direction: column;">
-    <h2 class="text-center mt-5">Listado de Usuarios</h2>
-    <button type="button" style="width: ;" class="btn btn-primary m-auto mb-2">Crear Usuario</button>
+    <h1 class="text-center mt-5">Listado de Usuarios</h1>
+
 </div>
 
   <div class="container mb-5" style="min-height: 55vh;">
-    <div class="row m-auto mt-5" style="">
+    <div class="row m-auto mt-3" style="">
 <!--Generamos una tabla-->
 <table id="example" class="table table-striped">
     <!--Cabecera de mi tabla-->
