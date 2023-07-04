@@ -87,20 +87,22 @@
           </div>
         </div>
 
-        <!-- Area -->
-        <div class="col-md-4 mb-3">
-          <div class="form-group">
-            <h5>Area</h5>
-            <p>Administrativo</p>
-          </div>
-        </div>
+              <!-- Area -->
+              <div class="col-md-4 mb-3">
+                <div class="form-group">
+                  <label class="form-label">Perfil</label>
+                  <input class="form-control form-control-sm" type="text" name="area" placeholder="Area"
+                    value="<%= adm.getArea()%>" required>
+                </div>
+              </div>
 
       </div>
 
 
       <div class="row gutter-2 mt-4">
 
-        <!-- Area -->
+
+        <!-- Experiencia -->
         <div class="col-md-4 mb-3">
           <div class="form-group">
             <label class="form-label">Años de Experiencia </label>
