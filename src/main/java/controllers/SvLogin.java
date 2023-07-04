@@ -80,14 +80,14 @@ public class SvLogin extends HttpServlet {
         if(!(runIntput == us.getRun()) || !passwordInput.equals(us.getContrasenia())) {
             out.println("<script type=\"text/javascript\">");
             out.println("alert('RUN o password incorrectos');");
-            out.println("location='views/login.jsp';"); //el profe lo tenía como .jsp
+            out.println("location='views/login.jsp';");
             out.println("</script>");
 
         } else {
 
             HttpSession sesionUsuario= request.getSession(true);
             sesionUsuario.setAttribute("tipoUsuario", tipoUsuarioSV);
-            RequestDispatcher rd = request.getRequestDispatcher("/usuario"); //el profe lo tenía cómo .jsp
+            RequestDispatcher rd = request.getRequestDispatcher("/usuario");
             rd.forward(request, response);
         }
     }

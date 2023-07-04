@@ -6,7 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page import="models.Administrativo" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -17,6 +16,7 @@
   //Recuperamos el contenedor usuarios pero por su nombre Html
   //y lo guardamos en un arraylist usuario
   Administrativo adm = (Administrativo) (request.getAttribute("administrativosHtml"));
+  System.out.println("Desde el formulario Editar ADM "+adm.getId_usuario());
   //Generamos el foreach para recorrer el arreglo usuario
 
 
@@ -28,6 +28,8 @@
   <input type="hidden" name="run" value="<%=adm.getRun()%>">
   <input type="hidden" name="idAdministrativo" value="<%=adm.getId_administrativo()%>">
   <!--Datos que se mostraran al usuario-->
+  <h1>Usuario:</h1>
+  <hr>
   <label >Nombre: </label>
   <input type="text" name="nombre"  value="<%= adm.getNombre() %>" required>
   <label >Apellido Paterno: </label>
@@ -39,6 +41,8 @@
   <input type="date" name="fechaNac"  value="<%= adm.getFechaNacimiento()%>" required>
   <label >Contraseña </label>
   <input type="password" name="contrasenia" placeholder="Ingrese Contraseña" value="<%=adm.getContrasenia()%>" required>
+  <h1>Administrativo: </h1>
+  <hr>
   <label >Area</label>
   <input type="text" name="area" placeholder="Area" value="<%= adm.getArea()%>" required>
   <label >Años de Experiencia </label>
