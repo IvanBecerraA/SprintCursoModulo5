@@ -18,7 +18,7 @@
 	<body>
 		<%@ include file='header.jsp' %>
 
-		<div class="container mx-auto" style="width: 80vw">
+		<div class="container mx-auto" style="width: 80vw; min-height: 70vh;">
 			<form action="/create" method="post" id="formCrearUsuario">
 				<div class="row d-flex justify-content-between mt-4">
 					<h2 class="p-10">Formulario Crear Usuario</h2>
