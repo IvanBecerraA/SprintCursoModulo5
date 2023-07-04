@@ -29,7 +29,7 @@
 <!-- título y boton crear usuario  -->
 <div style="display: flex; flex-direction: column;">
     <h1 class="text-center mt-5">Listado de Usuarios</h1>
-
+    <button type="button" style="width: 150px;" class="btn btn-primary m-auto">Crear Usuario</button>
 </div>
 
   <div class="container mb-5" style="min-height: 55vh;">
@@ -63,7 +63,7 @@
             }
     %>
     <!--Generamos los datos de usuario-->
-    <tr class="text-center align-middle">
+    <tr class=" align-middle">
         <td class="fw-bold"><%=x.getId_usuario() %></td>
         <td><%=x.getNombre() %></td>
         <td><%=x.getApellido1() %></td>
